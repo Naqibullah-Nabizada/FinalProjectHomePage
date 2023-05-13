@@ -1,8 +1,6 @@
-// "use client";
-
 import '@/public/bootstrap/bootstrap.css';
 // import 'react-toastify/dist/ReactToastify.css';
-import '../globals.css';
+import "../globals.css";
 
 // import { ToastContainer } from 'react-toastify';
 

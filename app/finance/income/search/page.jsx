@@ -1,7 +1,6 @@
 "use client";
 
 import Header from "@/components/Header";
-
 import axios from "axios";
 import Link from "next/link";
 
@@ -10,13 +9,15 @@ import { useEffect, useState } from "react";
 
 import { FaCogs, FaEdit, FaTrash } from "react-icons/fa";
 
-const IdCard = () => {
+const SearchPage = () => {
 
   const [IdCards, setIdCards] = useState([]);
 
   const search = useSearchParams();
-  const searchQuery = search ? search.get("search") : null;
+  const searchQuery = search ? search.get("q") : null;
+
   const encodedSearchQuery = encodeURI(searchQuery || "");
+
 
   useEffect(() => {
     fetchData();
@@ -28,10 +29,11 @@ const IdCard = () => {
   }
 
 
+
   return (
     <>
       <header className="flex">
-        <Header href="./finance/income/id-cards/add" pageName="id-cards" />
+        <Header href="./income/id-cards/add" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto">
@@ -66,8 +68,8 @@ const IdCard = () => {
                   <td>{item.cost * item.count}</td>
                   <td>{item.tariff_num}</td>
                   <td>{item.tariff_date.slice(0, 10)}</td>
-                  <td>{item.pendant_num ?? null}</td>
-                  <td>{item.pendant_date != null ? item.pendant_date.slice(0, 10) : null}</td>
+                  <td>{item.pendant_num}</td>
+                  <td>{item.pendant_date.slice(0, 10)}</td>
                   <td>{item.remark}</td>
                   <td className="flex justify-around">
                     <Link href='' className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
@@ -83,4 +85,4 @@ const IdCard = () => {
   )
 }
 
-export default IdCard;
+export default SearchPage;

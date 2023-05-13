@@ -1,64 +1,26 @@
-"use client";
-
-import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { FaArrowCircleRight, FaPlus } from "react-icons/fa";
 
-import { toast } from "react-toastify";
-
 const Add = () => {
-
-  const router = useRouter();
-
-  const [IdCard, setIdCard] = useState({});
-
-  const setIdCardInfo = (e) => {
-    setIdCard({
-      ...IdCard,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const submitForm = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post("http://localhost:5000/IdCards", IdCard);
-      router.push("/income/id-cards");
-      toast('معلومات جدید با موفقیت اضافه شد',
-        {
-          hideProgressBar: false,
-          autoClose: 5000,
-          type: 'success',
-          position: 'top-right'
-        })
-    } catch (err) {
-      console.log(err)
-    }
-  }
 
   return (
     <>
       <header>
         <h3 className="my-4 text-center text-xl">
-          فورم ثبت عواید کارت ها
+          فورم ثبت کرایه اپارتمان های استادان
         </h3>
       </header>
       <hr />
       <main>
-        <form onSubmit={submitForm}>
+        <form>
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
             <div className="w-[32%]">
               <label className="form-label">نام تحویل دهنده</label>
               <input
                 type="text"
-                name="name"
+                name="fullname"
                 className="form-control form-control-sm mb-3"
                 placeholder="نام تحویل دهنده"
-                onChange={setIdCardInfo}
-                required
-                autoFocus
               />
             </div>
 
@@ -66,23 +28,9 @@ const Add = () => {
               <label className="form-label">نام پدر تحویل دهنده</label>
               <input
                 type="text"
-                name="father_name"
+                name="fullname"
                 className="form-control form-control-sm mb-3"
                 placeholder="نام پدر تحویل دهنده"
-                onChange={setIdCardInfo}
-                required
-              />
-            </div>
-
-            <div className="w-[32%]">
-              <label className="form-label">تعداد محصلین</label>
-              <input
-                type="number"
-                name="count"
-                className="form-control form-control-sm mb-3"
-                placeholder="تعداد محصلین"
-                onChange={setIdCardInfo}
-                required
               />
             </div>
 
@@ -93,20 +41,16 @@ const Add = () => {
                 name="reference"
                 className="form-control form-control-sm mb-3"
                 placeholder="مرجع"
-                onChange={setIdCardInfo}
-                required
               />
             </div>
 
             <div className="w-[32%]">
-              <label className="form-label">قیمت کارت</label>
+              <label className="form-label">مبلغ</label>
               <input
                 type="number"
                 name="cost"
                 className="form-control form-control-sm mb-3"
-                placeholder="قیمت کارت"
-                onChange={setIdCardInfo}
-                required
+                placeholder="مبلغ"
               />
             </div>
 
@@ -117,8 +61,6 @@ const Add = () => {
                 name="tariff_num"
                 className="form-control form-control-sm mb-3"
                 placeholder="نمبر تعرفه"
-                onChange={setIdCardInfo}
-                required
               />
             </div>
 
@@ -128,8 +70,6 @@ const Add = () => {
                 type="date"
                 name="tariff_date"
                 className="form-control form-control-sm mb-3"
-                onChange={setIdCardInfo}
-                required
               />
             </div>
 
@@ -140,8 +80,6 @@ const Add = () => {
                 name="pendant_num"
                 className="form-control form-control-sm mb-3"
                 placeholder="نمبر تعرفه"
-                onChange={setIdCardInfo}
-                required
               />
             </div>
 
@@ -151,8 +89,6 @@ const Add = () => {
                 type="date"
                 name="pendant_date"
                 className="form-control form-control-sm mb-3"
-                onChange={setIdCardInfo}
-                required
               />
             </div>
 
@@ -160,22 +96,22 @@ const Add = () => {
               <label className="form-label">ملاحضات</label>
               <textarea
                 rows="3"
-                name="remark"
+                name="notice"
                 className="form-control form-control-sm mb-3"
                 placeholder="ملاحضات"
-                onChange={setIdCardInfo}
-                required
               ></textarea>
             </div>
           </section>
 
           <div className="flex">
-            <button type="submit" className="btn btn-outline-success flex mr-10 ml-5">
+            <button
+              type="submit"
+              className="btn btn-outline-success flex mr-10 ml-5"
+            >
               ثبت
               <FaPlus className="mx-1 bg-inherit" />
             </button>
-
-            <Link href="./income/id-cards" className="btn btn-outline-secondary flex">
+            <Link href="./income/buildings" className="btn btn-outline-secondary flex">
               <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
             </Link>
           </div>

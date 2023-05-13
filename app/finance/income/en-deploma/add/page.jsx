@@ -12,11 +12,11 @@ const Add = () => {
 
   const router = useRouter();
 
-  const [IdCard, setIdCard] = useState({});
+  const [EnDeploma, setEnDeploma] = useState({});
 
-  const setIdCardInfo = (e) => {
-    setIdCard({
-      ...IdCard,
+  const setEnDeplomaInfo = (e) => {
+    setEnDeploma({
+      ...EnDeploma,
       [e.target.name]: e.target.value,
     });
   };
@@ -24,11 +24,11 @@ const Add = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/IdCards", IdCard);
-      router.push("/income/id-cards");
+      await axios.post("http://localhost:5000/EnDeploma", EnDeploma);
+      router.push("/income/en-deploma");
       toast('معلومات جدید با موفقیت اضافه شد',
         {
-          hideProgressBar: false,
+          hideProgressBar: true,
           autoClose: 5000,
           type: 'success',
           position: 'top-right'
@@ -42,7 +42,7 @@ const Add = () => {
     <>
       <header>
         <h3 className="my-4 text-center text-xl">
-          فورم ثبت عواید کارت ها
+          فورم ثبت دیپلوم زبان انگلیسی
         </h3>
       </header>
       <hr />
@@ -56,7 +56,7 @@ const Add = () => {
                 name="name"
                 className="form-control form-control-sm mb-3"
                 placeholder="نام تحویل دهنده"
-                onChange={setIdCardInfo}
+                onChange={setEnDeplomaInfo}
                 required
                 autoFocus
               />
@@ -69,7 +69,7 @@ const Add = () => {
                 name="father_name"
                 className="form-control form-control-sm mb-3"
                 placeholder="نام پدر تحویل دهنده"
-                onChange={setIdCardInfo}
+                onChange={setEnDeplomaInfo}
                 required
               />
             </div>
@@ -81,7 +81,7 @@ const Add = () => {
                 name="count"
                 className="form-control form-control-sm mb-3"
                 placeholder="تعداد محصلین"
-                onChange={setIdCardInfo}
+                onChange={setEnDeplomaInfo}
                 required
               />
             </div>
@@ -93,19 +93,19 @@ const Add = () => {
                 name="reference"
                 className="form-control form-control-sm mb-3"
                 placeholder="مرجع"
-                onChange={setIdCardInfo}
+                onChange={setEnDeplomaInfo}
                 required
               />
             </div>
 
             <div className="w-[32%]">
-              <label className="form-label">قیمت کارت</label>
+              <label className="form-label">قیمت</label>
               <input
                 type="number"
                 name="cost"
                 className="form-control form-control-sm mb-3"
-                placeholder="قیمت کارت"
-                onChange={setIdCardInfo}
+                placeholder="قیمت"
+                onChange={setEnDeplomaInfo}
                 required
               />
             </div>
@@ -117,7 +117,7 @@ const Add = () => {
                 name="tariff_num"
                 className="form-control form-control-sm mb-3"
                 placeholder="نمبر تعرفه"
-                onChange={setIdCardInfo}
+                onChange={setEnDeplomaInfo}
                 required
               />
             </div>
@@ -128,7 +128,7 @@ const Add = () => {
                 type="date"
                 name="tariff_date"
                 className="form-control form-control-sm mb-3"
-                onChange={setIdCardInfo}
+                onChange={setEnDeplomaInfo}
                 required
               />
             </div>
@@ -140,7 +140,7 @@ const Add = () => {
                 name="pendant_num"
                 className="form-control form-control-sm mb-3"
                 placeholder="نمبر تعرفه"
-                onChange={setIdCardInfo}
+                onChange={setEnDeplomaInfo}
                 required
               />
             </div>
@@ -151,7 +151,7 @@ const Add = () => {
                 type="date"
                 name="pendant_date"
                 className="form-control form-control-sm mb-3"
-                onChange={setIdCardInfo}
+                onChange={setEnDeplomaInfo}
                 required
               />
             </div>
@@ -163,7 +163,7 @@ const Add = () => {
                 name="remark"
                 className="form-control form-control-sm mb-3"
                 placeholder="ملاحضات"
-                onChange={setIdCardInfo}
+                onChange={setEnDeplomaInfo}
                 required
               ></textarea>
             </div>
@@ -175,7 +175,7 @@ const Add = () => {
               <FaPlus className="mx-1 bg-inherit" />
             </button>
 
-            <Link href="./income/id-cards" className="btn btn-outline-secondary flex">
+            <Link href="./income/en-deploma" className="btn btn-outline-secondary flex">
               <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
             </Link>
           </div>
