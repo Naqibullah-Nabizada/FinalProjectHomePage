@@ -6,6 +6,11 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaArrowCircleRight, FaPlus } from "react-icons/fa";
 
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import DatePicker, { DateObject } from "react-multi-date-picker";
+
+
 import { toast } from "react-toastify";
 
 const Add = () => {
@@ -25,7 +30,7 @@ const Add = () => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:5000/IdCards", IdCard);
-      router.push("/income/id-cards");
+      router.push("/finance/income/id-cards");
       toast('معلومات جدید با موفقیت اضافه شد',
         {
           hideProgressBar: false,
@@ -123,13 +128,46 @@ const Add = () => {
             </div>
 
             <div className="w-[32%]">
-              <label className="form-label">تاریخ تعرفه</label>
-              <input
+              <label className="form-label d-block">تاریخ تعرفه</label>
+              {/* <input
                 type="date"
                 name="tariff_date"
                 className="form-control form-control-sm mb-3"
                 onChange={setIdCardInfo}
                 required
+              /> */}
+              {/* <Calendar
+
+
+                calendar={persian}
+                locale={persian_fa}
+
+              /> */}
+              <DatePicker
+                months={[
+                  "حمل",
+                  "ثور",
+                  "جوزا",
+                  "سرطان",
+                  "اسد",
+                  "سنبله",
+                  "میزان",
+                  "عقرب",
+                  "قوس",
+                  "جدی",
+                  "دلو",
+                  "حوت"
+                ]}
+                hideOnScroll
+                hideWeekDays 
+                editable={false}
+                placeholder="تاریخ تعرفه"
+                currentDate={
+                  new DateObject({ calendar: persian })
+                }
+                calendar={persian}
+                locale={persian_fa}
+                inputClass="custom-input"
               />
             </div>
 
@@ -175,7 +213,7 @@ const Add = () => {
               <FaPlus className="mx-1 bg-inherit" />
             </button>
 
-            <Link href="./income/id-cards" className="btn btn-outline-secondary flex">
+            <Link href="./finance/income/id-cards" className="btn btn-outline-secondary flex">
               <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
             </Link>
           </div>

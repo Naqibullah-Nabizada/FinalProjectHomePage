@@ -19,13 +19,15 @@ const Add = () => {
       ...NocturnalFees,
       [e.target.name]: e.target.value,
     });
+    console.log(NocturnalFees)
   };
 
   const submitForm = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/NocturnalFees", NocturnalFees);
-      router.push("/income/nocturnal-fees");
+      await axios.post("http://localhost:5000/NMDTN", NocturnalFees);
+      console.log(NocturnalFees)
+      router.push("/finance/income/nocturnal-fees");
       toast('معلومات جدید با موفقیت اضافه شد',
         {
           hideProgressBar: true,
@@ -74,37 +76,75 @@ const Add = () => {
               />
             </div>
 
-            <div className="w-[32%]">
-              <label className="form-label">تعداد محصلین</label>
-              <input
-                type="number"
-                name="count"
-                className="form-control form-control-sm mb-3"
-                placeholder="تعداد محصلین"
-                onChange={setNocturnalFeesInfo}
-                required
-              />
-            </div>
+            {/* !! Hidden input */}
+            <input type="hidden" name="type" value={"nocturnal_fees"} />
 
             <div className="w-[32%]">
-              <label className="form-label">مرجع</label>
+              <label className="form-label">پوهنزی</label>
               <input
                 type="text"
-                name="reference"
+                name="faculty"
                 className="form-control form-control-sm mb-3"
-                placeholder="مرجع"
+                placeholder="پوهنزی"
                 onChange={setNocturnalFeesInfo}
                 required
               />
             </div>
 
             <div className="w-[32%]">
-              <label className="form-label">قیمت</label>
+              <label className="form-label">دیپارتمنت</label>
+              <input
+                type="text"
+                name="department"
+                className="form-control form-control-sm mb-3"
+                placeholder="دیپارتمنت"
+                onChange={setNocturnalFeesInfo}
+                required
+              />
+            </div>
+
+            <div className="w-[32%]">
+              <label className="form-label">سال</label>
+              <input
+                type="date"
+                name="year"
+                className="form-control form-control-sm mb-3"
+                onChange={setNocturnalFeesInfo}
+                required
+              />
+            </div>
+
+            <div className="w-[32%]">
+              <label className="form-label">سمستر</label>
               <input
                 type="number"
-                name="cost"
+                name="semester"
                 className="form-control form-control-sm mb-3"
-                placeholder="قیمت"
+                placeholder="سمستر"
+                onChange={setNocturnalFeesInfo}
+                required
+              />
+            </div>
+
+            <div className="w-[32%]">
+              <label className="form-label">داخله</label>
+              <input
+                type="number"
+                name="interner_fees"
+                className="form-control form-control-sm mb-3"
+                placeholder="داخله"
+                onChange={setNocturnalFeesInfo}
+                required
+              />
+            </div>
+
+            <div className="w-[32%]">
+              <label className="form-label">فیس</label>
+              <input
+                type="number"
+                name="fees"
+                className="form-control form-control-sm mb-3"
+                placeholder="فیس"
                 onChange={setNocturnalFeesInfo}
                 required
               />
@@ -167,6 +207,7 @@ const Add = () => {
                 required
               ></textarea>
             </div>
+            
           </section>
 
           <div className="flex">
@@ -175,7 +216,7 @@ const Add = () => {
               <FaPlus className="mx-1 bg-inherit" />
             </button>
 
-            <Link href="./income/nocturnal-fees" className="btn btn-outline-secondary flex">
+            <Link href="./finance/income/nocturnal-fees" className="btn btn-outline-secondary flex">
               <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
             </Link>
           </div>

@@ -74,7 +74,7 @@ const Income = () => {
               <FaBuilding className='mx-1 bg-inherit' />کرایه بایسکل نگهبانی</Link>
 
 
-            <Link href='/' className='btn btn-outline-dark flex mb-2'>
+            <Link href='/finance' className='btn btn-outline-dark flex mb-2'>
               <FaArrowAltCircleRight className='mx-1 bg-inherit' />بازگشت به صفحه اصلی</Link>
           </div>
         </div>
