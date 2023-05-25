@@ -29,7 +29,7 @@ const Home = async() => {
   return (
     <>
       <header className="flex">
-        <Header href="./income/ma_forms/add"/>
+        <Header href="/finance/income/guaranteed-recursive/add"/>
       </header>
       <hr />
       <main className="w-[98%] mx-auto">

@@ -21,6 +21,7 @@
     "react-icons": "^4.8.0",
     "react-multi-date-picker": "^4.0.0",
     "react-toastify": "^9.1.2",
+    "shamsi-date-converter": "^1.0.5",
     "tailwindcss": "3.3.2"
   }
 }
