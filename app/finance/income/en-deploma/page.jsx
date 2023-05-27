@@ -6,7 +6,7 @@ const IdCard = () => {
   return (
     <>
       <header className="flex">
-        <Header href="./income/en-deploma/add" />
+        <Header href="/finance/income/en-deploma/add" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto">
