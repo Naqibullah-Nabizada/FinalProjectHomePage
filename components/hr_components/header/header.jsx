@@ -1,5 +1,5 @@
 import Link from "next/link";
-const index = () => {
+const header = () => {
     return (
         <header className="bg-slate-500 h-[14vh] flex justify-center rounded-b-md">
             <div className="container mx-auto">
@@ -24,4 +24,4 @@ const index = () => {
     );
 }
 
-export default index;
+export default header;

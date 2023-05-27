@@ -12,7 +12,7 @@ const Hero = () => {
           <Link href='./hr/recruitment' className='btn btn-outline-dark flex mb-2'>
             <FaFileCsv className='mx-1 bg-inherit' />بخش استخدام پوهنتون کابل</Link>
 
-          <Link href='./hr_components/l' className='btn btn-outline-dark flex mb-2'>
+          <Link href='./hr/login' className='btn btn-outline-dark flex mb-2'>
             <FaIdCardAlt className='mx-1 bg-inherit' />بحش سوانح پوهنتون کابل</Link>
 
           <Link href='' className='btn btn-outline-dark flex mb-2'>

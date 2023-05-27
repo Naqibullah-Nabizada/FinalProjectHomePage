@@ -1,4 +1,4 @@
-import Header from "@/components/hr_components/header";
+import Header from "@/components/hr_components/header/header";
 const Recruitment = () => {
     return (
         <div>

@@ -1,4 +1,4 @@
-import Header from "@/components/hr_components/header";
+
 
 
 
@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="fa-IR">
       <body>
         {children}
-        <Header/>
+        
       </body>
     </html>
   )
