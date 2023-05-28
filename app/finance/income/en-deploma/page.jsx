@@ -44,7 +44,7 @@ const fetchData = async () => {
           <th>شماره</th>
           <th>نام</th>
           <th>نام پدر</th>
-          <th>پوهنزی</th>
+          <th>پوهنځی</th>
           <th>دیپارتمنت</th>
           <th>سال</th>
           <th>سمستر</th>

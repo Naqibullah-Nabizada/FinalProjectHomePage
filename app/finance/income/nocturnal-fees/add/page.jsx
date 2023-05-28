@@ -72,6 +72,7 @@ const Add = () => {
                 placeholder="نام تحویل دهنده"
                 onChange={(e) => setName(e.target.value)}
                 required
+                minLength={3}
                 autoFocus
               />
             </div>
@@ -84,18 +85,20 @@ const Add = () => {
                 className="form-control form-control-sm mb-3"
                 placeholder="نام پدر تحویل دهنده"
                 onChange={(e) => setFatherName(e.target.value)}
+                minLength={3}
                 required
               />
             </div>
 
             <div className="w-[32%]">
-              <label className="form-label">پوهنزی</label>
+              <label className="form-label">پوهنځی</label>
               <input
                 type="text"
                 name="faculty"
                 className="form-control form-control-sm mb-3"
-                placeholder="پوهنزی"
+                placeholder="پوهنځی"
                 onChange={(e) => setFaculty(e.target.value)}
+                minLength={3}
                 required
               />
             </div>
@@ -108,6 +111,7 @@ const Add = () => {
                 className="form-control form-control-sm mb-3"
                 placeholder="دیپارتمنت"
                 onChange={(e) => setDepartment(e.target.value)}
+                minLength={3}
                 required
               />
             </div>
@@ -119,6 +123,8 @@ const Add = () => {
                 name="year"
                 className="form-control form-control-sm mb-3"
                 onChange={(e) => setYear(e.target.value)}
+                minLength={4}
+                maxLength={4}
                 required
               />
             </div>
@@ -131,6 +137,8 @@ const Add = () => {
                 className="form-control form-control-sm mb-3"
                 placeholder="سمستر"
                 onChange={(e) => setSemester(e.target.value)}
+                minLength={1}
+                maxLength={1}
                 required
               />
             </div>
@@ -178,7 +186,7 @@ const Add = () => {
                 hideOnScroll
                 hideWeekDays
                 editable={false}
-                placeholder="تاریخ آویز"
+                placeholder="تاریخ تعرفه"
                 currentDate={
                   new DateObject({ calendar: persian })
                 }
@@ -235,7 +243,6 @@ const Add = () => {
                 className="form-control form-control-sm mb-3"
                 placeholder="ملاحضات"
                 onChange={(e) => setRemark(e.target.value)}
-                required
               ></textarea>
             </div>
 

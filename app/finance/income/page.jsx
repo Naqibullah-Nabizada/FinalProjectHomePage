@@ -37,7 +37,7 @@ const Income = () => {
               <FaBuilding className='mx-1 bg-inherit' />تضمین و بازگشتی</Link>
 
             <Link href='/finance/income/research-farm' className='btn btn-outline-dark flex mb-2'>
-              <FaCar className='mx-1 bg-inherit' />فارم تحقیقاتی پوهنزی زراعت</Link>
+              <FaCar className='mx-1 bg-inherit' />فارم تحقیقاتی پوهنځی زراعت</Link>
 
             <Link href='/finance/income/ma-forms' className='btn btn-outline-dark flex mb-2'>
               <FaIdCard className='mx-1 bg-inherit' />فورم های ماستری</Link>
@@ -65,7 +65,7 @@ const Income = () => {
               <FaCar className='mx-1 bg-inherit' />فروش ضایعات کاغذ نشرات</Link>
 
             <Link href='/finance/income/animal-clinic' className='btn btn-outline-dark flex mb-2'>
-              <FaIdCard className='mx-1 bg-inherit' />کلینک حیوانی پوهنزی وترنری</Link>
+              <FaIdCard className='mx-1 bg-inherit' />کلینک حیوانی پوهنځی وترنری</Link>
 
             <Link href='/finance/income/kabul-bank' className='btn btn-outline-dark flex mb-2'>
               <FaIdCardAlt className='mx-1 bg-inherit' />کرایه نمایندگی کابل بانک</Link>
