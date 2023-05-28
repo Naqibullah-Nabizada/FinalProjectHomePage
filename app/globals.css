@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 
+@font-face {
+  font-family: Sahel;
+  src: url('../public/font/Sahel.eot');
+  src: url('../public/font/Sahel.woff');
+  src: url('../public/font/Sahel.woff2');
+}
+
 * {
   font-family: Sahel, sans-serif;
   direction: rtl;
