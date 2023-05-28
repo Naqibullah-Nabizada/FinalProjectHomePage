@@ -24,7 +24,7 @@ const Add = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/MAFees", MAFees);
+      await axios.post("http://localhost:5000/NMDTN", MAFees);
       router.push("/income/ma-fees");
       toast('معلومات جدید با موفقیت اضافه شد',
         {
@@ -175,7 +175,7 @@ const Add = () => {
               <FaPlus className="mx-1 bg-inherit" />
             </button>
 
-            <Link href="./income/ma-fees" className="btn btn-outline-secondary flex">
+            <Link href="/income/ma-fees" className="btn btn-outline-secondary flex">
               <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
             </Link>
           </div>

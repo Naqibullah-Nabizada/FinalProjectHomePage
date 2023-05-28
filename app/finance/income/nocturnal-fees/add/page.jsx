@@ -6,35 +6,47 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaArrowCircleRight, FaPlus } from "react-icons/fa";
 
+//! Shamsi Date
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import transition from "react-element-popper/animations/transition";
+import DatePicker, { DateObject } from "react-multi-date-picker";
+
 import { toast } from "react-toastify";
 
 const Add = () => {
 
   const router = useRouter();
 
-  const [NocturnalFees, setNocturnalFees] = useState({});
-
-  const setNocturnalFeesInfo = (e) => {
-    setNocturnalFees({
-      ...NocturnalFees,
-      [e.target.name]: e.target.value,
-    });
-    console.log(NocturnalFees)
-  };
+  const [name, setName] = useState("");
+  const [father_name, setFatherName] = useState("");
+  const [type, setType] = useState("nocturnalFees");
+  const [faculty, setFaculty] = useState("");
+  const [department, setDepartment] = useState("");
+  const [year, setYear] = useState("");
+  const [semester, setSemester] = useState("");
+  const [internel_fees, setInternelFees] = useState("");
+  const [fees, setFees] = useState("");
+  const [tariff_num, setTariffNum] = useState("");
+  const [tariff_date, setTariffDate] = useState("");
+  const [pendant_num, setPendantNum] = useState("");
+  const [pendant_date, setPendantDate] = useState("");
+  const [remark, setRemark] = useState("");
 
   const submitForm = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/NMDTN", NocturnalFees);
-      console.log(NocturnalFees)
+      await axios.post("http://localhost:5000/NMDTN", {
+        name, father_name, type, faculty, department, year, semester, internel_fees, fees, tariff_date, tariff_num, pendant_date, pendant_num, remark
+      });
       router.push("/finance/income/nocturnal-fees");
       toast('معلومات جدید با موفقیت اضافه شد',
         {
-          hideProgressBar: true,
+          hideProgressBar: false,
           autoClose: 5000,
           type: 'success',
           position: 'top-right'
-        })
+        });
     } catch (err) {
       console.log(err)
     }
@@ -58,7 +70,7 @@ const Add = () => {
                 name="name"
                 className="form-control form-control-sm mb-3"
                 placeholder="نام تحویل دهنده"
-                onChange={setNocturnalFeesInfo}
+                onChange={(e) => setName(e.target.value)}
                 required
                 autoFocus
               />
@@ -71,13 +83,10 @@ const Add = () => {
                 name="father_name"
                 className="form-control form-control-sm mb-3"
                 placeholder="نام پدر تحویل دهنده"
-                onChange={setNocturnalFeesInfo}
+                onChange={(e) => setFatherName(e.target.value)}
                 required
               />
             </div>
-
-            {/* !! Hidden input */}
-            <input type="hidden" name="type" value={"nocturnal_fees"} />
 
             <div className="w-[32%]">
               <label className="form-label">پوهنزی</label>
@@ -86,7 +95,7 @@ const Add = () => {
                 name="faculty"
                 className="form-control form-control-sm mb-3"
                 placeholder="پوهنزی"
-                onChange={setNocturnalFeesInfo}
+                onChange={(e) => setFaculty(e.target.value)}
                 required
               />
             </div>
@@ -98,7 +107,7 @@ const Add = () => {
                 name="department"
                 className="form-control form-control-sm mb-3"
                 placeholder="دیپارتمنت"
-                onChange={setNocturnalFeesInfo}
+                onChange={(e) => setDepartment(e.target.value)}
                 required
               />
             </div>
@@ -106,10 +115,10 @@ const Add = () => {
             <div className="w-[32%]">
               <label className="form-label">سال</label>
               <input
-                type="date"
+                type="number"
                 name="year"
                 className="form-control form-control-sm mb-3"
-                onChange={setNocturnalFeesInfo}
+                onChange={(e) => setYear(e.target.value)}
                 required
               />
             </div>
@@ -121,7 +130,7 @@ const Add = () => {
                 name="semester"
                 className="form-control form-control-sm mb-3"
                 placeholder="سمستر"
-                onChange={setNocturnalFeesInfo}
+                onChange={(e) => setSemester(e.target.value)}
                 required
               />
             </div>
@@ -133,7 +142,7 @@ const Add = () => {
                 name="interner_fees"
                 className="form-control form-control-sm mb-3"
                 placeholder="داخله"
-                onChange={setNocturnalFeesInfo}
+                onChange={(e) => setInternelFees(e.target.value)}
                 required
               />
             </div>
@@ -145,7 +154,7 @@ const Add = () => {
                 name="fees"
                 className="form-control form-control-sm mb-3"
                 placeholder="فیس"
-                onChange={setNocturnalFeesInfo}
+                onChange={(e) => setFees(e.target.value)}
                 required
               />
             </div>
@@ -157,18 +166,29 @@ const Add = () => {
                 name="tariff_num"
                 className="form-control form-control-sm mb-3"
                 placeholder="نمبر تعرفه"
-                onChange={setNocturnalFeesInfo}
+                onChange={(e) => setTariffNum(e.target.value)}
                 required
               />
             </div>
 
             <div className="w-[32%]">
               <label className="form-label">تاریخ تعرفه</label>
-              <input
-                type="date"
+              <DatePicker
+                months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
+                hideOnScroll
+                hideWeekDays
+                editable={false}
+                placeholder="تاریخ آویز"
+                currentDate={
+                  new DateObject({ calendar: persian })
+                }
+                animations={[transition()]}
+                calendar={persian}
+                locale={persian_fa}
+                inputClass="custom-input"
+                value={tariff_date}
+                onChange={setTariffDate}
                 name="tariff_date"
-                className="form-control form-control-sm mb-3"
-                onChange={setNocturnalFeesInfo}
                 required
               />
             </div>
@@ -180,18 +200,29 @@ const Add = () => {
                 name="pendant_num"
                 className="form-control form-control-sm mb-3"
                 placeholder="نمبر تعرفه"
-                onChange={setNocturnalFeesInfo}
+                onChange={(e) => setPendantNum(e.target.value)}
                 required
               />
             </div>
 
             <div className="w-[32%]">
               <label className="form-label">تاریخ آویز</label>
-              <input
-                type="date"
-                name="pendant_date"
-                className="form-control form-control-sm mb-3"
-                onChange={setNocturnalFeesInfo}
+              <DatePicker
+                months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
+                hideOnScroll
+                hideWeekDays
+                editable={false}
+                placeholder="تاریخ آویز"
+                currentDate={
+                  new DateObject({ calendar: persian })
+                }
+                animations={[transition()]}
+                calendar={persian}
+                locale={persian_fa}
+                inputClass="custom-input"
+                value={pendant_date}
+                onChange={setPendantDate}
+                name="tariff_date"
                 required
               />
             </div>
@@ -203,11 +234,11 @@ const Add = () => {
                 name="remark"
                 className="form-control form-control-sm mb-3"
                 placeholder="ملاحضات"
-                onChange={setNocturnalFeesInfo}
+                onChange={(e) => setRemark(e.target.value)}
                 required
               ></textarea>
             </div>
-            
+
           </section>
 
           <div className="flex">
