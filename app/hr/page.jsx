@@ -1,21 +1,14 @@
 
-
-import Hero from '@/components/hr_components/Hero';
-import Navbar from '@/components/hr_components/Navbar';
-
+import Hero from "@/components/hr_components/Hero";
+import Navbar from "@/components/Navbar";
 export default function HomePage() {
   return (
     <>
-
-      <div className="bg-[url('/images/hr/HR_bg.webp')] w-full h-screen bg-no-repeat">
-      <Navbar />
+    <Navbar title={"آمریت منابع بشری"} />
       <hr />
       <main>
         <Hero />
       </main>
-
-      </div>
-      
     </>
   );
 }
