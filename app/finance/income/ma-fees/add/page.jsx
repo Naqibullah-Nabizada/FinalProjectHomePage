@@ -122,6 +122,7 @@ const Add = () => {
                 type="number"
                 name="year"
                 className="form-control form-control-sm mb-3"
+                placeholder="سال"
                 onChange={(e) => setYear(e.target.value)}
                 minLength={4}
                 maxLength={4}
@@ -131,16 +132,12 @@ const Add = () => {
 
             <div className="w-[32%]">
               <label className="form-label">سمستر</label>
-              <input
-                type="number"
-                name="semester"
-                className="form-control form-control-sm mb-3"
-                placeholder="سمستر"
-                onChange={(e) => setSemester(e.target.value)}
-                minLength={1}
-                maxLength={1}
-                required
-              />
+              <select name="semester" className="form-control form-control-sm mb-3" onChange={(e) => setSemester(e.target.value)} >
+                <option value={"1"}>اول</option>
+                <option value={"2"}>دوم</option>
+                <option value={"3"}>سوم</option>
+                <option value={"4"}>چهارم</option>
+              </select>
             </div>
 
             <div className="w-[32%]">
