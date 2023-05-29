@@ -42,7 +42,7 @@ export default function Home() {
             </Link>
         </section>  
       </main>
-      <footer className="text-center mt-[5rem]">
+      <footer className="text-center mt-[5rem] mb-3">
         <h4 className="text-zinc-500">copyright {new Date().getFullYear()} &copy;</h4>
       </footer>
     </>

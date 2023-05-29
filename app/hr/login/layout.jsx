@@ -3,5 +3,4 @@ const LoginLayout = ({children}) => {
         <main>{children}</main>
     );
 }
-
 export default LoginLayout;

@@ -14,6 +14,14 @@ export default async function ListProducts() {
       {/* {product.map((item) => (
               <Row item={item} key={item.id} number={++counter} />
             ))} */}
+    <tr>
+      <td>1</td>
+      <td>کتاب</td>
+      <td>جلد</td>
+      <td>۱۰۰</td>
+      <td>۱۰۰</td>
+      <td>۱۰۰۰۰</td>
+    </tr>
     </tbody>
   );
 }
