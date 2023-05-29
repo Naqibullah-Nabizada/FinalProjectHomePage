@@ -26,12 +26,14 @@ export default function Home() {
             <hr />
             <p className='card-title text-center text-xl pt-3'>آمریت مالی و حسابی</p>
           </Link>
-          <div className="card p-2 mx-3 w-[22%]">
-            <Image src={'/../public/images/HR.webp'} alt="logo" width={200} height={200}
+
+          <Link href={"./hr"} className="card p-2 mx-3 w-[22%]">
+            <Image src={'/../public/images/hr.png'} alt="logo" width={200} height={200}
+
               className="card-img-top h-[15rem]" />
             <hr />
             <h1 className='card-title text-center text-xl pt-3'>آمریت منابع بشری</h1>
-          </div>
+          </Link>
           <Link href={"./supplies"} className="card p-2 mx-3 w-[22%]">
             <Image src={'/../public/images/S.png'} alt="logo" width={200} height={200}
               className="card-img-top h-[15rem]" />

@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'فارم تحقیقاتی پوهنزی زراعت',
+  title: 'فارم تحقیقاتی پوهنځی زراعت',
   description: 'Developed by Naqibullah Nabizada and Shoaib Nigzad',
 }
 

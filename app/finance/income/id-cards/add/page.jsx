@@ -6,26 +6,37 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaArrowCircleRight, FaPlus } from "react-icons/fa";
 
+//! Shamsi Date
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import transition from "react-element-popper/animations/transition";
+import DatePicker, { DateObject } from "react-multi-date-picker";
+
 import { toast } from "react-toastify";
 
 const Add = () => {
 
   const router = useRouter();
 
-  const [IdCard, setIdCard] = useState({});
-
-  const setIdCardInfo = (e) => {
-    setIdCard({
-      ...IdCard,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const [name, setName] = useState("");
+  const [father_name, setFatherName] = useState("");
+  const [count, setCount] = useState("");
+  const [reference, setReference] = useState("");
+  const [cost, setCost] = useState("");
+  const [year, setYear] = useState();
+  const [tariff_num, setTariff_num] = useState("");
+  const [tariff_date, setTariff_date] = useState("");
+  const [pendant_num, setPendant_num] = useState("");
+  const [pendant_date, setPendant_date] = useState("");
+  const [remark, setRemark] = useState("");
 
   const submitForm = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/IdCards", IdCard);
-      router.push("/income/id-cards");
+      await axios.post("http://localhost:5000/IdCards", {
+        name, father_name, cost, count, year, reference, tariff_date, tariff_num, pendant_date, pendant_num, remark
+      });
+      router.push("/finance/income/id-cards");
       toast('معلومات جدید با موفقیت اضافه شد',
         {
           hideProgressBar: false,
@@ -56,7 +67,7 @@ const Add = () => {
                 name="name"
                 className="form-control form-control-sm mb-3"
                 placeholder="نام تحویل دهنده"
-                onChange={setIdCardInfo}
+                onChange={(e) => setName(e.target.value)}
                 required
                 autoFocus
               />
@@ -69,7 +80,19 @@ const Add = () => {
                 name="father_name"
                 className="form-control form-control-sm mb-3"
                 placeholder="نام پدر تحویل دهنده"
-                onChange={setIdCardInfo}
+                onChange={(e) => setFatherName(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="w-[32%]">
+              <label className="form-label">سال</label>
+              <input
+                type="number"
+                name="year"
+                className="form-control form-control-sm mb-3"
+                placeholder="سال"
+                onChange={(e) => setYear(e.target.value)}
                 required
               />
             </div>
@@ -81,7 +104,7 @@ const Add = () => {
                 name="count"
                 className="form-control form-control-sm mb-3"
                 placeholder="تعداد محصلین"
-                onChange={setIdCardInfo}
+                onChange={(e) => setCount(e.target.value)}
                 required
               />
             </div>
@@ -93,7 +116,7 @@ const Add = () => {
                 name="reference"
                 className="form-control form-control-sm mb-3"
                 placeholder="مرجع"
-                onChange={setIdCardInfo}
+                onChange={(e) => setReference(e.target.value)}
                 required
               />
             </div>
@@ -105,7 +128,7 @@ const Add = () => {
                 name="cost"
                 className="form-control form-control-sm mb-3"
                 placeholder="قیمت کارت"
-                onChange={setIdCardInfo}
+                onChange={(e) => setCost(e.target.value)}
                 required
               />
             </div>
@@ -117,18 +140,29 @@ const Add = () => {
                 name="tariff_num"
                 className="form-control form-control-sm mb-3"
                 placeholder="نمبر تعرفه"
-                onChange={setIdCardInfo}
+                onChange={(e) => setTariff_num(e.target.value)}
                 required
               />
             </div>
 
             <div className="w-[32%]">
-              <label className="form-label">تاریخ تعرفه</label>
-              <input
-                type="date"
+              <label className="form-label d-block">تاریخ تعرفه</label>
+              <DatePicker
+                months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
+                hideOnScroll
+                hideWeekDays
+                editable={false}
+                placeholder="تاریخ تعرفه"
+                currentDate={
+                  new DateObject({ calendar: persian })
+                }
+                animations={[transition()]}
+                calendar={persian}
+                locale={persian_fa}
+                inputClass="custom-input"
+                value={tariff_date}
+                onChange={setTariff_date}
                 name="tariff_date"
-                className="form-control form-control-sm mb-3"
-                onChange={setIdCardInfo}
                 required
               />
             </div>
@@ -140,18 +174,29 @@ const Add = () => {
                 name="pendant_num"
                 className="form-control form-control-sm mb-3"
                 placeholder="نمبر تعرفه"
-                onChange={setIdCardInfo}
+                onChange={(e) => setPendant_num(e.target.value)}
                 required
               />
             </div>
 
             <div className="w-[32%]">
               <label className="form-label">تاریخ آویز</label>
-              <input
-                type="date"
-                name="pendant_date"
-                className="form-control form-control-sm mb-3"
-                onChange={setIdCardInfo}
+              <DatePicker
+                months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
+                hideOnScroll
+                hideWeekDays
+                editable={false}
+                placeholder="تاریخ آویز"
+                currentDate={
+                  new DateObject({ calendar: persian })
+                }
+                animations={[transition()]}
+                calendar={persian}
+                locale={persian_fa}
+                inputClass="custom-input"
+                value={pendant_date}
+                onChange={setPendant_date}
+                name="tariff_date"
                 required
               />
             </div>
@@ -163,7 +208,7 @@ const Add = () => {
                 name="remark"
                 className="form-control form-control-sm mb-3"
                 placeholder="ملاحضات"
-                onChange={setIdCardInfo}
+                onChange={(e) => setRemark(e.target.value)}
                 required
               ></textarea>
             </div>
@@ -175,7 +220,7 @@ const Add = () => {
               <FaPlus className="mx-1 bg-inherit" />
             </button>
 
-            <Link href="./income/id-cards" className="btn btn-outline-secondary flex">
+            <Link href="./finance/income/id-cards" className="btn btn-outline-secondary flex">
               <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
             </Link>
           </div>

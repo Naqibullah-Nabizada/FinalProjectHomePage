@@ -1,5 +1,8 @@
 "use client";
 
+//! Shamsi Date Converter 
+import * as shamsi from "shamsi-date-converter";
+
 import Header from "@/components/Header";
 
 import axios from "axios";
@@ -8,7 +11,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { FaCogs, FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 
 const IdCard = () => {
 
@@ -31,7 +34,7 @@ const IdCard = () => {
   return (
     <>
       <header className="flex">
-        <Header href="./finance/income/id-cards/add" pageName="id-cards" />
+        <Header href="/finance/income/id-cards/add" pageName="id-cards" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto">
@@ -42,6 +45,7 @@ const IdCard = () => {
               <th>نام</th>
               <th>نام پدر</th>
               <th>تعداد محصل</th>
+              <th>سال</th>
               <th>مرجع</th>
               <th>قیمت کارت</th>
               <th>قیمت مجموعی</th>
@@ -50,7 +54,7 @@ const IdCard = () => {
               <th>نمبر آویز</th>
               <th>تاریخ آویز</th>
               <th>ملاحضات</th>
-              <th className="flex justify-center"><FaCogs className="mx-1" />تنظیمات</th>
+              <th className="flex justify-center">ویرایش</th>
             </tr>
           </thead>
           <tbody>
@@ -61,17 +65,18 @@ const IdCard = () => {
                   <td>{item.name}</td>
                   <td>{item.father_name}</td>
                   <td>{item.count}</td>
+                  <td>{item.year}</td>
                   <td>{item.reference}</td>
                   <td>{item.cost}</td>
                   <td>{item.cost * item.count}</td>
                   <td>{item.tariff_num}</td>
-                  <td>{item.tariff_date.slice(0, 10)}</td>
+                  <td>{shamsi.gregorianToJalali(item.tariff_date).join("-")}</td>
                   <td>{item.pendant_num ?? null}</td>
-                  <td>{item.pendant_date != null ? item.pendant_date.slice(0, 10) : null}</td>
+                  <td>{item.pendant_date != null ? shamsi.gregorianToJalali(item.pendant_date).join("-") : null}</td>
                   <td>{item.remark}</td>
                   <td className="flex justify-around">
                     <Link href='' className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
-                    <button className="btn btn-sm btn-danger"><FaTrash className="bg-inherit" /></button>
+                    {/* <button className="btn btn-sm btn-danger"><FaTrash className="bg-inherit" /></button> */}
                   </td>
                 </tr>
               )) : null
