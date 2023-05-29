@@ -1,19 +1,12 @@
-
-
-
-
 export const metadata = {
-  title: 'آمریت منابع بشری',
-  description: 'Developed by Atiqullah Poya and Mirwais Jafari',
-}
+  title: " آمریت منابع بشری پوهنتون کابل ",
+  description: "Developed by Atiqullah Poya and Mirwais Jafari",
+};
 
-export default function RootLayout({ children }) {
+export default function HumanResourceLayout({ children }) {
   return (
     <html lang="fa-IR">
-      <body>
-        {children}
-        
-      </body>
+      <body>{children}</body>
     </html>
-  )
+  );
 }

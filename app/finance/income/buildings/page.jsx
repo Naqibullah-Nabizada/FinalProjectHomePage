@@ -4,7 +4,7 @@ const Building = () => {
   return (
     <>
       <header className="flex">
-        <Header href="/finance/income/buildings/add" />
+        <Header hrefAddBtn="/finance/income/buildings/add" hrefBackBtn="/finance/income" pageName="buildings" />
       </header>
       <hr />
       <main>
