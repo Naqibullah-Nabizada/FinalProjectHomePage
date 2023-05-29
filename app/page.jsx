@@ -32,12 +32,12 @@ export default function Home() {
             <hr />
             <h1 className='card-title text-center text-xl pt-3'>آمریت منابع بشری</h1>
           </div>
-          <div className="card p-2 mx-3 w-[22%]">
+          <Link href={"./supplies"} className="card p-2 mx-3 w-[22%]">
             <Image src={'/../public/images/S.png'} alt="logo" width={200} height={200}
               className="card-img-top h-[15rem]" />
             <hr />
-            <h1 className='card-title text-center text-xl pt-3'>آمریت تهیه و تدارکات</h1>
-          </div>
+            <p className='card-title text-center text-xl pt-3'>آمریت تهیه و تدارکات</p>
+            </Link>
         </section>  
       </main>
       <footer className="text-center mt-[5rem]">
