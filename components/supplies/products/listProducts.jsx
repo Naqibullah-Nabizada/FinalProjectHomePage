@@ -1,26 +1,24 @@
 "use client";
-import { getProducts } from "@/lib/supplies/routes";
-
-const products = async()=>{
-    const response = await getProducts();
-    // return response;
-    console.log(response)
-}
+import {AiOutlineEye} from "react-icons/ai";
+import Link from "next/link";
 
 export default async function ListProducts() {
-    // console.log(await products());
   return (
     <tbody>
-      {/* {product.map((item) => (
-              <Row item={item} key={item.id} number={++counter} />
-            ))} */}
     <tr>
       <td>1</td>
       <td>کتاب</td>
-      <td>جلد</td>
-      <td>۱۰۰</td>
-      <td>۱۰۰</td>
-      <td>۱۰۰۰۰</td>
+      <td className="flex overflow-clip">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+        Recusandae molestias nostrum voluptas quidem. 
+        Nam reprehenderit deleniti temporibus necessitatibus atque impedit.adipisicing elit.
+         Recusandae molestias nostrum voluptas quidem.
+      </td>
+      <td className="text-center items-center">
+        <Link href={"/supplies/depot-list/details"} className="btn bg-yellow-500">
+          <AiOutlineEye/>
+        </Link>
+      </td>
     </tr>
     </tbody>
   );
