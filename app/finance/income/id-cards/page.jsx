@@ -1,8 +1,9 @@
 "use client";
 
 //! Shamsi Date Converter 
-import Header from "@/components/Header";
 import * as shamsi from "shamsi-date-converter";
+
+import Header from "@/components/Header";
 
 import axios from "axios";
 import Link from "next/link";
@@ -53,7 +54,7 @@ const IdCard = () => {
               <th>نمبر آویز</th>
               <th>تاریخ آویز</th>
               <th>ملاحضات</th>
-              <th className="flex justify-center"><FaEdit className="mx-1" />ویرایش</th>
+              <th className="flex justify-center">ویرایش</th>
             </tr>
           </thead>
           <tbody>
@@ -69,9 +70,9 @@ const IdCard = () => {
                   <td>{item.cost}</td>
                   <td>{item.cost * item.count}</td>
                   <td>{item.tariff_num}</td>
-                  <td>{shamsi.gregorianToJalali(item.tariff_date.slice(0, 10)).join("-")}</td>
+                  <td>{shamsi.gregorianToJalali(item.tariff_date).join("-")}</td>
                   <td>{item.pendant_num ?? null}</td>
-                  <td>{item.pendant_date != null ? shamsi.gregorianToJalali(item.pendant_date.slice(0, 10)).join("-") : null}</td>
+                  <td>{item.pendant_date != null ? shamsi.gregorianToJalali(item.pendant_date).join("-") : null}</td>
                   <td>{item.remark}</td>
                   <td className="flex justify-around">
                     <Link href='' className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
