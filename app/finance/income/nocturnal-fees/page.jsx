@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
 
-const Noctunal = async () => {
+const NocturnalFees = async () => {
 
   const [nucturnalFees, setNucturnalFees] = useState([]);
 
@@ -91,4 +91,4 @@ const Noctunal = async () => {
   )
 }
 
-export default Noctunal;
+export default NocturnalFees;

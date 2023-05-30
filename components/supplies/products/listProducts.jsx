@@ -6,6 +6,8 @@ const products = async()=>{
     // return response;
     console.log(response)
 }
+import Link from "next/link";
+import { AiOutlineEye } from "react-icons/ai";
 
 export default async function ListProducts() {
   return (
