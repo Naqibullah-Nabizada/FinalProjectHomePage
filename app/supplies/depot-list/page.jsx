@@ -5,7 +5,7 @@ function DepotList() {
   return (
     <div>
       <header className="flex">
-        <Header href="/supplies/depot" pageName="nocturnal-fees"/>
+        <Header hrefAddBtn="/supplies/depot" hrefBackBtn={"/supplies/"}pageName="nocturnal-fees"/>
       </header>
       <main className="w-[99%] mx-auto">
         <table className="table table-bordered table-sm table-striped">
