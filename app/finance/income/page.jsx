@@ -5,12 +5,15 @@ import { FaArrowAltCircleRight, FaBuilding, FaCar, FaIdCard, FaIdCardAlt } from 
 const Income = () => {
   return (
     <>
-      <Navbar />
+      <Navbar title={"معاونیت مالی و اداری"} />
       <hr />
       <section className='w-[95%] mx-auto flex my-4'>
         <div className='w-[100%] flex justify-center items-center'>
 
           <div className='w-[25%] mx-5'>
+
+          <Link href='/finance/income/id-cards' className='btn btn-outline-dark flex mb-2'>
+              <FaBuilding className='mx-1 bg-inherit' />کارت های هویت محصلان</Link>
 
             <Link href='/finance/income/nocturnal-fees' className='btn btn-outline-dark flex mb-2'>
               <FaIdCard className='mx-1 bg-inherit' />فیس محصلین برنامه های شبانه</Link>
@@ -30,21 +33,21 @@ const Income = () => {
             <Link href='/finance/income/buildings' className='btn btn-outline-dark flex mb-2'>
               <FaIdCard className='mx-1 bg-inherit' />کرایه اپارتمان های استادان</Link>
 
+            <Link href='/finance/income/vehicles' className='btn btn-outline-dark flex mb-2'>
+              <FaIdCardAlt className='mx-1 bg-inherit' />کارت های وسایط نقلیه</Link>
+
             <Link href='/finance/income/farm-products' className='btn btn-outline-dark flex mb-2'>
               <FaIdCardAlt className='mx-1 bg-inherit' />محصولات تجزیه فارمسوتیکی</Link>
 
             <Link href='/finance/income/guaranteed-recursive' className='btn btn-outline-dark flex mb-2'>
               <FaBuilding className='mx-1 bg-inherit' />تضمین و بازگشتی</Link>
 
-            <Link href='/finance/income/research-farm' className='btn btn-outline-dark flex mb-2'>
-              <FaCar className='mx-1 bg-inherit' />فارم تحقیقاتی پوهنځی زراعت</Link>
-
-            <Link href='/finance/income/ma-forms' className='btn btn-outline-dark flex mb-2'>
-              <FaIdCard className='mx-1 bg-inherit' />فورم های ماستری</Link>
-
           </div>
 
           <div className='w-[25%] mx-5'>
+
+          <Link href='/finance/income/research-farm' className='btn btn-outline-dark flex mb-2'>
+              <FaCar className='mx-1 bg-inherit' />فارم تحقیقاتی پوهنځی زراعت</Link>
 
             <Link href='/finance/income/bread' className='btn btn-outline-dark flex mb-2'>
               <FaIdCardAlt className='mx-1 bg-inherit' />فروش نان قاق لیلیه</Link>
@@ -55,11 +58,8 @@ const Income = () => {
             <Link href='/finance/income/guesthouse' className='btn btn-outline-dark flex mb-2'>
               <FaIdCard className='mx-1 bg-inherit' />کرایه مهمانخانه آمریت خدمات</Link>
 
-            <Link href='/finance/income/vehicles' className='btn btn-outline-dark flex mb-2'>
-              <FaIdCardAlt className='mx-1 bg-inherit' />کارت های وسایط نقلیه</Link>
-
-            <Link href='/finance/income/id-cards' className='btn btn-outline-dark flex mb-2'>
-              <FaBuilding className='mx-1 bg-inherit' />کارت های هویت محصلان</Link>
+              <Link href='/finance/income/ma-forms' className='btn btn-outline-dark flex mb-2'>
+              <FaIdCard className='mx-1 bg-inherit' />فورم های ماستری</Link>
 
             <Link href='/finance/income/papers' className='btn btn-outline-dark flex mb-2'>
               <FaCar className='mx-1 bg-inherit' />فروش ضایعات کاغذ نشرات</Link>

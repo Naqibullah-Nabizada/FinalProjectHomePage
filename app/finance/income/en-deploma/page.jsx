@@ -62,7 +62,7 @@ const fetchData = async () => {
       <tbody>
         {
           EnDeploma.map((item) => (
-            <tr key={item.id}>
+            <tr key={item.id}  style={item.pendant_date == null ? { background: "#FFEEB3" } : null}>
               <td>{item.id}</td>
               <td>{item.name}</td>
               <td>{item.father_name}</td>
@@ -75,8 +75,8 @@ const fetchData = async () => {
               <td>{Number(item.fees) + Number(item.internel_fees)}</td>
               <td>{item.tariff_num}</td>
               <td>{shamsi.gregorianToJalali(item.tariff_date).join('-')}</td>
-              <td>{item.pendant_num}</td>
-              <td>{shamsi.gregorianToJalali(item.pendant_date).join('-')}</td>
+              <td>{item.pendant_num ?? null}</td>
+              <td>{item.pendant_date != null ? shamsi.gregorianToJalali(item.pendant_date).join('-') : null}</td>
               <td>{item.remark}</td>
               <td className="flex justify-around">
                 <Link href='' className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>

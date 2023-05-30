@@ -60,7 +60,7 @@ const IdCard = () => {
           <tbody>
             {
               IdCards.length > 0 ? IdCards.map((item) => (
-                <tr key={item.id}>
+                <tr key={item.id}  style={item.pendant_date == null ? { background: "#FFEEB3" } : null}>
                   <td>{item.id}</td>
                   <td>{item.name}</td>
                   <td>{item.father_name}</td>

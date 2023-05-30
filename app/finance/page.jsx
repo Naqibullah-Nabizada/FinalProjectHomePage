@@ -8,7 +8,7 @@ import Navbar from '@/components/Navbar';
 export default function Home() {
   return (
     <>
-      <Navbar />
+      <Navbar title="معاونیت مالی و اداری" />
       <hr />
       <main>
         <Hero />

@@ -9,7 +9,7 @@ const Header = ({ hrefBackBtn, hrefAddBtn, pageName }) => {
         <Button hrefBackBtn={hrefBackBtn} hrefAddBtn={hrefAddBtn} text={'اضافه کردن'} />
       </div>
       <div className="w-[20%]">
-        <Navbar />
+        <Navbar title="معاونیت مالی و اداری" />
       </div>
       <div className="w-[40%]">
         <Search pageName={pageName} />

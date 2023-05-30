@@ -75,7 +75,7 @@ const Noctunal = async () => {
                   <td>{Number(item.fees) + Number(item.internel_fees)}</td>
                   <td>{item.tariff_num}</td>
                   <td>{shamsi.gregorianToJalali(item.tariff_date).join('-')}</td>
-                  <td>{item.pendant_num}</td>
+                  <td>{item.pendant_num ?? null}</td>
                   <td>{item.pendant_date != null ? shamsi.gregorianToJalali(item.pendant_date).join('-') : null}</td>
                   <td>{item.remark}</td>
                   <td className="flex justify-around">

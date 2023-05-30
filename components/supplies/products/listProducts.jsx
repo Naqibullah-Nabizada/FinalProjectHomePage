@@ -1,8 +1,8 @@
 "use client";
-import { getProducts } from "@/lib/supplies/routes";
+// import { getProducts } from "@/lib/supplies/routes";
 
 const products = async()=>{
-    const response = await getProducts();
+    // const response = await getProducts();
     // return response;
     console.log(response)
 }

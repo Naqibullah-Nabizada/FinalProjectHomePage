@@ -29,9 +29,9 @@ const Add = () => {
   const [fees, setFees] = useState("");
   const [tariff_num, setTariffNum] = useState("");
   const [tariff_date, setTariffDate] = useState("");
-  const [pendant_num, setPendantNum] = useState("");
-  const [pendant_date, setPendantDate] = useState("");
-  const [remark, setRemark] = useState("");
+  const [pendant_num, setPendantNum] = useState(null);
+  const [pendant_date, setPendantDate] = useState(null);
+  const [remark, setRemark] = useState(null);
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -212,7 +212,6 @@ const Add = () => {
                 className="form-control form-control-sm mb-3"
                 placeholder="نمبر تعرفه"
                 onChange={(e) => setPendantNum(e.target.value)}
-                required
               />
             </div>
 
@@ -234,7 +233,6 @@ const Add = () => {
                 value={pendant_date}
                 onChange={setPendantDate}
                 name="tariff_date"
-                required
               />
             </div>
 

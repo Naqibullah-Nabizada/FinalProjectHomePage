@@ -1,26 +1,76 @@
+"use client";
+
+import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FaArrowCircleRight, FaPlus } from "react-icons/fa";
 
+//! Shamsi Date
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import transition from "react-element-popper/animations/transition";
+import DatePicker, { DateObject } from "react-multi-date-picker";
+
+import { toast } from "react-toastify";
+
 const Add = () => {
+
+  const router = useRouter();
+
+  const [name, setName] = useState("");
+  const [father_name, setFatherName] = useState("");
+  const [type, setType] = useState("buildings");
+  const [reference, setReference] = useState("");
+  const [year, setYear] = useState("");
+  const [amount, setAmount] = useState("");
+  const [tariff_num, setTariffNum] = useState("");
+  const [tariff_date, setTariffDate] = useState("");
+  const [pendant_num, setPendantNum] = useState(null);
+  const [pendant_date, setPendantDate] = useState(null);
+  const [remark, setRemark] = useState(null);
+
+  const submitForm = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:5000/BV", {
+        name, father_name, type, year, reference, amount, tariff_date, tariff_num, pendant_date, pendant_num, remark
+      });
+      router.push("/finance/income/buildings");
+      toast('معلومات جدید با موفقیت اضافه شد',
+        {
+          hideProgressBar: false,
+          autoClose: 5000,
+          type: 'success',
+          position: 'top-right'
+        });
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <>
       <header>
         <h3 className="my-4 text-center text-xl">
-          فورم ثبت کرایه اپارتمان های استادان
+          فورم ثبت کرایه بلاک های استادان
         </h3>
       </header>
       <hr />
       <main>
-        <form>
+        <form onSubmit={submitForm}>
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
             <div className="w-[32%]">
               <label className="form-label">نام تحویل دهنده</label>
               <input
                 type="text"
-                name="fullname"
+                name="name"
                 className="form-control form-control-sm mb-3"
                 placeholder="نام تحویل دهنده"
+                onChange={(e) => setName(e.target.value)}
+                required
+                minLength={3}
+                autoFocus
               />
             </div>
 
@@ -28,9 +78,12 @@ const Add = () => {
               <label className="form-label">نام پدر تحویل دهنده</label>
               <input
                 type="text"
-                name="fullname"
+                name="father_name"
                 className="form-control form-control-sm mb-3"
                 placeholder="نام پدر تحویل دهنده"
+                onChange={(e) => setFatherName(e.target.value)}
+                minLength={3}
+                required
               />
             </div>
 
@@ -41,6 +94,23 @@ const Add = () => {
                 name="reference"
                 className="form-control form-control-sm mb-3"
                 placeholder="مرجع"
+                onChange={(e) => setReference(e.target.value)}
+                minLength={3}
+                required
+              />
+            </div>
+
+            <div className="w-[32%]">
+              <label className="form-label">سال</label>
+              <input
+                type="number"
+                name="year"
+                className="form-control form-control-sm mb-3"
+                placeholder="سال"
+                onChange={(e) => setYear(e.target.value)}
+                minLength={4}
+                maxLength={4}
+                required
               />
             </div>
 
@@ -48,9 +118,11 @@ const Add = () => {
               <label className="form-label">مبلغ</label>
               <input
                 type="number"
-                name="cost"
+                name="fees"
                 className="form-control form-control-sm mb-3"
                 placeholder="مبلغ"
+                onChange={(e) => setAmount(e.target.value)}
+                required
               />
             </div>
 
@@ -61,15 +133,30 @@ const Add = () => {
                 name="tariff_num"
                 className="form-control form-control-sm mb-3"
                 placeholder="نمبر تعرفه"
+                onChange={(e) => setTariffNum(e.target.value)}
+                required
               />
             </div>
 
             <div className="w-[32%]">
               <label className="form-label">تاریخ تعرفه</label>
-              <input
-                type="date"
+              <DatePicker
+                months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
+                hideOnScroll
+                hideWeekDays
+                editable={false}
+                placeholder="تاریخ تعرفه"
+                currentDate={
+                  new DateObject({ calendar: persian })
+                }
+                animations={[transition()]}
+                calendar={persian}
+                locale={persian_fa}
+                inputClass="custom-input"
+                value={tariff_date}
+                onChange={setTariffDate}
                 name="tariff_date"
-                className="form-control form-control-sm mb-3"
+                required
               />
             </div>
 
@@ -80,15 +167,28 @@ const Add = () => {
                 name="pendant_num"
                 className="form-control form-control-sm mb-3"
                 placeholder="نمبر تعرفه"
+                onChange={(e) => setPendantNum(e.target.value)}
               />
             </div>
 
             <div className="w-[32%]">
               <label className="form-label">تاریخ آویز</label>
-              <input
-                type="date"
-                name="pendant_date"
-                className="form-control form-control-sm mb-3"
+              <DatePicker
+                months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
+                hideOnScroll
+                hideWeekDays
+                editable={false}
+                placeholder="تاریخ آویز"
+                currentDate={
+                  new DateObject({ calendar: persian })
+                }
+                animations={[transition()]}
+                calendar={persian}
+                locale={persian_fa}
+                inputClass="custom-input"
+                value={pendant_date}
+                onChange={setPendantDate}
+                name="tariff_date"
               />
             </div>
 
@@ -96,22 +196,22 @@ const Add = () => {
               <label className="form-label">ملاحضات</label>
               <textarea
                 rows="3"
-                name="notice"
+                name="remark"
                 className="form-control form-control-sm mb-3"
                 placeholder="ملاحضات"
+                onChange={(e) => setRemark(e.target.value)}
               ></textarea>
             </div>
+
           </section>
 
           <div className="flex">
-            <button
-              type="submit"
-              className="btn btn-outline-success flex mr-10 ml-5"
-            >
+            <button type="submit" className="btn btn-outline-success flex mr-10 ml-5">
               ثبت
               <FaPlus className="mx-1 bg-inherit" />
             </button>
-            <Link href="./income/buildings" className="btn btn-outline-secondary flex">
+
+            <Link href="./finance/income/buildings" className="btn btn-outline-secondary flex">
               <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
             </Link>
           </div>

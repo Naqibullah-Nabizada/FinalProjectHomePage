@@ -26,9 +26,9 @@ const Add = () => {
   const [year, setYear] = useState();
   const [tariff_num, setTariff_num] = useState("");
   const [tariff_date, setTariff_date] = useState("");
-  const [pendant_num, setPendant_num] = useState("");
-  const [pendant_date, setPendant_date] = useState("");
-  const [remark, setRemark] = useState("");
+  const [pendant_num, setPendantNum] = useState(null);
+  const [pendant_date, setPendantDate] = useState(null);
+  const [remark, setRemark] = useState(null);
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -174,8 +174,7 @@ const Add = () => {
                 name="pendant_num"
                 className="form-control form-control-sm mb-3"
                 placeholder="نمبر تعرفه"
-                onChange={(e) => setPendant_num(e.target.value)}
-                required
+                onChange={(e) => setPendantNum(e.target.value)}
               />
             </div>
 
@@ -195,9 +194,8 @@ const Add = () => {
                 locale={persian_fa}
                 inputClass="custom-input"
                 value={pendant_date}
-                onChange={setPendant_date}
+                onChange={setPendantDate}
                 name="tariff_date"
-                required
               />
             </div>
 
@@ -209,7 +207,6 @@ const Add = () => {
                 className="form-control form-control-sm mb-3"
                 placeholder="ملاحضات"
                 onChange={(e) => setRemark(e.target.value)}
-                required
               ></textarea>
             </div>
           </section>
