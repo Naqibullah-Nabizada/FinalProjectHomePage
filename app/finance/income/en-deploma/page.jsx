@@ -34,7 +34,7 @@ const fetchData = async () => {
   return (
     <>
       <header className="flex">
-        <Header href="/finance/income/en-deploma/add" pageName="en-deploma"/>
+        <Header hrefAddBtn="/finance/income/en-deploma/add" hrefBackBtn="/finance/income" pageName="en-deploma"/>
       </header>
       <hr />
       <main className="w-[99%] mx-auto">

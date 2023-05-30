@@ -34,7 +34,7 @@ const Noctunal = async () => {
   return (
     <>
       <header className="flex">
-        <Header href="/finance/income/nocturnal-fees/add" pageName="nocturnal-fees" />
+        <Header hrefAddBtn="/finance/income/nocturnal-fees/add" hrefBackBtn="/finance/income" pageName="nocturnal-fees" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto">
