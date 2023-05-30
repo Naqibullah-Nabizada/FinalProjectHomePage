@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-// import { InsertProduct } from "./api/Hooks/hooks"
 import StuffsDetails from "../form/Stuffs_details";
+
 function Inserting() {
   const data = {
     document_No: 80000,
