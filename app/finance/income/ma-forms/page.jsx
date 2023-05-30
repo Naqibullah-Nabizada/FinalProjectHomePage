@@ -1,45 +1,50 @@
-import axios from "axios";
-import { toast } from "react-toastify";
+"use client";
+
+//! Shamsi Date Converter 
+import * as shamsi from "shamsi-date-converter";
 
 import Header from "@/components/Header";
+
+import axios from "axios";
 import Link from "next/link";
-import { FaCogs, FaEdit, FaTrash } from 'react-icons/fa';
 
-const getMAForms = async () => {
-  const data = await fetch("http://localhost:5000/MAForms", {cache: "no-cache"});
-  return data.json();
-}
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-const Home = async() => {
+import { FaEdit } from "react-icons/fa";
 
-  const MAForms = await getMAForms();
 
-  const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:5000/MAForms/${id}`);
-    toast('معلومات با موفقیت حذف شد',
-      {
-        hideProgressBar: true,
-        autoClose: 5000,
-        type: 'success',
-        position: 'top-right',
-      })
-    getMAForms();
+const MAForms = async () => {
+
+  const [MAForms, setMAForms] = useState([]);
+
+  const search = useSearchParams();
+  const searchQuery = search ? search.get("search") : null;
+  const encodedSearchQuery = encodeURI(searchQuery || "");
+
+  useEffect(() => {
+    fetchData();
+  }, [searchQuery]);
+
+  const fetchData = async () => {
+    const { data } = await axios.get(`http://localhost:5000/TwelveSection/MAForms${encodedSearchQuery}`);
+    setMAForms(data);
   }
 
   return (
     <>
       <header className="flex">
-        <Header href="./income/ma_forms/add"/>
+        <Header hrefAddBtn="/finance/income/ma-forms/add" hrefBackBtn="/finance/income" pageName="ma-forms" />
       </header>
       <hr />
-      <main className="w-[98%] mx-auto">
-        <table className="table table-sm table-responsive table-bordered table-striped">
+      <main className="w-[99%] mx-auto">
+        <table className="table table-bordered table-sm table-striped">
           <thead>
             <tr>
               <th>شماره</th>
-              <th>تحویل دهنده</th>
+              <th>نام</th>
+              <th>نام پدر</th>
               <th>نمبر مکتوب</th>
-              <th>تاریخ</th>
               <th>مرجع</th>
               <th>سال</th>
               <th>مبلغ</th>
@@ -49,29 +54,28 @@ const Home = async() => {
               <th>نمبر آویز</th>
               <th>تاریخ آویز</th>
               <th>ملاحضات</th>
-              <th className="flex justify-center"><FaCogs className="mx-1" />تنظیمات</th>
+              <th className="flex justify-center">ویرایش</th>
             </tr>
           </thead>
           <tbody>
             {
-              MAForms.map((MAForm) => (
-                <tr key={MAForm.id}>
-                  <td>{MAForm.id}</td>
-                  <td>{MAForm.fullname}</td>
-                  <td>{MAForm.maktub_num}</td>
-                  <td>{MAForm.date.slice(0, 10)}</td>
-                  <td>{MAForm.reference.slice(0, 15)}</td>
-                  <td>{MAForm.year.slice(0, 4)}</td>
-                  <td>{MAForm.amount}</td>
-                  <td>{MAForm.desc.slice(0, 15)}</td>
-                  <td>{MAForm.tariff_num}</td>
-                  <td>{MAForm.tariff_date.slice(0, 10)}</td>
-                  <td>{MAForm.pendant_num}</td>
-                  <td>{MAForm.pendant_date.slice(0, 10)}</td>
-                  <td>{MAForm.remark.slice(0, 15)}</td>
+              MAForms.map((item) => (
+                <tr key={item.id} style={item.pendant_date == null ? { background: "#F2BBA7" } : null}>
+                  <td>{item.id}</td>
+                  <td>{item.name}</td>
+                  <td>{item.father_name}</td>
+                  <td>{item.maktub_num}</td>
+                  <td>{item.reference}</td>
+                  <td>{item.year}</td>
+                  <td>{item.amount}</td>
+                  <td>{item.desc}</td>
+                  <td>{item.tariff_num}</td>
+                  <td>{shamsi.gregorianToJalali(item.tariff_date).join('-')}</td>
+                  <td>{item.pendant_num}</td>
+                  <td>{item.pendant_date != null ? shamsi.gregorianToJalali(item.pendant_date).join('-') : null}</td>
+                  <td>{item.remark}</td>
                   <td className="flex justify-around">
                     <Link href='' className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
-                    <button className="btn btn-sm btn-danger"><FaTrash className="bg-inherit" /></button>
                   </td>
                 </tr>
               ))
@@ -83,4 +87,4 @@ const Home = async() => {
   )
 }
 
-export default Home;
+export default MAForms;
