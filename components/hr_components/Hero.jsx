@@ -23,12 +23,12 @@ const Hero = () => {
             بخش استخدام پوهنتون کابل
           </Link>
 
-          <Link href="/hr/login" className="btn btn-outline-dark flex mb-2">
+          <Link href="/hr/archive" className="btn btn-outline-dark flex mb-2">
             <FaArchive className="mx-1 bg-inherit" size={25} />
             بخش سوانح پوهنتون کابل
           </Link>
 
-          <Link href="/hr/buildings" className="btn btn-outline-dark flex mb-2">
+          <Link href="/hr/development" className="btn btn-outline-dark flex mb-2">
             <MdOutlineDeveloperBoard className="mx-1 bg-inherit" size={30} />
             بخش آموزش و انکشاف پوهنتون کابل
           </Link>
