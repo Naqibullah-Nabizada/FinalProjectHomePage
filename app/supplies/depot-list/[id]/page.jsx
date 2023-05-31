@@ -1,6 +1,6 @@
-import FormHeader from "@/components/supplies/form/header";
-import Body from "@/components/supplies/details/body";
+import FormHeader from "@/components/supplies/header";
 import axios from "axios";
+
 async function getData(id) {
   const data = await axios.get(
     `http://localhost:3001/supplies/stuffes/details/${id}`
