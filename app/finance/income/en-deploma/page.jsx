@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
 
-const Noctunal = async() => {
+const EnDeploma = async() => {
 
   const [EnDeploma, SetEnDeploma] = useState([]);
 
@@ -91,4 +91,4 @@ const fetchData = async () => {
   )
 }
 
-export default Noctunal;
+export default EnDeploma;

@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
 
-const Noctunal = async () => {
+const Vehicles = async () => {
 
   const [vehicles, setVehicles] = useState([]);
 
@@ -83,4 +83,4 @@ const Noctunal = async () => {
   )
 }
 
-export default Noctunal;
+export default Vehicles;

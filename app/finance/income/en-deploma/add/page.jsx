@@ -24,7 +24,7 @@ const Add = () => {
   const [faculty, setFaculty] = useState("");
   const [department, setDepartment] = useState("");
   const [year, setYear] = useState("");
-  const [semester, setSemester] = useState("");
+  const [semester, setSemester] = useState("1");
   const [internel_fees, setInternelFees] = useState("");
   const [fees, setFees] = useState("");
   const [tariff_num, setTariffNum] = useState("");

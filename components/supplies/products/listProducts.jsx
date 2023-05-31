@@ -12,6 +12,8 @@ async function getData() {
     console.log(error.message);
   }
 }
+import Link from "next/link";
+import { AiOutlineEye } from "react-icons/ai";
 
 export default async function ListProducts() {
   const data = await getData();

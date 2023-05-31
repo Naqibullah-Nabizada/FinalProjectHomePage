@@ -14,9 +14,9 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
 
-const Noctunal = async() => {
+const EnTranscript = async() => {
 
-  const [EnDeploma, SetEnDeploma] = useState([]);
+  const [EnTranscript, setEnTranscript] = useState([]);
 
 const search = useSearchParams();
 const searchQuery = search ? search.get("search") : null;
@@ -28,7 +28,7 @@ useEffect(() => {
 
 const fetchData = async () => {
   const { data } = await axios.get(`http://localhost:5000/NMDTN/EnTranscript${encodedSearchQuery}`);
-  SetEnDeploma(data);
+  setEnTranscript(data);
 }
 
   return (
@@ -61,7 +61,7 @@ const fetchData = async () => {
       </thead>
       <tbody>
         {
-          EnDeploma.map((item) => (
+          EnTranscript.map((item) => (
             <tr key={item.id}  style={item.pendant_date == null ? { background: "#FFEEB3" } : null}>
               <td>{item.id}</td>
               <td>{item.name}</td>
@@ -91,4 +91,4 @@ const fetchData = async () => {
   )
 }
 
-export default Noctunal;
+export default EnTranscript;
