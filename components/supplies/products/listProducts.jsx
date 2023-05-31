@@ -1,32 +1,40 @@
 "use client";
-// import { getProducts } from "@/lib/supplies/routes";
-
-const products = async()=>{
-    // const response = await getProducts();
-    // return response;
-    console.log(response)
+import Link from "next/link";
+import { AiOutlineEye } from "react-icons/ai";
+import axios from "axios";
+async function getData() {
+  try {
+    const response = await axios.get("http://localhost:3001/supplies/main");
+    const data = await response.data;
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 import Link from "next/link";
 import { AiOutlineEye } from "react-icons/ai";
 
 export default async function ListProducts() {
+  const data = await getData();
   return (
-    <tbody>
-    <tr>
-      <td>1</td>
-      <td>کتاب</td>
-      <td className="flex overflow-clip">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-        Recusandae molestias nostrum voluptas quidem. 
-        Nam reprehenderit deleniti temporibus necessitatibus atque impedit.adipisicing elit.
-         Recusandae molestias nostrum voluptas quidem.
-      </td>
-      <td className="text-center items-center">
-        <Link href={"/supplies/depot-list/details"} className="btn bg-yellow-500">
-          <AiOutlineEye/>
-        </Link>
-      </td>
-    </tr>
+    <tbody className="text-end">
+      {data.map((items, index) => {
+        return (
+          <tr key={index}>
+            <td>{index + 1}</td>
+            <td>{items.document_No}</td>
+            <td>{items.content}</td>
+            <td className="text-center">
+              <Link
+                href={`/supplies/depot-list/${items.document_No}`}
+                className="btn bg-yellow-500"
+              >
+                <AiOutlineEye />
+              </Link>
+            </td>
+          </tr>
+        );
+      })}
     </tbody>
   );
 }
