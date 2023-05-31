@@ -1,4 +1,4 @@
-import FormHeader from "@/components/supplies/form/header";
+import FormHeader from "@/components/supplies/header";
 import Inserting from "@/components/supplies/depot";
 
 const Index = () => {

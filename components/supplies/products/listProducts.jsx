@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { AiOutlineEye } from "react-icons/ai";
 import axios from "axios";
+
 async function getData() {
   try {
     const response = await axios.get("http://localhost:3001/supplies/main");

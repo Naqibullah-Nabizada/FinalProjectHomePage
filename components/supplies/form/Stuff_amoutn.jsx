@@ -1,19 +1,15 @@
 import AddStuffs from "./add-stuffs";
 import Buttons from "./button";
+import Address from "./address";
 
 const StuffAmoutn = (props) => {
-    let stuff_arr = []
-    for (let i = 0; i < (props.amount); i++) {
-        stuff_arr.push(<AddStuffs number={i+1}/>)
-    }
-    stuff_arr = stuff_arr.map(item => item  )
-
-    stuff_arr=="" ? "" :stuff_arr.push(<Buttons/>);
-    return(
-      <>
-      {stuff_arr}
-      </>
-    )
+  let allInputes = [<Address/>];
+  for (let i = 0; i < props.amount; i++) {
+    allInputes.push(<AddStuffs number={i + 1} />);
   }
+
+  allInputes == "" ? "" : allInputes.push(<Buttons />);
+  return <>{allInputes}</>;
+};
 
 export default StuffAmoutn;
