@@ -1,8 +1,9 @@
 "use client";
-import Link from "next/link";
 import { AiOutlineEye } from "react-icons/ai";
+import Link from "next/link";
 import axios from "axios";
 
+import TableData from "../table/td/tabelData";
 async function getData() {
   try {
     const response = await axios.get("http://localhost:3001/supplies/main");
@@ -12,8 +13,6 @@ async function getData() {
     console.log(error.message);
   }
 }
-import Link from "next/link";
-import { AiOutlineEye } from "react-icons/ai";
 
 export default async function ListProducts() {
   const data = await getData();
@@ -22,10 +21,14 @@ export default async function ListProducts() {
       {data.map((items, index) => {
         return (
           <tr key={index}>
-            <td>{index + 1}</td>
-            <td>{items.document_No}</td>
-            <td>{items.content}</td>
+            {/* a column to show the number of records */}
+            <TableData title={index + 1} />
+            {/* column for document number */}
+            <TableData title={items.document_No} />
+            {/* column for the content of document */}
+            <TableData title={items.content} />
             <td className="text-center">
+              {/* this link redirect to another page to show the full details */}
               <Link
                 href={`/supplies/depot-list/${items.document_No}`}
                 className="btn bg-yellow-500"
