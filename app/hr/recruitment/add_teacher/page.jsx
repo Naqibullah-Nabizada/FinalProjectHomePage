@@ -1,3 +1,5 @@
+"use client";
+
 // import axios from "axios";
 import Link from "next/link";
 // import { useState } from "react";
@@ -12,7 +14,10 @@ import DatePicker, { DateObject } from "react-multi-date-picker";
 
 // import { toast } from "react-toastify";
 // import { useRouter } from 'next/router';
-const AddEmployee = () => {
+
+
+const AddTeacher = () => {
+
 
   // const [MAForm, setMAForm] = useState({});
 
@@ -46,9 +51,9 @@ const AddEmployee = () => {
       <main>
         <form>
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
-            <div className="w-[95%] flex justify-center items-center mb-2">
+            <div className="w-[95%] flex justify-center items-center mb-4">
               <h3 className="border-b border-danger p-1 rounded">
-                شهرت کارمند
+                شهرت استاد
               </h3>
             </div>
             <div className="w-[32%]">
@@ -56,7 +61,7 @@ const AddEmployee = () => {
               <input
                 type="text"
                 name="code"
-                className="form-control form-control-sm mb-3"
+                className="form-control form-contro l-sm mb-3"
                 placeholder="کود تشکیلاتی بست"
                 // onChange={setMAFormInfo}
                 required
@@ -98,28 +103,6 @@ const AddEmployee = () => {
                 required
               />
             </div>
-
-            
-<button id="dropdownRadioBgHoverButton" data-dropdown-toggle="dropdownRadioBgHover" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown radio <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-
-<!-- Dropdown menu -->
-<div id="dropdownRadioBgHover" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
-    <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioBgHoverButton">
-      <li>
-        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-            <input id="default-radio-4" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-            <label for="default-radio-4" class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Default radio</label>
-        </div>
-      </li>
-      <li>
-        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-            <input checked id="default-radio-5" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-            <label for="default-radio-5" class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Checked state</label>
-        </div>
-      </li>
-    </ul>
-</div>
-
 
             <div className="w-[32%]">
               <label for="gender">جنسیت</label>
@@ -178,7 +161,6 @@ const AddEmployee = () => {
               />
             </div>
 
-
             <div className="w-[32%]">
               <label className="form-label">نمبر تذکره</label>
               <input
@@ -217,7 +199,7 @@ const AddEmployee = () => {
             </div>
             <div className="w-[95%] flex justify-center items-center">
               <h3 className="border-b border-danger p-1 rounded">
-                معلومات اداری کارمند
+                معلومات اداری استاد
               </h3>
             </div>
             <div className="w-[32%]">
@@ -230,7 +212,7 @@ const AddEmployee = () => {
                 placeholder=" نام پوهنتون"
                 // onChange={setMAFormInfo}
                 required
-             
+                
               />
             </div>
             <div className="w-[32%]">
@@ -290,10 +272,57 @@ const AddEmployee = () => {
                 required
               />
             </div>
-            
+            <div className="w-[95%] flex justify-center items-center">
+              <h3 className="border-b border-danger p-1 rounded">
+                مشخصات تحصیلی
+              </h3>
+            </div>
+            <div className="w-[32%]">
+              <label for="degree">درجه تحصیل</label>
+              <select class="form-control form-control-sm mb-3" id="degree">
+                <option value="1">دوکتورا</option>
+                <option value="2">ماستر </option>
+                <option value="3">لیسانس </option>
+              </select>
+            </div>
+            <div className="w-[32%]">
+              <label className="form-label"> رشته تحصیل </label>
+              <input
+                type="text"
+                name="major"
+                placeholder=""
+                className="form-control form-control-sm mb-3"
+                // onChange={setMAFormInfo}
+                required
+              />
+            </div>
+            <div className="w-[32%]">
+              <label className="form-label"> سال فراغت </label>
+              <input
+                name="graduateyear"
+				type="number"
+                name="year"
+                min="1370"
+                max="1420"
+                className="form-control form-control-sm mb-3"
+                // onChange={setMAFormInfo}
+                required
+              />
+            </div>
+
+            <div className="w-[32%]">
+              <label className="form-label"> پوهنتون </label>
+              <input
+                type="text"
+                name="university"
+                className="form-control form-control-sm mb-3"
+                // onChange={setMAFormInfo}
+                required
+              />
+            </div>
           </section>
 
-          <div className="flex mb-4">
+          <div className="flex mb-3">
             <button
               type="submit"
               className="btn btn-outline-success flex mr-10 ml-5"
@@ -314,4 +343,4 @@ const AddEmployee = () => {
   );
 };
 
-export default AddEmployee;
+export default AddTeacher;

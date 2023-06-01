@@ -9,16 +9,20 @@ const Recruitment = () => {
             <section className='w-[95%] mx-auto flex my-4'>
               <div className='w-[40%]'>
                 <div className='w-[60%] mt-36'>
-                  <Link href='/hr/recruitment/add_employee' className='btn btn-outline-dark flex mb-2'>
-                    <BsPersonPlus className='mx-1 bg-inherit' size={25} />ثبت کارمند جدید</Link>
-        
-                  <Link href='/hr/recruitment/form_karyabi' className='btn btn-outline-dark flex mb-2'>
+				<Link href='/hr/recruitment/form_karyabi' className='btn btn-outline-dark flex mb-2'>
                     <GiArchiveRegister className='mx-1 bg-inherit' size={25} />فورم کاریابی</Link>
+                  <Link href='/hr/recruitment/add_teacher' className='btn btn-outline-dark flex mb-2'>
+                    <BsPersonPlus className='mx-1 bg-inherit' size={25} />ثبت استاد جدید</Link>
+                  
+				<Link href='/hr/recruitment/add_employee' className='btn btn-outline-dark flex mb-2'>
+                    <BsPersonPlus className='mx-1 bg-inherit' size={25} />ثبت کارمند جدید</Link>
+					<Link href='/hr/recruitment/add_date' className='btn btn-outline-dark flex mb-2'>
+                    <BsPersonPlus className='mx-1 bg-inherit' size={25} />تاریخ</Link>
         
                   <Link href='' className='btn btn-outline-dark flex mb-2'>
                     <FaCar className='mx-1 bg-inherit' />بخش</Link>
         
-                  <Link href='/hr/recruitment' className='btn btn-outline-dark flex mb-2'>
+                  <Link href='/hr' className='btn btn-outline-dark flex mb-2'>
                     <FaArrowAltCircleRight className='mx-1 bg-inherit' />بازگشت به صفحه اصلی</Link>
                 </div>
               </div>

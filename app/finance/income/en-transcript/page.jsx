@@ -62,7 +62,7 @@ const fetchData = async () => {
       <tbody>
         {
           EnTranscript.map((item) => (
-            <tr key={item.id}  style={item.pendant_date == null ? { background: "#FFEEB3" } : null}>
+            <tr key={item.id}  style={item.pendant_date == null ? { background: "#F2BBA7" } : null}>
               <td>{item.id}</td>
               <td>{item.name}</td>
               <td>{item.father_name}</td>
