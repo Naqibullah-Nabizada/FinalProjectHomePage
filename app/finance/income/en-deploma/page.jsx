@@ -91,4 +91,5 @@ const fetchData = async () => {
   )
 }
 
+
 export default EnDeploma;
