@@ -1,21 +1,13 @@
 import StuffRestructure from "../input-fields";
 import Stuffs from "../Stuffs";
 
-const AddStuffs = ({ number }) => {
+const AddStuffs = (props) => {
   return (
-    <section className="w-[98%]">
-      <div className="text-lg">
-        <div className="flex container mx-auto justify-center items-center gap-3">
-          {Stuffs.map((stuff) => {
-            return (
-              <>
-                <StuffRestructure key={stuff.id} {...stuff} />
-              </>
-            );
-          })}
-        </div>
-        </div>
-    </section>
+    <div className="flex container mx-auto justify-center items-center gap-3">
+      {Stuffs.map((stuff) => {
+        return <StuffRestructure key={stuff.id} {...stuff} number={props.number}/>;
+      })}
+    </div>
   );
 };
 export default AddStuffs;

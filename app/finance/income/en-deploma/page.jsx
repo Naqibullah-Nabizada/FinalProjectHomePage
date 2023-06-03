@@ -91,4 +91,8 @@ const fetchData = async () => {
   )
 }
 
+<<<<<<< HEAD
 export default EnDeploma;
+=======
+export default EnDeploma;
+>>>>>>> f48a8e01fc8b531c67ee3bd30793e65e1850ad34
