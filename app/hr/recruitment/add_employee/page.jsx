@@ -1,14 +1,19 @@
+"use client";
 // import axios from "axios";
 import Link from "next/link";
 // import { useState } from "react";
 import { FaArrowCircleRight, FaPlus } from "react-icons/fa";
 
-
 //! Shamsi Date
-import persian from "react-date-object/calendars/persian";
-import persian_fa from "react-date-object/locales/persian_fa";
+// import Persian from "react-date-object/calendars/persian";
+// import persian_fa from "react-date-object/locales/persian_fa";
+import Dari from "react-date-object/calendars/dari";
+import dari_dr from "react-date-object/locales/dari_dr";
 import transition from "react-element-popper/animations/transition";
 import DatePicker, { DateObject } from "react-multi-date-picker";
+
+
+
 
 // import { toast } from "react-toastify";
 // import { useRouter } from 'next/router';
@@ -18,7 +23,7 @@ const AddEmployee = () => {
 
   // const setMAFormInfo = (e) => {
   //   setMAForm({
-  //     ...MAForm,
+  //     ...MAForm,persian_fa
   //     [e.target.name]: e.target.value,
   //   });
   // };
@@ -99,28 +104,6 @@ const AddEmployee = () => {
               />
             </div>
 
-            
-<button id="dropdownRadioBgHoverButton" data-dropdown-toggle="dropdownRadioBgHover" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown radio <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-
-<!-- Dropdown menu -->
-<div id="dropdownRadioBgHover" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
-    <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioBgHoverButton">
-      <li>
-        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-            <input id="default-radio-4" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-            <label for="default-radio-4" class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Default radio</label>
-        </div>
-      </li>
-      <li>
-        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-            <input checked id="default-radio-5" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-            <label for="default-radio-5" class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Checked state</label>
-        </div>
-      </li>
-    </ul>
-</div>
-
-
             <div className="w-[32%]">
               <label for="gender">جنسیت</label>
               <select class="form-control form-control-sm mb-3" id="gender">
@@ -159,21 +142,22 @@ const AddEmployee = () => {
             <div className="w-[32%]">
               <label className="form-label">تاریخ تولد</label>
               <DatePicker
-                months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
+
+                // months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
                 hideOnScroll
                 hideWeekDays
                 editable={false}
                 placeholder="تاریخ تولد"
                 currentDate={
-                  new DateObject({ calendar: persian })
+                  new DateObject({ calendar: Dari })
                 }
                 animations={[transition()]}
-                calendar={persian}
-                locale={persian_fa}
+                calendar={Dari}
+                locale={dari_dr}
                 inputClass="custom-input"
                 // value={tariff_date}
                 // onChange={setTariff_date}
-                name="tariff_date"
+                name="birthdate"
                 required
               />
             </div>
