@@ -25,7 +25,7 @@
   font-weight: 800;
   line-height: 1.5;
   color: #212529;
-  background-color: #fff;
+  background-color: rgb(240, 240, 240) !important;
   background-clip: padding-box;
   border: 1px solid #ced4da;
   -webkit-appearance: none;
@@ -45,4 +45,13 @@
 
 .form-control {
   background-color: rgb(240, 240, 240) !important;
+}
+
+.notFound {
+  color: #fff;
+  font-weight: bold;
+  background-image: url('/images/finance/p404.png');
+  background-position: center;
+  background-repeat: repeat;
+  background-color: #212529;
 }
