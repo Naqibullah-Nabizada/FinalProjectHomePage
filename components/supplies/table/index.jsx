@@ -57,7 +57,7 @@ export default function Table({ data }) {
           <tbody>
             {data.map((items, index) => {
               return (
-                <tr>
+                <tr key={index}>
                   <TableData title={index + 1} />
                   <TableData title={items.itemName} />
                   <TableData title={items.unit} />

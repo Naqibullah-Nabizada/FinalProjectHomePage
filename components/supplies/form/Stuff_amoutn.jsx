@@ -3,7 +3,7 @@ import Buttons from "./button";
 import Address from "./address";
 
 const StuffAmoutn = (props) => {
-  let allInputes = [<Address/>];
+  let allInputes = [<Address key={"address"}/>];
   for (let i = 0; i < props.amount; i++) {
     allInputes.push(<AddStuffs number={i + 1} />);
   }
