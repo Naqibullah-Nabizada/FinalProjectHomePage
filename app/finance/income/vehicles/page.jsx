@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
 
-const Vehicles = async () => {
+const Vehicles = () => {
 
   const [vehicles, setVehicles] = useState([]);
 

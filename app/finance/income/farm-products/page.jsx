@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
 
-const FarmaticProducts = async () => {
+const FarmaticProducts = () => {
 
   const [farmaticProducts, setFarmaticProducts] = useState([]);
 

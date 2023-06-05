@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
 
-const Noctunal = async () => {
+const Noctunal = () => {
 
   const [buildings, setBuildings] = useState([]);
 

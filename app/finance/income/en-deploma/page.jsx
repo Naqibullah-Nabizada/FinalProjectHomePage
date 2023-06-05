@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
 
-const EnDeploma = async() => {
+const EnDeploma = () => {
 
   const [EnDeploma, SetEnDeploma] = useState([]);
 

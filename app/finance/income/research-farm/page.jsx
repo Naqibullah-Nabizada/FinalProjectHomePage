@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
 
-const ResearchFarm = async () => {
+const ResearchFarm = () => {
 
   const [researchFarm, setResearchFarm] = useState([]);
 

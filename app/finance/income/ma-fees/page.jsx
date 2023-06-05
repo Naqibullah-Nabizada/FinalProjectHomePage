@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
 
-const MAFees = async() => {
+const MAFees = () => {
 
   const [MAFees, setMAFees] = useState([]);
 

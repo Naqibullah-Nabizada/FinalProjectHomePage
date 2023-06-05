@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
 
-const NationalNumTable = async() => {
+const NationalNumTable = () => {
 
   const [EnDeploma, SetEnDeploma] = useState([]);
 

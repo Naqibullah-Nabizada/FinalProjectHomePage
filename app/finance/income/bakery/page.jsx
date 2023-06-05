@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
 
-const Bakery = async () => {
+const Bakery = () => {
 
   const [bakery, setBakery] = useState([]);
 

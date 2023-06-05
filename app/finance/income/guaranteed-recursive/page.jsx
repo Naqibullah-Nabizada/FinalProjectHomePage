@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
 
-const GuaranteedRecursive = async () => {
+const GuaranteedRecursive = () => {
 
   const [guaranrRecursive, setGuaranrRecursive] = useState([]);
 

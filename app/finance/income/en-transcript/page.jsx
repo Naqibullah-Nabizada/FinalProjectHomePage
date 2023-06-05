@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
 
-const EnTranscript = async() => {
+const EnTranscript = () => {
 
   const [EnTranscript, setEnTranscript] = useState([]);
 
