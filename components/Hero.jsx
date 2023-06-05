@@ -24,7 +24,7 @@ const Hero = () => {
         </div>
       </div>
       <div className='w-[60%] mx-auto'>
-        <Image src='/img/1675576783.jpg' alt='background' className='img-thumbnail' width={700} height={100} />
+        <Image src='/images/finance/1675576783.jpg' alt='background' className='img-thumbnail' width={700} height={100} />
       </div>
     </section>
   )
