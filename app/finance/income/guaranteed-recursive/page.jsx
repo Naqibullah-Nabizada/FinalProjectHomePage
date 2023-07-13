@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { FaEdit } from "react-icons/fa";
+import { FaCheck, FaEdit } from "react-icons/fa";
 
 
 const GuaranteedRecursive = () => {
@@ -60,7 +60,7 @@ const GuaranteedRecursive = () => {
           <tbody>
             {
               guaranrRecursive.map((item) => (
-                <tr key={item.id} style={item.pendant_date == null ? { background: "#F2BBA7" } : null}>
+                <tr key={item.id} style={item.pendant_num == null || item.pendant_num == '' ? { background: "#F2BBA7" } : null}>
                   <td>{item.id}</td>
                   <td>{item.name}</td>
                   <td>{item.father_name}</td>
@@ -76,6 +76,11 @@ const GuaranteedRecursive = () => {
                   <td>{item.remark}</td>
                   <td className="flex justify-around">
                     <Link href='' className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
+                    {
+                      item.pendant_num == null || item.pendant_num == ''?
+                        <Link href={`/finance/income/guaranteed-recursive/add/${item.id}`} className="btn btn-sm btn-success"><FaCheck className="bg-inherit" /></Link>
+                        : null
+                    }
                   </td>
                 </tr>
               ))

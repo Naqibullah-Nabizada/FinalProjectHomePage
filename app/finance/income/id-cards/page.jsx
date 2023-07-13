@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { FaEdit } from "react-icons/fa";
+import { FaCheck, FaEdit } from "react-icons/fa";
 
 const IdCard = () => {
 
@@ -60,7 +60,7 @@ const IdCard = () => {
           <tbody>
             {
               IdCards.length > 0 ? IdCards.map((item) => (
-                <tr key={item.id}  style={item.pendant_date == null ? { background: "#F2BBA7" } : null}>
+                <tr key={item.id} style={item.pendant_num == null || item.pendant_num == '' ? { background: "#F2BBA7" } : null}>
                   <td>{item.id}</td>
                   <td>{item.name}</td>
                   <td>{item.father_name}</td>
@@ -75,8 +75,11 @@ const IdCard = () => {
                   <td>{item.pendant_date != null ? shamsi.gregorianToJalali(item.pendant_date).join("-") : null}</td>
                   <td>{item.remark}</td>
                   <td className="flex justify-around">
-                    <Link href='' className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
-                    {/* <button className="btn btn-sm btn-danger"><FaTrash className="bg-inherit" /></button> */}
+                    <Link href={`/finance/income/id-cards/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
+                    {item.pendant_num == null || item.pendant_num == ''?
+                      <Link href={`/finance/income/id-cards/add/${item.id}`} className="btn btn-sm btn-success"><FaCheck className="bg-inherit" /></Link>
+                      : null
+                    }
                   </td>
                 </tr>
               )) : null

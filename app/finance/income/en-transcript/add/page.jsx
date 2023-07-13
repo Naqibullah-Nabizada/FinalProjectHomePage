@@ -210,7 +210,7 @@ const Add = () => {
                 type="number"
                 name="pendant_num"
                 className="form-control form-control-sm mb-3"
-                placeholder="نمبر تعرفه"
+                placeholder="نمبر آویز"
                 onChange={(e) => setPendantNum(e.target.value)}
               />
             </div>

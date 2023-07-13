@@ -26,15 +26,12 @@ const Add = () => {
   const [year, setYear] = useState();
   const [tariff_num, setTariff_num] = useState("");
   const [tariff_date, setTariff_date] = useState("");
-  const [pendant_num, setPendantNum] = useState(null);
-  const [pendant_date, setPendantDate] = useState(null);
-  const [remark, setRemark] = useState(null);
 
   const submitForm = async (e) => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:5000/IdCards", {
-        name, father_name, cost, count, year, reference, tariff_date, tariff_num, pendant_date, pendant_num, remark
+        name, father_name, cost, count, year, reference, tariff_date, tariff_num
       });
       router.push("/finance/income/id-cards");
       toast('معلومات جدید با موفقیت اضافه شد',
@@ -167,48 +164,6 @@ const Add = () => {
               />
             </div>
 
-            <div className="w-[32%]">
-              <label className="form-label">نمبر آویز</label>
-              <input
-                type="number"
-                name="pendant_num"
-                className="form-control form-control-sm mb-3"
-                placeholder="نمبر تعرفه"
-                onChange={(e) => setPendantNum(e.target.value)}
-              />
-            </div>
-
-            <div className="w-[32%]">
-              <label className="form-label">تاریخ آویز</label>
-              <DatePicker
-                months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
-                hideOnScroll
-                hideWeekDays
-                editable={false}
-                placeholder="تاریخ آویز"
-                currentDate={
-                  new DateObject({ calendar: persian })
-                }
-                animations={[transition()]}
-                calendar={persian}
-                locale={persian_fa}
-                inputClass="custom-input"
-                value={pendant_date}
-                onChange={setPendantDate}
-                name="tariff_date"
-              />
-            </div>
-
-            <div className="w-[32%]">
-              <label className="form-label">ملاحضات</label>
-              <textarea
-                rows="3"
-                name="remark"
-                className="form-control form-control-sm mb-3"
-                placeholder="ملاحضات"
-                onChange={(e) => setRemark(e.target.value)}
-              ></textarea>
-            </div>
           </section>
 
           <div className="flex">
