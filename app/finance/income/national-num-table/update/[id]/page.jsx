@@ -24,7 +24,7 @@ const Update = () => {
 
   const [name, setName] = useState("");
   const [father_name, setFatherName] = useState("");
-  const [type, setType] = useState("nocturnalFees");
+  const [type, setType] = useState("NationalNum");
   const [faculty, setFaculty] = useState("");
   const [department, setDepartment] = useState("");
   const [year, setYear] = useState("");
@@ -40,7 +40,7 @@ const Update = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     try {
-      router.push("/finance/income/nocturnal-fees");
+      router.push("/finance/income/national-num-table");
       await axios.put(`http://localhost:5000/updateNMDTN/${id}`, {
         name, father_name, type, faculty, department, year, semester, internel_fees, fees, tariff_date, tariff_num, pendant_num, pendant_date, remark
       });
@@ -58,12 +58,12 @@ const Update = () => {
 
 
   useEffect(() => {
-    getNocturnalFess();
+    getEnDeploma();
   }, []);
 
-  const getNocturnalFess = async () => {
+  const getEnDeploma = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/NMDTN/nocturnalFees/${id}`);
+      const { data } = await axios.get(`http://localhost:5000/NMDTN/NationalNum/${id}`);
       setName(data.name);
       setFatherName(data.father_name);
       setFaculty(data.faculty);
@@ -86,7 +86,7 @@ const Update = () => {
     <>
       <header>
         <h3 className="my-4 text-center text-xl">
-          فورم ثبت فیس محصلین برنامه های شبانه
+          فورم ویرایش جدول نمرات ملی
         </h3>
       </header>
       <hr />
@@ -300,7 +300,7 @@ const Update = () => {
               <FaPlus className="mx-1 bg-inherit" />
             </button>
 
-            <Link href="./finance/income/nocturnal-fees" className="btn btn-outline-secondary flex">
+            <Link href="./finance/income/national-num-table" className="btn btn-outline-secondary flex">
               <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
             </Link>
           </div>

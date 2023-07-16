@@ -24,13 +24,10 @@ const Update = () => {
 
   const [name, setName] = useState("");
   const [father_name, setFatherName] = useState("");
-  const [type, setType] = useState("nocturnalFees");
-  const [faculty, setFaculty] = useState("");
-  const [department, setDepartment] = useState("");
+  const [type, setType] = useState("buildings");
+  const [reference, setReference] = useState("");
   const [year, setYear] = useState("");
-  const [semester, setSemester] = useState("1");
-  const [internel_fees, setInternelFees] = useState("");
-  const [fees, setFees] = useState("");
+  const [amount, setAmount] = useState("");
   const [tariff_num, setTariffNum] = useState("");
   const [tariff_date, setTariffDate] = useState("");
   const [pendant_num, setPendantNum] = useState(null);
@@ -40,9 +37,9 @@ const Update = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     try {
-      router.push("/finance/income/nocturnal-fees");
-      await axios.put(`http://localhost:5000/updateNMDTN/${id}`, {
-        name, father_name, type, faculty, department, year, semester, internel_fees, fees, tariff_date, tariff_num, pendant_num, pendant_date, remark
+      router.push("/finance/income/buildings");
+      await axios.put(`http://localhost:5000/BV/buildings/${id}`, {
+        name, father_name, type, year, reference, amount, tariff_date, tariff_num, pendant_num, pendant_date, remark
       });
       toast('معلومات جدید با موفقیت اضافه شد',
         {
@@ -56,21 +53,17 @@ const Update = () => {
     }
   }
 
-
   useEffect(() => {
-    getNocturnalFess();
+    getBuildings();
   }, []);
 
-  const getNocturnalFess = async () => {
+  const getBuildings = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/NMDTN/nocturnalFees/${id}`);
+      const { data } = await axios.get(`http://localhost:5000/BV/buildings/${id}`);
       setName(data.name);
       setFatherName(data.father_name);
-      setFaculty(data.faculty);
-      setSemester(data.semester);
-      setDepartment(data.department);
-      setInternelFees(data.internel_fees);
-      setFees(data.fees);
+      setReference(data.reference);
+      setAmount(data.amount);
       setYear(data.year);
       setTariffNum(data.tariff_num);
       setTariffDate(data.tariff_date);
@@ -86,7 +79,7 @@ const Update = () => {
     <>
       <header>
         <h3 className="my-4 text-center text-xl">
-          فورم ثبت فیس محصلین برنامه های شبانه
+          فورم ویرایش کرایه بلاک های استادان
         </h3>
       </header>
       <hr />
@@ -123,30 +116,16 @@ const Update = () => {
             </div>
 
             <div className="w-[32%]">
-              <label className="form-label">پوهنځی</label>
+              <label className="form-label">مرجع</label>
               <input
                 type="text"
-                name="faculty"
+                name="reference"
                 className="form-control form-control-sm mb-3"
-                placeholder="پوهنځی"
-                onChange={(e) => setFaculty(e.target.value)}
+                placeholder="مرجع"
+                onChange={(e) => setReference(e.target.value)}
                 minLength={3}
                 required
-                value={faculty}
-              />
-            </div>
-
-            <div className="w-[32%]">
-              <label className="form-label">دیپارتمنت</label>
-              <input
-                type="text"
-                name="department"
-                className="form-control form-control-sm mb-3"
-                placeholder="دیپارتمنت"
-                onChange={(e) => setDepartment(e.target.value)}
-                minLength={3}
-                required
-                value={department}
+                value={reference}
               />
             </div>
 
@@ -166,44 +145,15 @@ const Update = () => {
             </div>
 
             <div className="w-[32%]">
-              <label className="form-label">سمستر</label>
-              <select name="semester" className="form-control form-control-sm mb-3" onChange={(e) => setSemester(e.target.value)} >
-                <option value={"1"}>اول</option>
-                <option value={"2"}>دوم</option>
-                <option value={"3"}>سوم</option>
-                <option value={"4"}>چهارم</option>
-                <option value={"5"}>پنجم</option>
-                <option value={"6"}>ششم</option>
-                <option value={"7"}>هفتم</option>
-                <option value={"8"}>هشتم</option>
-                <option value={"9"}>نهم</option>
-                <option value={"10"}>دهم</option>
-              </select>
-            </div>
-
-            <div className="w-[32%]">
-              <label className="form-label">داخله</label>
-              <input
-                type="number"
-                name="interner_fees"
-                className="form-control form-control-sm mb-3"
-                placeholder="داخله"
-                onChange={(e) => setInternelFees(e.target.value)}
-                required
-                value={internel_fees}
-              />
-            </div>
-
-            <div className="w-[32%]">
-              <label className="form-label">فیس</label>
+              <label className="form-label">مبلغ</label>
               <input
                 type="number"
                 name="fees"
                 className="form-control form-control-sm mb-3"
-                placeholder="فیس"
-                onChange={(e) => setFees(e.target.value)}
+                placeholder="مبلغ"
+                onChange={(e) => setAmount(e.target.value)}
                 required
-                value={fees}
+                value={amount}
               />
             </div>
 
@@ -300,7 +250,7 @@ const Update = () => {
               <FaPlus className="mx-1 bg-inherit" />
             </button>
 
-            <Link href="./finance/income/nocturnal-fees" className="btn btn-outline-secondary flex">
+            <Link href="./finance/income/buildings" className="btn btn-outline-secondary flex">
               <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
             </Link>
           </div>

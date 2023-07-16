@@ -75,7 +75,7 @@ const GuaranteedRecursive = () => {
                   <td>{item.pendant_date != null ? shamsi.gregorianToJalali(item.pendant_date).join('-') : null}</td>
                   <td>{item.remark}</td>
                   <td className="flex justify-around">
-                    <Link href='' className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
+                    <Link href={`/finance/income/guaranteed-recursive/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
                     {
                       item.pendant_num == null || item.pendant_num == ''?
                         <Link href={`/finance/income/guaranteed-recursive/add/${item.id}`} className="btn btn-sm btn-success"><FaCheck className="bg-inherit" /></Link>

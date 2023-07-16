@@ -30,9 +30,9 @@ const IdCard = () => {
     setIdCards(data);
   }
 
-
   return (
     <>
+
       <header className="flex">
         <Header hrefAddBtn="/finance/income/id-cards/add" hrefBackBtn="/finance/income" pageName="id-cards" />
       </header>
@@ -76,7 +76,7 @@ const IdCard = () => {
                   <td>{item.remark}</td>
                   <td className="flex justify-around">
                     <Link href={`/finance/income/id-cards/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
-                    {item.pendant_num == null || item.pendant_num == ''?
+                    {item.pendant_num == null || item.pendant_num == '' ?
                       <Link href={`/finance/income/id-cards/add/${item.id}`} className="btn btn-sm btn-success"><FaCheck className="bg-inherit" /></Link>
                       : null
                     }
@@ -85,6 +85,7 @@ const IdCard = () => {
               )) : null
             }
           </tbody>
+
         </table>
       </main>
     </>
