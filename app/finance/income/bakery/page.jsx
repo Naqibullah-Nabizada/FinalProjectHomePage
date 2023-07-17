@@ -31,13 +31,19 @@ const Bakery = () => {
     setBakery(data);
   }
 
+  const { totalAmount } = bakery.reduce((accumulator, item) => {
+    return {
+      totalAmount: accumulator.totalAmount + (item.amount)
+    };
+  }, { totalAmount: 0 });
+
   return (
     <>
       <header className="flex">
         <Header hrefAddBtn="/finance/income/bakery/add" hrefBackBtn="/finance/income" pageName="bakery" />
       </header>
       <hr />
-      <main className="w-[99%] mx-auto">
+      <main className="w-[99%] mx-auto" id="main">
         <table className="table table-bordered table-sm table-striped">
           <thead>
             <tr>
@@ -77,7 +83,7 @@ const Bakery = () => {
                   <td className="flex justify-around">
                     <Link href={`/finance/income/bakery/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
                     {
-                      item.pendant_num == null || item.pendant_num == ''?
+                      item.pendant_num == null || item.pendant_num == '' ?
                         <Link href={`/finance/income/bakery/add/${item.id}`} className="btn btn-sm btn-success"><FaCheck className="bg-inherit" /></Link>
                         : null
                     }
@@ -88,6 +94,10 @@ const Bakery = () => {
           </tbody>
         </table>
       </main>
+      <div className="d-flex justify-around bg-primary text-white p-1">
+        <button onClick={print} className="btn btn-sm btn-dark">پرنت</button>
+        <span>قیمت مجموعی: {totalAmount}</span>
+      </div>
     </>
   )
 }

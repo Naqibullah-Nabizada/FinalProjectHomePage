@@ -31,13 +31,19 @@ const GuestHouse = () => {
     setGuestHouse(data);
   }
 
+  const { totalAmount } = guestHouse.reduce((accumulator, item) => {
+    return {
+      totalAmount: accumulator.totalAmount + (item.amount)
+    };
+  }, { totalAmount: 0 });
+
   return (
     <>
       <header className="flex">
         <Header hrefAddBtn="/finance/income/guesthouse/add" hrefBackBtn="/finance/income" pageName="guesthouse" />
       </header>
       <hr />
-      <main className="w-[99%] mx-auto">
+      <main className="w-[99%] mx-auto" id="main">
         <table className="table table-bordered table-sm table-striped">
           <thead>
             <tr>
@@ -88,6 +94,10 @@ const GuestHouse = () => {
           </tbody>
         </table>
       </main>
+      <div className="d-flex justify-around bg-primary text-white p-1">
+        <button onClick={print} className="btn btn-sm btn-dark">پرنت</button>
+        <span>قیمت مجموعی: {totalAmount}</span>
+      </div>
     </>
   )
 }

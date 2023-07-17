@@ -30,6 +30,13 @@ const IdCard = () => {
     setIdCards(data);
   }
 
+  const { totalCount, totalAmount } = IdCards.reduce((accumulator, item) => {
+    return {
+      totalCount: accumulator.totalCount + item.count,
+      totalAmount: accumulator.totalAmount + (item.cost * item.count)
+    };
+  }, { totalCount: 0, totalAmount: 0 });
+
   return (
     <>
 
@@ -37,7 +44,7 @@ const IdCard = () => {
         <Header hrefAddBtn="/finance/income/id-cards/add" hrefBackBtn="/finance/income" pageName="id-cards" />
       </header>
       <hr />
-      <main className="w-[99%] mx-auto">
+      <main className="w-[99%] mx-auto" id="main">
         <table className="table table-bordered table-sm table-striped">
           <thead>
             <tr>
@@ -88,6 +95,11 @@ const IdCard = () => {
 
         </table>
       </main>
+      <div className="d-flex justify-around bg-primary text-white p-1">
+        <button onClick={print} className="btn btn-sm btn-dark">پرنت</button>
+        <span>قیمت مجموعی: {totalAmount}</span>
+        <span>تعداد مجموعی: {totalCount}</span>
+      </div>
     </>
   )
 }

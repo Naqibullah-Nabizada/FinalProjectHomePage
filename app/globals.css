@@ -56,3 +56,13 @@
   background-color: #212529;
 }
 
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #main,
+  #main * {
+    visibility: visible;
+  }
+}

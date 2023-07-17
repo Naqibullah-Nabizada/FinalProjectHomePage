@@ -31,13 +31,19 @@ const NationalNumTable = () => {
     SetEnDeploma(data);
   }
 
+  const { totalAmount } = EnDeploma.reduce((accumulator, item) => {
+    return {
+      totalAmount: accumulator.totalAmount + (item.fees + item.internel_fees)
+    };
+  }, { totalAmount: 0 });
+
   return (
     <>
       <header className="flex">
         <Header hrefAddBtn="/finance/income/national-num-table/add" hrefBackBtn="/finance/income" pageName="national-num-table" />
       </header>
       <hr />
-      <main className="w-[99%] mx-auto">
+      <main className="w-[99%] mx-auto" id="main">
         <table className="table table-bordered table-sm table-striped">
           <thead>
             <tr>
@@ -90,6 +96,10 @@ const NationalNumTable = () => {
           </tbody>
         </table>
       </main>
+      <div className="d-flex justify-around bg-primary text-white p-1">
+        <button onClick={print} className="btn btn-sm btn-dark">پرنت</button>
+        <span>قیمت مجموعی: {totalAmount}</span>
+      </div>
     </>
   )
 }
