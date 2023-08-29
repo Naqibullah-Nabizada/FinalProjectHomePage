@@ -94,7 +94,7 @@ const FarmaticProducts = () => {
           </tbody>
         </table>
       </main>
-      <div className="d-flex justify-around bg-primary text-white p-1">
+      <div className="d-flex justify-around bg-gray-200 p-1">
         <button onClick={print} className="btn btn-sm btn-dark">پرنت</button>
         <span>قیمت مجموعی: {totalAmount}</span>
       </div>
