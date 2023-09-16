@@ -4,49 +4,58 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FaArrowCircleRight, FaPlus } from "react-icons/fa";
-
 import { useForm } from "react-hook-form";
-
+import { FaArrowCircleRight, FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
 
+//! Shamsi Date
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import transition from "react-element-popper/animations/transition";
+import DatePicker, { DateObject } from "react-multi-date-picker";
+
 const Add = () => {
-
   const router = useRouter();
-
   const [fasels, setFasel] = useState([]);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue, // Add the setValue function from react-hook-form
   } = useForm({});
+  const [selectedDate, setSelectedDate] = useState(null); // Selected date state
 
   useEffect(() => {
     fetchData();
-  }, [])
+  }, []);
 
   const fetchData = async () => {
     const { data } = await axios.get("http://localhost:5000/Fasel");
     setFasel(data);
-  }
-
+  };
 
   const submitForm = async (data) => {
     try {
-      await axios.post("http://localhost:5000/FaselDetail", data);
+      // Add the selected date to the form data
+      const formData = { ...data, date: selectedDate };
+      await axios.post("http://localhost:5000/FaselDetail", formData);
       router.push("/finance/forms/fasel-detail");
-      toast('معلومات جدید با موفقیت اضافه شد',
-        {
-          hideProgressBar: false,
-          autoClose: 5000,
-          type: 'success',
-          position: 'top-right'
-        });
+      toast("معلومات جدید با موفقیت اضافه شد", {
+        hideProgressBar: false,
+        autoClose: 5000,
+        type: "success",
+        position: "top-right",
+      });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    // Update the form's value for the date field
+    setValue("date", date);
+  };
 
   return (
     <>
@@ -78,17 +87,6 @@ const Add = () => {
 
             <div className="w-[32%]">
               <label className="form-label">تاریخ</label>
-              <input
-                type="date"
-                className={`form-control form-control-sm mb-2 ${errors.date ? 'is-invalid' : ''}`}
-                {...register("date", { required: true })}
-                placeholder="تاریخ"
-              />
-              {errors.date && <span className="invalid-feedback">فیلد تاریخ الزامی است.</span>}
-            </div>
-
-            {/* <div className="w-[32%]">
-              <label className="form-label">تاریخ</label>
               <DatePicker
                 months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
                 hideOnScroll
@@ -102,12 +100,12 @@ const Add = () => {
                 calendar={persian}
                 locale={persian_fa}
                 inputClass="custom-input"
-                value={date}
-                onChange={setDate}
+                value={selectedDate} // Use the selectedDate state as the value
+                onChange={handleDateChange} // Call the handleDateChange function
                 name="date"
               />
               {errors.date && <span className="invalid-feedback">فیلد تاریخ الزامی است.</span>}
-            </div> */}
+            </div>
 
 
             <div className="w-[32%]">

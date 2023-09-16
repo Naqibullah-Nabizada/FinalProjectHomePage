@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 
 import { FaEdit } from "react-icons/fa";
 
+//! Shamsi Date Converter 
+import * as shamsi from "shamsi-date-converter";
 
 const FaselDetail = () => {
 
@@ -67,7 +69,7 @@ const FaselDetail = () => {
                 <tr key={item.id}>
                   <td>{item.id}</td>
                   <td>{item.fasel.code}</td>
-                  <td>{item.date}</td>
+                  <td>{shamsi.gregorianToJalali(item.date).join('-')}</td>
                   <td>{item.desc}</td>
                   <td>{item.reference}</td>
                   <td>{item.private_num}</td>
