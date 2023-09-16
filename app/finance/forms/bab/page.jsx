@@ -28,25 +28,28 @@ const ParentBob = () => {
     setParentBab(data);
   }
 
-  // const { totalAmount } = bakery.reduce((accumulator, item) => {
-  //   return {
-  //     totalAmount: accumulator.totalAmount + (item.amount)
-  //   };
-  // }, { totalAmount: 0 });
+  const { totalBudget } = parentBabs.reduce((accumulator, item) => {
+    return {
+      totalBudget: accumulator.totalBudget + (item.amount)
+    };
+  }, { totalBudget: 0 });
 
   return (
     <>
       <header className="flex">
-        <Header hrefAddBtn="/finance/forms/parent/add" hrefBackBtn="/finance/forms" pageName="forms" />
+        <Header hrefAddBtn="/finance/forms/bab/add" hrefBackBtn="/finance/forms" pageName="forms" />
       </header>
       <hr />
-      <main className="w-[25%] mx-auto" id="main">
+      <main className="w-[60%] mx-auto" id="main">
         <table className="table table-bordered table-sm table-striped">
-          <thead>
+          <thead className="table-dark">
             <tr>
               <th>شماره</th>
-              <th>نام باب</th>
-              <th>سال</th>
+              <th>باب</th>
+              <th>شرح</th>
+              <th>تخصیص از</th>
+              <th>کد تخصیص</th>
+              <th>مقدار تخصیص</th>
               <th className="flex justify-center">ویرایش</th>
             </tr>
           </thead>
@@ -56,7 +59,12 @@ const ParentBob = () => {
                 <tr key={item.id}>
                   <td>{item.id}</td>
                   <td>{item.name}</td>
-                  <td>{item.year}</td>
+                  <td>{item.desc}</td>
+                  <td>{
+                    item.kind_of === 'program' ? 'پروگرام' : 'تخصیصات'
+                  }</td>
+                  <td>{item.kind_of_budget}</td>
+                  <td>{item.amount}</td>
                   <td className="flex justify-around">
                     <Link href={""} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
                   </td>
@@ -68,7 +76,7 @@ const ParentBob = () => {
       </main>
       <div className="d-flex justify-around bg-gray-200 p-1">
         <button onClick={print} className="btn btn-sm btn-dark">پرنت</button>
-        {/* <span>قیمت مجموعی: {totalAmount}</span> */}
+        <span>مجموع بودجه تخصیص داده شده: {totalBudget}</span>
       </div>
     </>
   )

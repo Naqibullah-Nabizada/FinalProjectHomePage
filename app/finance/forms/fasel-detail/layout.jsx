@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'باب های فرعی',
+  title: 'فصل ها',
   description: 'Developed by Naqibullah Nabizada and Shoaib Nigzad',
 }
 

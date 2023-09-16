@@ -46,7 +46,7 @@ const IdCard = () => {
       <hr />
       <main className="w-[99%] mx-auto" id="main">
         <table className="table table-bordered table-sm table-striped">
-          <thead>
+          <thead className="table-dark">
             <tr>
               <th>شماره</th>
               <th>نام</th>

@@ -3,38 +3,38 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaArrowCircleRight, FaPlus } from "react-icons/fa";
 
+import { useForm } from "react-hook-form";
+
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 const Add = () => {
 
   const router = useRouter();
 
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [childBabsId, setChildBabId] = useState("");
+  const [parentBabs, setParentBabs] = useState([]);
 
-
-  const [childBabs, setChildBab] = useState([]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({});
 
   useEffect(() => {
     fetchData();
   }, [])
 
   const fetchData = async () => {
-    const { data } = await axios.get("http://localhost:5000/ChildBab");
-    setChildBab(data);
+    const { data } = await axios.get("http://localhost:5000/ParentBab");
+    setParentBabs(data);
   }
 
-
-  const submitForm = async (e) => {
-    e.preventDefault();
+  const submitForm = async (data) => {
     try {
-      await axios.post("http://localhost:5000/Fasel", {
-        name, description, childBabsId
-      });
+      await axios.post("http://localhost:5000/Fasel", data);
       router.push("/finance/forms/fasel");
       toast('معلومات جدید با موفقیت اضافه شد',
         {
@@ -52,51 +52,51 @@ const Add = () => {
     <>
       <header>
         <h3 className="my-4 text-center text-xl">
-          فورم ثبت باب های اصلی
+          فورم ثبت فصل ها
         </h3>
       </header>
       <hr />
       <main>
-        <form onSubmit={submitForm}>
+        <form onSubmit={handleSubmit(submitForm)}>
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
 
           <div className="w-[32%]">
               <label className="form-label">باب</label>
-              <select name="childBabsId"
-                className="form-control form-control-sm mb-3"
-                onChange={(e) => setChildBabId(e.target.value)} required>
-                    <option>انتخاب باب</option>
+              <select
+                className={`form-control form-control-sm mb-3 ${errors.parentBabsId ? 'is-invalid' : ''}`}
+                {...register("parentBabsId", { required: true })}
+              >
                 {
-                  childBabs.map((bab) => (
+                  parentBabs.map((bab) => (
                     <option value={bab.id} key={bab.id}>{bab.name}</option>
                   ))
                 }
               </select>
+              {errors.parentBabsId && <span className="invalid-feedback">فیلد باب الزامی است.</span>}
             </div>
 
             <div className="w-[32%]">
-              <label className="form-label">نام فصل</label>
+              <label className="form-label">فصل</label>
               <input
                 type="text"
-                name="name"
-                className="form-control form-control-sm mb-3"
-                placeholder="نام فصل"
-                onChange={(e) => setName(e.target.value)}
-                required
-                minLength={3}
+                className={`form-control form-control-sm mb-3 ${errors.code ? 'is-invalid' : ''}`}
+                placeholder="فصل"
                 autoFocus
+                {...register("code", { required: true })}
               />
+              {errors.code && <span className="invalid-feedback">فیلد فصل الزامی است.</span>}
             </div>
 
             <div className="w-[32%]">
               <label className="form-label">توضیحات</label>
-              <textarea name="description"
-                className="form-control form-control-sm mb-3"
+              <textarea
+                className={`form-control form-control-sm mb-3 ${errors.desc ? 'is-invalid' : ''}`}
+                {...register("desc", { required: true })}
                 col="3"
                 placeholder="توضیحات"
-                onChange={(e) => setDescription(e.target.value)}>
+              >
               </textarea>
-
+              {errors.desc && <span className="invalid-feedback">فیلد توضیحات الزامی است.</span>}
             </div>
 
           </section>
@@ -107,7 +107,7 @@ const Add = () => {
               <FaPlus className="mx-1 bg-inherit" />
             </button>
 
-            <Link href="./finance/forms/fasel" className="btn btn-outline-secondary flex">
+            <Link href="/finance/forms/fasel" className="btn btn-outline-secondary flex">
               <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
             </Link>
           </div>

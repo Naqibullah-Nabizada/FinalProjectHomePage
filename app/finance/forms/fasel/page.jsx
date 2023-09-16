@@ -13,7 +13,7 @@ import { FaEdit } from "react-icons/fa";
 
 const Fasel = () => {
 
-  const [parentBabs, setParentBab] = useState([]);
+  const [fasels, setFasel] = useState([]);
 
   const search = useSearchParams();
   const searchQuery = search ? search.get("search") : null;
@@ -25,14 +25,14 @@ const Fasel = () => {
 
   const fetchData = async () => {
     const { data } = await axios.get(`http://localhost:5000/Fasel/${encodedSearchQuery}`);
-    setParentBab(data);
+    setFasel(data);
   }
 
-  // const { totalAmount } = Fasel.reduce((accumulator, item) => {
+  // const { totalBudget } = childBabs.reduce((accumulator, item) => {
   //   return {
-  //     totalAmount: accumulator.totalAmount + (item.amount)
+  //     totalBudget: accumulator.totalBudget + (item.amount)
   //   };
-  // }, { totalAmount: 0 });
+  // }, { totalBudget: 0 });
 
   return (
     <>
@@ -40,9 +40,9 @@ const Fasel = () => {
         <Header hrefAddBtn="/finance/forms/fasel/add" hrefBackBtn="/finance/forms" pageName="forms" />
       </header>
       <hr />
-      <main className="w-[25%] mx-auto" id="main">
-        <table className="table table-bordered table-sm table-striped">
-          <thead>
+      <main className="w-[60%] mx-auto" id="main">
+        <table className="table table-responsive table-bordered table-sm table-striped">
+          <thead className="table-dark">
             <tr>
               <th>شماره</th>
               <th>باب</th>
@@ -53,12 +53,16 @@ const Fasel = () => {
           </thead>
           <tbody>
             {
-              parentBabs.map((item) => (
+              fasels.map((item) => (
                 <tr key={item.id}>
                   <td>{item.id}</td>
-                  <td>{item.childbab.name}</td>
-                  <td>{item.name}</td>
-                  <td>{item.description}</td>
+                  <td>{item.parentbab.name}</td>
+                  <td>
+                    <Link href={`/finance/forms/fasel/fasel-detail/${item.id}`}>
+                      {item.code}
+                    </Link>
+                  </td>
+                  <td>{item.desc}</td>
                   <td className="flex justify-around">
                     <Link href={""} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
                   </td>
@@ -70,7 +74,7 @@ const Fasel = () => {
       </main>
       <div className="d-flex justify-around bg-gray-200 p-1">
         <button onClick={print} className="btn btn-sm btn-dark">پرنت</button>
-        {/* <span>قیمت مجموعی: {totalAmount}</span> */}
+        {/* <span>مجموع بودجه تخصیص داده شده: {totalBudget}</span> */}
       </div>
     </>
   )

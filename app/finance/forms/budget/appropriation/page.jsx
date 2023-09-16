@@ -27,11 +27,11 @@ const Appropriation = () => {
     setAppropriation(data);
   }
 
-  // const { totalAmount } = bakery.reduce((accumulator, item) => {
-  //   return {
-  //     totalAmount: accumulator.totalAmount + (item.amount)
-  //   };
-  // }, { totalAmount: 0 });
+  const { totalBudget } = appropriations.reduce((accumulator, item) => {
+    return {
+      totalBudget: accumulator.totalBudget + (item.amount)
+    };
+  }, { totalBudget: 0 });
 
   return (
     <>
@@ -41,7 +41,7 @@ const Appropriation = () => {
       <hr />
       <main className="w-[60%] mx-auto" id="main">
         <table className="table table-bordered table-sm table-striped">
-          <thead>
+          <thead className="table-dark">
             <tr>
               <th>شماره</th>
               <th>کد</th>
@@ -73,7 +73,7 @@ const Appropriation = () => {
       </main>
       <div className="d-flex justify-around bg-gray-200 p-1">
         <button onClick={print} className="btn btn-sm btn-dark">پرنت</button>
-        {/* <span>قیمت مجموعی: {totalAmount}</span> */}
+        <span>مجموع بودجه: {totalBudget}</span>
       </div>
     </>
   )

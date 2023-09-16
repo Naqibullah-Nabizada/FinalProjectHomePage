@@ -47,6 +47,10 @@
   background-color: rgb(240, 240, 240) !important;
 }
 
+.form-select {
+  background-color: rgb(240, 240, 240) !important;
+}
+
 .notFound {
   color: #fff;
   font-weight: bold;
@@ -65,4 +69,9 @@
   #main * {
     visibility: visible;
   }
+}
+
+
+#fasel-detail-table{
+  font-size: small !important;
 }

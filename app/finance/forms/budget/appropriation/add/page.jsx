@@ -44,24 +44,29 @@ const Add = () => {
               <label className="form-label">کد</label>
               <input
                 type="text"
-                {...register("code", { required: true })}
+                {...register("code", { required: true, minLength: 3, maxLength: 15, min: 0 })}
                 className={`form-control form-control-sm mb-3 ${errors.code ? 'is-invalid' : ''}`}
                 placeholder="کد"
-                onChange={(e) => setCode(e.target.value)}
                 autoFocus
               />
-              {errors.code && <span className="invalid-feedback">فیلد کد الزامی است.</span>}
+              {errors.code && errors.code.type === "required" && <span className="invalid-feedback">کد الزامی است.</span>}
+              {errors.code && errors.code.type === "minLength" && <span className="invalid-feedback">کد حداقل باید سه کارکتر باشد.</span>}
+              {errors.code && errors.code.type === "maxLength" && <span className="invalid-feedback">کد حداکثر باید 15 کارکتر باشد..</span>}
+              {errors.code && errors.code.type === "min" && <span className="invalid-feedback">کد باید یک عدد مثب باشد.</span>}
             </div>
 
             <div className="w-[32%]">
               <label className="form-label">نام به دری</label>
               <input
                 type="text"
-                {...register("dari_name", { required: true })}
+                {...register("dari_name", { required: true, minLength: 3, maxLength: 15 })}
                 className={`form-control form-control-sm mb-3 ${errors.dari_name ? 'is-invalid' : ''}`}
                 placeholder="نام به دری"
               />
-              {errors.dari_name && <span className="invalid-feedback">فیلد نام دری الزامی است.</span>}
+              {errors.dari_name && errors.dari_name.type === "required" && <span className="invalid-feedback">نام دری الزامی است.</span>}
+              {errors.dari_name && errors.dari_name.type === "minLength" && <span className="invalid-feedback">نام دری باید حداقل سه کارکتر باشد.</span>}
+              {errors.dari_name && errors.dari_name.type === "maxLength" && <span className="invalid-feedback">نام دری باید حداکثر 30 کارکتر باشد..</span>}
+              {/* {errors.dari_name && errors.code.type === "pattern" && <span className="invalid-feedback">فیلد نام دری الزامی است.</span>} */}
             </div>
 
             <div className="w-[32%]">
