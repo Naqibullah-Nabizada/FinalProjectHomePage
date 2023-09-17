@@ -44,15 +44,16 @@ const Add = () => {
               <label className="form-label">کد</label>
               <input
                 type="text"
-                {...register("code", { required: true, minLength: 3, maxLength: 15, min: 0 })}
+                {...register("code", { required: true, min: 0, pattern: /^[0-9]+$/i, minLength: 3, maxLength: 15, })}
                 className={`form-control form-control-sm mb-3 ${errors.code ? 'is-invalid' : ''}`}
                 placeholder="کد"
                 autoFocus
               />
               {errors.code && errors.code.type === "required" && <span className="invalid-feedback">کد الزامی است.</span>}
+              {errors.code && errors.code.type === "pattern" && <span className="invalid-feedback">کد باید عدد باشد.</span>}
+              {errors.code && errors.code.type === "min" && <span className="invalid-feedback">کد باید یک عدد مثب باشد.</span>}
               {errors.code && errors.code.type === "minLength" && <span className="invalid-feedback">کد حداقل باید سه کارکتر باشد.</span>}
               {errors.code && errors.code.type === "maxLength" && <span className="invalid-feedback">کد حداکثر باید 15 کارکتر باشد..</span>}
-              {errors.code && errors.code.type === "min" && <span className="invalid-feedback">کد باید یک عدد مثب باشد.</span>}
             </div>
 
             <div className="w-[32%]">
