@@ -40,7 +40,7 @@ const HostelBread = () => {
   return (
     <>
       <header className="flex">
-        <Header hrefAddBtn="/finance/income/bread/add" hrefBackBtn="/finance/income" pageName="bread" />
+        <Header hrefAddBtn="/finance/income/bread/add" hrefBackBtn="/finance/income" section={"income"} pageName="bread" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto" id="main">

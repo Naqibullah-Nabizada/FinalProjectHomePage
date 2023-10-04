@@ -41,7 +41,7 @@ const IdCard = () => {
     <>
 
       <header className="flex">
-        <Header hrefAddBtn="/finance/income/id-cards/add" hrefBackBtn="/finance/income" pageName="id-cards" />
+        <Header hrefAddBtn="/finance/income/id-cards/add" hrefBackBtn="/finance/income" section={"income"} pageName="id-cards" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto" id="main">

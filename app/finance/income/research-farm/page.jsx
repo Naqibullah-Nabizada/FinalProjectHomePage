@@ -40,7 +40,7 @@ const ResearchFarm = () => {
   return (
     <>
       <header className="flex">
-        <Header hrefAddBtn="/finance/income/research-farm/add" hrefBackBtn="/finance/income" pageName="research-farm" />
+        <Header hrefAddBtn="/finance/income/research-farm/add" hrefBackBtn="/finance/income" section={"income"} pageName="research-farm" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto" id="main">

@@ -14,10 +14,10 @@ const Budget = () => {
           <div className='w-[60%]'>
 
           <Link href='/finance/forms/budget/appropriation' className='btn btn-outline-dark flex mb-2'>
-              <FaBuilding className='mx-1 bg-inherit' />تخصیصات</Link>
-
+              <FaBuilding className='mx-1 bg-inherit' />تخصیصات و پروگرام</Link>
+{/* 
             <Link href='/finance/forms/budget/program' className='btn btn-outline-dark flex mb-2'>
-              <FaBuilding className='mx-1 bg-inherit' />پروگرام</Link>
+              <FaBuilding className='mx-1 bg-inherit' />پروگرام</Link> */}
 
             <Link href='finance/forms' className='btn btn-outline-dark flex mb-2'>
               <FaArrowAltCircleRight className='mx-1 bg-inherit' />بازگشت به صفحه اصلی</Link>

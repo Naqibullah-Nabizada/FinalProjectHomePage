@@ -40,7 +40,7 @@ const FarmaticProducts = () => {
   return (
     <>
       <header className="flex">
-        <Header hrefAddBtn="/finance/income/farm-products/add" hrefBackBtn="/finance/income" pageName="farm-products" />
+        <Header hrefAddBtn="/finance/income/farm-products/add" hrefBackBtn="/finance/income" section={"income"} pageName="farm-products" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto" id="main">

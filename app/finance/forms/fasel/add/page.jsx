@@ -15,7 +15,8 @@ const Add = () => {
 
   const router = useRouter();
 
-  const [parentBabs, setParentBabs] = useState([]);
+  // const [parentBabs, setParentBabs] = useState([]);
+  const [appropriations, setAppropriation] = useState([]);
 
   const {
     register,
@@ -28,8 +29,8 @@ const Add = () => {
   }, [])
 
   const fetchData = async () => {
-    const { data } = await axios.get("http://localhost:5000/ParentBab");
-    setParentBabs(data);
+    const { data } = await axios.get("http://localhost:5000/Appropriations");
+    setAppropriation(data);
   }
 
   const submitForm = async (data) => {
@@ -60,19 +61,19 @@ const Add = () => {
         <form onSubmit={handleSubmit(submitForm)}>
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
 
-          <div className="w-[32%]">
-              <label className="form-label">باب</label>
+            <div className="w-[32%]">
+              <label className="form-label">کد</label>
               <select
                 className={`form-control form-control-sm mb-3 ${errors.parentBabsId ? 'is-invalid' : ''}`}
-                {...register("parentBabsId", { required: true })}
+                {...register("appropriationId", { required: true })}
               >
                 {
-                  parentBabs.map((bab) => (
-                    <option value={bab.id} key={bab.id}>{bab.name}</option>
+                  appropriations.map((app) => (
+                    <option value={app.id} key={app.id}>{app.code}</option>
                   ))
                 }
               </select>
-              {errors.parentBabsId && <span className="invalid-feedback">فیلد باب الزامی است.</span>}
+              {errors.appropriation && <span className="invalid-feedback">کد الزامی است.</span>}
             </div>
 
             <div className="w-[32%]">
@@ -82,9 +83,13 @@ const Add = () => {
                 className={`form-control form-control-sm mb-3 ${errors.code ? 'is-invalid' : ''}`}
                 placeholder="فصل"
                 autoFocus
-                {...register("code", { required: true })}
+                {...register("code", { required: true, min: 0, pattern: /^[0-9]+$/i, minLength: 1, maxLength: 15, })}
               />
-              {errors.code && <span className="invalid-feedback">فیلد فصل الزامی است.</span>}
+              {errors.code && errors.code.type === "required" && <span className="invalid-feedback">فصل الزامی است.</span>}
+              {errors.code && errors.code.type === "pattern" && <span className="invalid-feedback">فصل باید عدد باشد.</span>}
+              {errors.code && errors.code.type === "min" && <span className="invalid-feedback">فصل باید یک عدد مثب باشد.</span>}
+              {errors.code && errors.code.type === "minLength" && <span className="invalid-feedback">فصل حداقل باید 1 کارکتر باشد.</span>}
+              {errors.code && errors.code.type === "maxLength" && <span className="invalid-feedback">فصل حداکثر باید 15 کارکتر باشد..</span>}
             </div>
 
             <div className="w-[32%]">
@@ -98,6 +103,21 @@ const Add = () => {
               </textarea>
               {errors.desc && <span className="invalid-feedback">فیلد توضیحات الزامی است.</span>}
             </div>
+
+            <div className="w-[32%]">
+              <label className="form-label">مقدار بودجه</label>
+              <input
+                type="text"
+                className={`form-control form-control-sm mb-3 ${errors.amount ? 'is-invalid' : ''}`}
+                placeholder="مقدار بودجه"
+                {...register("amount", { required: true, min: 0, minLength: 1, pattern: /^(?:\d+(?:\.\d*)?|\.\d*)$/ })}
+              />
+              {errors.amount && errors.amount.type === "required" && <span className="invalid-feedback">مقدار بودجه الزامی است.</span>}
+              {errors.amount && errors.amount.type === "min" && <span className="invalid-feedback">مقدار بودجه باید یک عدد مثبت باشد.</span>}
+              {errors.amount && errors.amount.type === "minLength" && <span className="invalid-feedback">مقدار بودجه حداقل باید یک کارکتر باشد.</span>}
+              {errors.amount && errors.amount.type === "pattern" && <span className="invalid-feedback">مقدار بودجه باید به عدد باشد.</span>}
+            </div>
+
 
           </section>
 

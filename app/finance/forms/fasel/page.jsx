@@ -37,34 +37,36 @@ const Fasel = () => {
   return (
     <>
       <header className="flex">
-        <Header hrefAddBtn="/finance/forms/fasel/add" hrefBackBtn="/finance/forms" pageName="forms" />
+        <Header hrefAddBtn="/finance/forms/fasel/add" hrefBackBtn="/finance/forms" section="forms" pageName="fasel" />
       </header>
       <hr />
       <main className="w-[60%] mx-auto" id="main">
         <table className="table table-responsive table-bordered table-sm table-striped">
           <thead className="table-dark">
             <tr>
-              <th>شماره</th>
+              <th>#</th>
               <th>باب</th>
               <th>فصل</th>
               <th>توضیحات</th>
+              <th>مقدار تخصیص</th>
               <th className="flex justify-center">ویرایش</th>
             </tr>
           </thead>
           <tbody>
             {
-              fasels.map((item) => (
+              fasels.map((item, index) => (
                 <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.parentbab.name}</td>
+                  <td>{index + 1}</td>
+                  <td>{item.appropriation.code}</td>
                   <td>
                     <Link href={`/finance/forms/fasel/fasel-detail/${item.id}`}>
                       {item.code}
                     </Link>
                   </td>
                   <td>{item.desc}</td>
+                  <td>{item.amount}</td>
                   <td className="flex justify-around">
-                    <Link href={""} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
+                    <Link href={`/finance/forms/fasel/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
                   </td>
                 </tr>
               ))

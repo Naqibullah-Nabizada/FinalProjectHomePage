@@ -37,14 +37,14 @@ const ParentBob = () => {
   return (
     <>
       <header className="flex">
-        <Header hrefAddBtn="/finance/forms/bab/add" hrefBackBtn="/finance/forms" pageName="forms" />
+        <Header hrefAddBtn="/finance/forms/bab/add" hrefBackBtn="/finance/forms" section={"forms"} pageName="bab" />
       </header>
       <hr />
       <main className="w-[60%] mx-auto" id="main">
         <table className="table table-bordered table-sm table-striped">
           <thead className="table-dark">
             <tr>
-              <th>شماره</th>
+              <th>#</th>
               <th>باب</th>
               <th>شرح</th>
               <th>تخصیص از</th>
@@ -55,9 +55,9 @@ const ParentBob = () => {
           </thead>
           <tbody>
             {
-              parentBabs.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
+              parentBabs.map((item, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
                   <td>{item.name}</td>
                   <td>{item.desc}</td>
                   <td>{

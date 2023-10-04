@@ -44,7 +44,7 @@ const Add = () => {
               <label className="form-label">کد</label>
               <input
                 type="text"
-                {...register("code", { required: true, min: 0, pattern: /^[0-9]+$/i, minLength: 3, maxLength: 15, })}
+                {...register("code", { required: true, min: 0, pattern: /^[0-9]+$/i, minLength: 1, maxLength: 15, })}
                 className={`form-control form-control-sm mb-3 ${errors.code ? 'is-invalid' : ''}`}
                 placeholder="کد"
                 autoFocus
@@ -52,7 +52,7 @@ const Add = () => {
               {errors.code && errors.code.type === "required" && <span className="invalid-feedback">کد الزامی است.</span>}
               {errors.code && errors.code.type === "pattern" && <span className="invalid-feedback">کد باید عدد باشد.</span>}
               {errors.code && errors.code.type === "min" && <span className="invalid-feedback">کد باید یک عدد مثب باشد.</span>}
-              {errors.code && errors.code.type === "minLength" && <span className="invalid-feedback">کد حداقل باید سه کارکتر باشد.</span>}
+              {errors.code && errors.code.type === "minLength" && <span className="invalid-feedback">کد حداقل باید 1 کارکتر باشد.</span>}
               {errors.code && errors.code.type === "maxLength" && <span className="invalid-feedback">کد حداکثر باید 15 کارکتر باشد..</span>}
             </div>
 
@@ -60,47 +60,56 @@ const Add = () => {
               <label className="form-label">نام به دری</label>
               <input
                 type="text"
-                {...register("dari_name", { required: true, minLength: 3, maxLength: 15 })}
+                {...register("dari_name", { required: true, minLength: 3, maxLength: 30, pattern: /^[آ-ی][آ-ی\s]*$/ })}
                 className={`form-control form-control-sm mb-3 ${errors.dari_name ? 'is-invalid' : ''}`}
                 placeholder="نام به دری"
               />
               {errors.dari_name && errors.dari_name.type === "required" && <span className="invalid-feedback">نام دری الزامی است.</span>}
+              {errors.dari_name && errors.dari_name.type === "pattern" && <span className="invalid-feedback">نام باید به حروف دری باشد.</span>}
               {errors.dari_name && errors.dari_name.type === "minLength" && <span className="invalid-feedback">نام دری باید حداقل سه کارکتر باشد.</span>}
               {errors.dari_name && errors.dari_name.type === "maxLength" && <span className="invalid-feedback">نام دری باید حداکثر 30 کارکتر باشد..</span>}
-              {/* {errors.dari_name && errors.code.type === "pattern" && <span className="invalid-feedback">فیلد نام دری الزامی است.</span>} */}
             </div>
 
             <div className="w-[32%]">
               <label className="form-label">نام به پشتو</label>
               <input
                 type="text"
-                {...register("pashto_name", { required: true })}
+                {...register("pashto_name", { required: true, minLength: 3, maxLength:30, pattern: /^[آ-ی-آ-ي][آ-ی-آ-ي\s]*$/ })}
                 className={`form-control form-control-sm mb-3 ${errors.pashto_name ? 'is-invalid' : ''}`}
                 placeholder="نام به پشتو"
               />
-              {errors.pashto_name && <span className="invalid-feedback">فیلد نام پشتو الزامی است.</span>}
+              {errors.pashto_name && errors.pashto_name.type === "required" && <span className="invalid-feedback">نام پشتو الزامی است.</span>}
+              {errors.pashto_name && errors.pashto_name.type === "pattern" && <span className="invalid-feedback">نام باید به حروف پشتو باشد.</span>}
+              {errors.pashto_name && errors.pashto_name.type === "minLength" && <span className="invalid-feedback">نام پشتو باید حداقل سه کارکتر باشد.</span>}
+              {errors.pashto_name && errors.pashto_name.type === "maxLength" && <span className="invalid-feedback">نام پشتو باید حداکثر 30 کارکتر باشد..</span>}
             </div>
 
             <div className="w-[32%]">
               <label className="form-label">نام به انگلیسی</label>
               <input
                 type="text"
-                {...register("eng_name", { required: true })}
+                {...register("eng_name", { required: true, minLength: 3, maxLength: 30, pattern: /^[A-Za-z][A-Za-z\s]*$/ })}
                 className={`form-control form-control-sm mb-3 ${errors.eng_name ? 'is-invalid' : ''}`}
                 placeholder="نام به انگلیسی"
               />
-              {errors.eng_name && <span className="invalid-feedback">فیلد نام انگلیسی الزامی است.</span>}
+              {errors.eng_name && errors.eng_name.type === "required" && <span className="invalid-feedback">نام انگلیسی الزامی است.</span>}
+              {errors.eng_name && errors.eng_name.type === "pattern" && <span className="invalid-feedback">نام باید به حروف انگلیسی باشد.</span>}
+              {errors.eng_name && errors.eng_name.type === "minLength" && <span className="invalid-feedback">نام انگلیسی باید حداقل سه کارکتر باشد.</span>}
+              {errors.eng_name && errors.eng_name.type === "maxLength" && <span className="invalid-feedback">نام انگلیسی باید حداکثر 30 کارکتر باشد..</span>}
             </div>
 
             <div className="w-[32%]">
               <label className="form-label">مقدار بودجه</label>
               <input
                 type="text"
-                {...register("amount", { required: true })}
+                {...register("amount", { required: true, min: 0, pattern: /^(?:\d+(?:\.\d*)?|\.\d*)$/ })}
+
                 className={`form-control form-control-sm mb-3 ${errors.amount ? 'is-invalid' : ''}`}
                 placeholder="مقدار بودجه"
               />
-              {errors.amount && <span className="invalid-feedback">فیلد مقدار بودجه الزامی است.</span>}
+              {errors.amount && errors.amount.type === "required" && <span className="invalid-feedback">فیلد مقدار بودجه الزامی است.</span>}
+              {errors.amount && errors.amount.type === "pattern" && <span className="invalid-feedback">مقدار بودجه باید به عدد باشد.</span>}
+              {errors.amount && errors.amount.type === "minLength" && <span className="invalid-feedback">مقدار بودجه باید حداقل سه کارکتر باشد.</span>}
             </div>
 
           </section>

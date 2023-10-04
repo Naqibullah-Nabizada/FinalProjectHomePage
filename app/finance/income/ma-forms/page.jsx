@@ -40,7 +40,7 @@ const MAForms = () => {
   return (
     <>
       <header className="flex">
-        <Header hrefAddBtn="/finance/income/ma-forms/add" hrefBackBtn="/finance/income" pageName="ma-forms" />
+        <Header hrefAddBtn="/finance/income/ma-forms/add" hrefBackBtn="/finance/income" section={"income"} pageName="ma-forms" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto" id="main">

@@ -2,11 +2,10 @@
 
 import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaArrowCircleRight, FaPlus } from "react-icons/fa";
-import { toast } from "react-toastify";
 
 //! Shamsi Date
 import persian from "react-date-object/calendars/persian";
@@ -14,9 +13,12 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import transition from "react-element-popper/animations/transition";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 
-const Add = () => {
+const Update = () => {
+
+  const { id } = useParams();
   const router = useRouter();
   const [fasels, setFasel] = useState([]);
+
   const {
     register,
     handleSubmit,
@@ -26,19 +28,43 @@ const Add = () => {
   const [selectedDate, setSelectedDate] = useState(null); // Selected date state
 
   useEffect(() => {
-    fetchData();
+    fetchFaselData();
+    fetchFaselDetailData();
   }, []);
 
-  const fetchData = async () => {
+  const fetchFaselData = async () => {
     const { data } = await axios.get("http://localhost:5000/Fasel");
     setFasel(data);
+  };
+
+  const fetchFaselDetailData = async () => {
+    try {
+      const { data } = await axios.get(`http://localhost:5000/FaselDetails/${id}`);
+      setValue("faselId", data[0].faselId);
+      setValue("desc", data[0].desc);
+      setValue("reference", data[0].reference);
+      setValue("private_num", data[0].private_num);
+      setValue("refinement", data[0].refinement);
+      setValue("after_pay", data[0].after_pay);
+      setValue("befor_pay", data[0].befor_pay);
+      setValue("previous_considered", data[0].previous_considered);
+      setValue("commitment", data[0].commitment);
+      setValue("income", data[0].income);
+      setValue("transfer", data[0].transfer);
+      setValue("commitment_transfer", data[0].commitment_transfer);
+
+      const fetchedDate = new Date(data[0].date);
+      setSelectedDate(fetchedDate);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const submitForm = async (data) => {
     try {
       // Add the selected date to the form data
       const formData = { ...data, date: selectedDate };
-      await axios.post("http://localhost:5000/FaselDetail", formData);
+      await axios.put(`http://localhost:5000/FaselDetail/${id}`, formData);
       router.push("/finance/forms/fasel-detail");
       toast("معلومات جدید با موفقیت اضافه شد", {
         hideProgressBar: false,
@@ -50,6 +76,7 @@ const Add = () => {
       console.log(err);
     }
   };
+
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -101,12 +128,12 @@ const Add = () => {
                 locale={persian_fa}
                 inputClass="custom-input"
                 value={selectedDate} // Use the selectedDate state as the value
-                onChange={handleDateChange} // Call the handleDateChange function
+                defaultValue={selectedDate}
+                onChange={handleDateChange}
                 name="date"
               />
               {errors.date && <span className="invalid-feedback">فیلد تاریخ الزامی است.</span>}
             </div>
-
 
             <div className="w-[32%]">
               <label className="form-label">توضیحات</label>
@@ -233,8 +260,8 @@ const Add = () => {
           </section>
 
           <div className="flex">
-            <button type="submit" className="btn btn-outline-success flex mr-10 ml-5">
-              ثبت
+            <button type="submit" className="btn btn-warning flex mr-10 ml-5">
+              ویرایش
               <FaPlus className="mx-1 bg-inherit" />
             </button>
 
@@ -248,4 +275,4 @@ const Add = () => {
   );
 };
 
-export default Add;
+export default Update;

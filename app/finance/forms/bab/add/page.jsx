@@ -76,26 +76,26 @@ const Add = () => {
                 className={`form-control form-control-sm mb-3 ${errors.name ? 'is-invalid' : ''}`}
                 placeholder="باب"
                 autoFocus
-                {...register("name", { required: true, min: 0, minLength: 2, maxLength: 5 })}
+                {...register("name", { required: true, min: 0, minLength: 1, maxLength: 6, pattern: /^(?:\d+(?:\.\d*)?|\.\d*)$/ })}
               />
               {errors.name && errors.name.type === "required" && <span className="invalid-feedback">باب الزامی است.</span>}
               {errors.name && errors.name.type === "min" && <span className="invalid-feedback">باب باید عدد مثبت باشد.</span>}
-              {errors.name && errors.name.type === "minLength" && <span className="invalid-feedback">باب حداقل باید دو کارکتر باشد.</span>}
-              {errors.name && errors.name.type === "maxLength" && <span className="invalid-feedback">باب حداکثر میتواند با پنج کارکتر باشد.</span>}
+              {errors.name && errors.name.type === "minLength" && <span className="invalid-feedback">باب حداقل باید 1 کارکتر باشد.</span>}
+              {errors.name && errors.name.type === "maxLength" && <span className="invalid-feedback">باب حداکثر میتواند با 6 کارکتر باشد.</span>}
+              {errors.name && errors.name.type === "pattern" && <span className="invalid-feedback">باب باید به عدد باشد.</span>}
             </div>
 
             <div className="w-[32%]">
               <label className="form-label">توضیحات</label>
               <textarea
                 className={`form-control form-control-sm mb-3 ${errors.desc ? 'is-invalid' : ''}`}
-                {...register("desc", { required: true, minLength: 3, maxLength: 20 })}
+                {...register("desc", { required: true, minLength: 3 })}
                 col="3"
                 placeholder="توضیحات"
               >
               </textarea>
               {errors.desc && errors.desc.type === "required" && <span className="invalid-feedback">فیلد توضیحات الزامی است.</span>}
               {errors.desc && errors.desc.type === "minLength" && <span className="invalid-feedback">فیلد توضیحات باید حداقل 3 کارکتر باشد.</span>}
-              {errors.desc && errors.desc.type === "maxLength" && <span className="invalid-feedback">فیلد توضیحات باید حد اکثر 20 کارکتر باشد.</span>}
             </div>
 
             <div className="w-[32%]">
@@ -133,12 +133,12 @@ const Add = () => {
                 type="text"
                 className={`form-control form-control-sm mb-3 ${errors.amount ? 'is-invalid' : ''}`}
                 placeholder="مقدار بودجه"
-                {...register("amount", { required: true, min: 0, minLength: 1, maxLength: 10 })}
+                {...register("amount", { required: true, min: 0, minLength: 1, pattern: /^(?:\d+(?:\.\d*)?|\.\d*)$/ })}
               />
               {errors.amount && errors.amount.type === "required" && <span className="invalid-feedback">مقدار بودجه الزامی است.</span>}
               {errors.amount && errors.amount.type === "min" && <span className="invalid-feedback">مقدار بودجه باید یک عدد مثبت باشد.</span>}
               {errors.amount && errors.amount.type === "minLength" && <span className="invalid-feedback">مقدار بودجه حداقل باید یک کارکتر باشد.</span>}
-              {errors.amount && errors.amount.type === "maxLength" && <span className="invalid-feedback">مقدار بودجه حداکثر میتواند تا ده کارکتر باشد.</span>}
+              {errors.amount && errors.amount.type === "pattern" && <span className="invalid-feedback">مقدار بودجه باید به عدد باشد.</span>}
             </div>
 
           </section>

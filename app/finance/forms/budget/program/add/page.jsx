@@ -169,12 +169,16 @@ const Add = () => {
               <label className="form-label">کد</label>
               <input
                 type="text"
-                {...register("code", { required: true })}
+                {...register("code", { required: true, min: 0, pattern: /^[0-9]+$/i, minLength: 3, maxLength: 15, })}
                 className={`form-control form-control-sm mb-3 ${errors.code ? 'is-invalid' : ''}`}
                 placeholder="کد"
                 autoFocus
               />
-              {errors.code && <span className="invalid-feedback">فیلد کد الزامی است.</span>}
+              {errors.code && errors.code.type === "required" && <span className="invalid-feedback">کد الزامی است.</span>}
+              {errors.code && errors.code.type === "pattern" && <span className="invalid-feedback">کد باید عدد باشد.</span>}
+              {errors.code && errors.code.type === "min" && <span className="invalid-feedback">کد باید یک عدد مثب باشد.</span>}
+              {errors.code && errors.code.type === "minLength" && <span className="invalid-feedback">کد حداقل باید سه کارکتر باشد.</span>}
+              {errors.code && errors.code.type === "maxLength" && <span className="invalid-feedback">کد حداکثر باید 15 کارکتر باشد..</span>}
             </div>
 
             <div className="w-[32%]">
@@ -192,12 +196,15 @@ const Add = () => {
               <label className="form-label">مقدار بودجه</label>
               <input
                 type="text"
-                {...register("amount", { required: true })}
+                {...register("amount", { required: true, min: 0, pattern: /^(?:\d+(?:\.\d*)?|\.\d*)$/ })}
                 className={`form-control form-control-sm mb-3 ${errors.amount ? 'is-invalid' : ''}`}
                 placeholder="مقدار بودجه"
               />
-              {errors.amount && <span className="invalid-feedback">مقدار بودجه الزامی است.</span>}
+              {errors.amount && errors.amount.type === "required" && <span className="invalid-feedback">فیلد مقدار بودجه الزامی است.</span>}
+              {errors.amount && errors.amount.type === "pattern" && <span className="invalid-feedback">مقدار بودجه باید به عدد باشد.</span>}
+              {errors.amount && errors.amount.type === "minLength" && <span className="invalid-feedback">مقدار بودجه باید حداقل سه کارکتر باشد.</span>}
             </div>
+
           </section>
 
           <div className="flex">

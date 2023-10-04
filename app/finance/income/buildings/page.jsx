@@ -40,7 +40,7 @@ const Noctunal = () => {
   return (
     <>
       <header className="flex">
-        <Header hrefAddBtn="/finance/income/buildings/add" hrefBackBtn="/finance/income" pageName="buildings" />
+        <Header hrefAddBtn="/finance/income/buildings/add" hrefBackBtn="/finance/income" section={"income"} pageName="buildings" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto" id="main">

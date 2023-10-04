@@ -3,13 +3,13 @@
 import Header from "@/components/Header";
 
 import axios from "axios";
-import Link from "next/link";
 
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { FaEdit } from "react-icons/fa";
 
+//! Shamsi Date Converter 
+import * as shamsi from "shamsi-date-converter";
 
 const Fasel = () => {
 
@@ -26,7 +26,7 @@ const Fasel = () => {
   }, [searchQuery]);
 
   const fetchData = async () => {
-    const { data } = await axios.get(`http://localhost:5000/FaselDetail/${id}/${encodedSearchQuery}`);
+    const { data } = await axios.get(`http://localhost:5000/FaselDetailss/${id}/${encodedSearchQuery}`);
     setFaselDetail(data);
   }
 
@@ -46,7 +46,7 @@ const Fasel = () => {
         <table className="table table-bordered table-sm table-striped" id="fasel-detail-table">
           <thead className="table-dark">
             <tr>
-              <th>شماره</th>
+              <th>#</th>
               <th>فصل</th>
               <th>تاریخ</th>
               <th>توضیحات</th>
@@ -60,16 +60,16 @@ const Fasel = () => {
               <th>عاید</th>
               <th>حواله تخصیصات</th>
               <th>حواله تخصیصات تعهد شده</th>
-              <th className="flex justify-center">ویرایش</th>
+              {/* <th className="flex justify-center">ویرایش</th> */}
             </tr>
           </thead>
           <tbody>
             {
               faselDetails.map((item) => (
-                <tr key={item.id}>
+                <tr key={item.id} style={item.befor_pay !== 0 && item.commitment === '' ? { background: "#F2BBA7" } : null}>
                   <td>{item.id}</td>
                   <td>{item.fasel.code}</td>
-                  <td>{item.date}</td>
+                  <td>{shamsi.gregorianToJalali(item.date).join('-')}</td>
                   <td>{item.desc}</td>
                   <td>{item.reference}</td>
                   <td>{item.private_num}</td>
@@ -82,7 +82,7 @@ const Fasel = () => {
                   <td>{item.transfer}</td>
                   <td>{item.commitment_transfer}</td>
                   <td className="flex justify-around">
-                    <Link href={""} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
+                    {/* <Link href={`/finance/forms/fasel-detail/${item.id}/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link> */}
                   </td>
                 </tr>
               ))

@@ -40,7 +40,7 @@ const NationalNumTable = () => {
   return (
     <>
       <header className="flex">
-        <Header hrefAddBtn="/finance/income/national-num-table/add" hrefBackBtn="/finance/income" pageName="national-num-table" />
+        <Header hrefAddBtn="/finance/income/national-num-table/add" hrefBackBtn="/finance/income" section={"income"} pageName="national-num-table" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto" id="main">

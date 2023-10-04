@@ -41,7 +41,7 @@ const NocturnalFees = () => {
   return (
     <>
       <header className="flex">
-        <Header hrefAddBtn="/finance/income/nocturnal-fees/add" hrefBackBtn="/finance/income" pageName="nocturnal-fees" />
+        <Header hrefAddBtn="/finance/income/nocturnal-fees/add" hrefBackBtn="/finance/income" section={"income"} pageName="nocturnal-fees" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto" id="main">

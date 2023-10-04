@@ -27,43 +27,48 @@ const Appropriation = () => {
     setAppropriation(data);
   }
 
-  const { totalBudget } = appropriations.reduce((accumulator, item) => {
+  const { totalMainBudget, totalBudget } = appropriations.reduce((accumulator, item) => {
     return {
-      totalBudget: accumulator.totalBudget + (item.amount)
+      totalMainBudget: accumulator.totalMainBudget + item.main_amount,
+      totalBudget: accumulator.totalBudget + item.amount,
     };
-  }, { totalBudget: 0 });
+  }, { totalMainBudget: 0, totalBudget: 0 });
+
+  const totalSpendBudget = totalMainBudget - totalBudget;
 
   return (
     <>
       <header className="flex">
-        <Header hrefAddBtn="/finance/forms/budget/appropriation/add" hrefBackBtn="/finance/forms/budget" pageName="forms" />
+        <Header hrefAddBtn="/finance/forms/budget/appropriation/add" hrefBackBtn="/finance/forms/budget" section={"forms"} pageName="budget/appropriation" />
       </header>
       <hr />
       <main className="w-[60%] mx-auto" id="main">
         <table className="table table-bordered table-sm table-striped">
           <thead className="table-dark">
             <tr>
-              <th>شماره</th>
+              <th>#</th>
               <th>کد</th>
               <th>نام دری</th>
               <th>نام پشتو</th>
               <th>نام انگلیسی</th>
-              <th>مقدار بودجه</th>
+              <th>اصل بودجه</th>
+              <th>بودجه باقی مانده</th>
               <th className="flex justify-center">ویرایش</th>
             </tr>
           </thead>
           <tbody>
             {
-              appropriations.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
+              appropriations.map((item, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
                   <td>{item.code}</td>
                   <td>{item.dari_name}</td>
                   <td>{item.pashto_name}</td>
                   <td>{item.eng_name}</td>
+                  <td>{item.main_amount}</td>
                   <td>{item.amount}</td>
                   <td className="flex justify-around">
-                    <Link href={""} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
+                    <Link href={`/finance/forms/budget/appropriation/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
                   </td>
                 </tr>
               ))
@@ -73,7 +78,9 @@ const Appropriation = () => {
       </main>
       <div className="d-flex justify-around bg-gray-200 p-1">
         <button onClick={print} className="btn btn-sm btn-dark">پرنت</button>
-        <span>مجموع بودجه: {totalBudget}</span>
+        <span>مجموع اصل بودجه: {totalMainBudget}</span>
+        <span>مجموع بودجه باقی مانده: {totalBudget}</span>
+        <span>مجموع بودجه مصرف شده: {totalSpendBudget}</span>
       </div>
     </>
   )

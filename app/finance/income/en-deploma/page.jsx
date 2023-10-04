@@ -40,7 +40,7 @@ const EnDeploma = () => {
   return (
     <>
       <header className="flex">
-        <Header hrefAddBtn="/finance/income/en-deploma/add" hrefBackBtn="/finance/income" pageName="en-deploma" />
+        <Header hrefAddBtn="/finance/income/en-deploma/add" hrefBackBtn="/finance/income" section={"income"} pageName="en-deploma" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto" id="main">

@@ -40,7 +40,7 @@ const GuaranteedRecursive = () => {
   return (
     <>
       <header className="flex">
-        <Header hrefAddBtn="/finance/income/guaranteed-recursive/add" hrefBackBtn="/finance/income" pageName="guaranteed-recursive" />
+        <Header hrefAddBtn="/finance/income/guaranteed-recursive/add" hrefBackBtn="/finance/income" section={"income"} pageName="guaranteed-recursive" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto" id="main">

@@ -27,36 +27,39 @@ const Program = () => {
     setProgram(data);
   }
 
-  const { totalBudget } = programs.reduce((accumulator, item) => {
+  const { totalMainBudget, totalBudget } = programs.reduce((accumulator, item) => {
     return {
+      totalMainBudget: accumulator.totalMainBudget + (item.main_amount),
       totalBudget: accumulator.totalBudget + (item.amount)
     };
-  }, { totalBudget: 0 });
+  }, {totalMainBudget: 0 ,totalBudget: 0 });
 
   return (
     <>
       <header className="flex">
-        <Header hrefAddBtn="/finance/forms/budget/program/add" hrefBackBtn="/finance/forms/budget" pageName="forms" />
+        <Header hrefAddBtn="/finance/forms/budget/program/add" hrefBackBtn="/finance/forms/budget" section={"forms"} pageName="budget/program" />
       </header>
       <hr />
       <main className="w-[60%] mx-auto" id="main">
         <table className="table table-bordered table-sm table-striped">
           <thead className="table-dark">
             <tr>
-              <th>شماره</th>
+              <th>#</th>
               <th>کد</th>
               <th>تفصیلات</th>
-              <th>مقدار بودجه</th>
+              <th>اصل بودجه</th>
+              <th>بودجه باقی مانده</th>
               <th className="flex justify-center">ویرایش</th>
             </tr>
           </thead>
           <tbody>
             {
-              programs.map((item) => (
-                <tr key={item.id}>
+              programs.map((item, index) => (
+                <tr key={index + 1}>
                   <td>{item.id}</td>
                   <td>{item.code}</td>
                   <td>{item.desc}</td>
+                  <td>{item.main_amount}</td>
                   <td>{item.amount}</td>
                   <td className="flex justify-around">
                     <Link href={""} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
@@ -69,7 +72,8 @@ const Program = () => {
       </main>
       <div className="d-flex justify-around bg-gray-200 p-1">
         <button onClick={print} className="btn btn-sm btn-dark">پرنت</button>
-        <span>مجموع بودجه: {totalBudget}</span>
+        <span>مجموع اصل بودجه: {totalMainBudget}</span>
+        <span>مجموع بودجه باقی مانده: {totalBudget}</span>
       </div>
     </>
   )

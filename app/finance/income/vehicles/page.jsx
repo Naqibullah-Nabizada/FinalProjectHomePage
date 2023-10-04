@@ -40,7 +40,7 @@ const Vehicles = () => {
   return (
     <>
       <header className="flex">
-        <Header hrefAddBtn="/finance/income/vehicles/add" hrefBackBtn="/finance/income" pageName="vehicles" />
+        <Header hrefAddBtn="/finance/income/vehicles/add" hrefBackBtn="/finance/income" section={"income"} pageName="vehicles" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto" id="main">

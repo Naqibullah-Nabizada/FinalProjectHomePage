@@ -2,21 +2,17 @@
 
 import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaArrowCircleRight, FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
 
-//! Shamsi Date
-import persian from "react-date-object/calendars/persian";
-import persian_fa from "react-date-object/locales/persian_fa";
-import transition from "react-element-popper/animations/transition";
-import DatePicker, { DateObject } from "react-multi-date-picker";
-
 const Add = () => {
   const router = useRouter();
-  const [fasels, setFasel] = useState([]);
+
+  const { id } = useParams();
+
   const {
     register,
     handleSubmit,
@@ -25,21 +21,13 @@ const Add = () => {
   } = useForm({});
   const [selectedDate, setSelectedDate] = useState(null); // Selected date state
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    const { data } = await axios.get("http://localhost:5000/Fasel");
-    setFasel(data);
-  };
 
   const submitForm = async (data) => {
     try {
       // Add the selected date to the form data
       const formData = { ...data, date: selectedDate };
-      await axios.post("http://localhost:5000/FaselDetail", formData);
-      router.push("/finance/forms/fasel-detail");
+      await axios.put(`http://localhost:5000/FaselDetails/${id}`, formData);
+      router.push("/finance/forms");
       toast("معلومات جدید با موفقیت اضافه شد", {
         hideProgressBar: false,
         autoClose: 5000,
@@ -49,12 +37,6 @@ const Add = () => {
     } catch (err) {
       console.log(err);
     }
-  };
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-    // Update the form's value for the date field
-    setValue("date", date);
   };
 
   return (
@@ -69,80 +51,7 @@ const Add = () => {
         <form onSubmit={handleSubmit(submitForm)}>
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
 
-            <div className="w-[32%]">
-              <label className="form-label">فصل</label>
-              <select
-                className={`form-control form-control-sm mb-2 ${errors.faselId ? 'is-invalid' : ''}`}
-                {...register("faselId", { required: true })}
-              >
-                {
-                  fasels.map((fasel) => (
-                    <option value={fasel.id} key={fasel.id}>{fasel.code}</option>
-                  ))
-                }
-              </select>
-              {errors.faselId && <span className="invalid-feedback">فیلد فصل الزامی است.</span>}
-
-            </div>
-
-            <div className="w-[32%]">
-              <label className="form-label">تاریخ</label>
-              <DatePicker
-                months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
-                hideOnScroll
-                hideWeekDays
-                editable={true}
-                placeholder="تاریخ"
-                currentDate={
-                  new DateObject({ calendar: persian })
-                }
-                animations={[transition()]}
-                calendar={persian}
-                locale={persian_fa}
-                inputClass="custom-input"
-                value={selectedDate} // Use the selectedDate state as the value
-                onChange={handleDateChange} // Call the handleDateChange function
-                name="date"
-              />
-              {errors.date && <span className="invalid-feedback">فیلد تاریخ الزامی است.</span>}
-            </div>
-
-
-            <div className="w-[32%]">
-              <label className="form-label">توضیحات</label>
-              <textarea
-                className={`form-control form-control-sm mb-2 ${errors.desc ? 'is-invalid' : ''}`}
-                {...register("desc", { required: true })}
-                col="3"
-                placeholder="توضیحات"
-              >
-              </textarea>
-              {errors.desc && <span className="invalid-feedback">فیلد توضیحات الزامی است.</span>}
-            </div>
-
-            <div className="w-[32%]">
-              <label className="form-label">مراجعه</label>
-              <input
-                type="text"
-                className={`form-control form-control-sm mb-2 ${errors.reference ? 'is-invalid' : ''}`}
-                {...register("reference", { required: true })}
-                placeholder="مراجعه"
-              />
-              {errors.reference && <span className="invalid-feedback">فیلد مراجعه الزامی است.</span>}
-            </div>
-
-            <div className="w-[32%]">
-              <label className="form-label">نمبر خصوصی</label>
-              <input
-                type="number"
-                className={`form-control form-control-sm mb-2 ${errors.private_num ? 'is-invalid' : ''}`}
-                {...register("private_num", { required: true })}
-                placeholder="نمبر خصوصی"
-              />
-              {errors.private_num && <span className="invalid-feedback">فیلد نمبر خصوصی الزامی است.</span>}
-            </div>
-
-            <div className="w-[32%]">
+            {/* <div className="w-[32%]">
               <label className="form-label">مراجعه تصفیه</label>
               <input
                 type="text"
@@ -151,7 +60,7 @@ const Add = () => {
                 placeholder="مراجعه تصفیه"
               />
               {errors.refinement && <span className="invalid-feedback">فیلد مراجعه تصفیه الزامی است.</span>}
-            </div>
+            </div> */}
 
             <div className="w-[32%]">
               <label className="form-label">تادیه بعدی</label>

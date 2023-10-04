@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { FaEdit } from "react-icons/fa";
+import { FaCheck, FaEdit } from "react-icons/fa";
 
 //! Shamsi Date Converter 
 import * as shamsi from "shamsi-date-converter";
@@ -39,7 +39,7 @@ const FaselDetail = () => {
   return (
     <>
       <header className="flex">
-        <Header hrefAddBtn="/finance/forms/fasel-detail/add" hrefBackBtn="/finance/forms" pageName="forms" />
+        <Header hrefAddBtn="/finance/forms/fasel-detail/add" hrefBackBtn="/finance/forms" section={"forms"} pageName="fasel-detail" />
       </header>
       <hr />
       <main className="w-[100%] table-responsive mx-auto" id="main">
@@ -65,9 +65,9 @@ const FaselDetail = () => {
           </thead>
           <tbody>
             {
-              faselDetails.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
+              faselDetails.map((item, index) => (
+                <tr key={item.id} style={item.befor_pay != 0 && item.commitment === '' ? { background: "#F2BBA7" } : null}>
+                  <td>{index + 1}</td>
                   <td>{item.fasel.code}</td>
                   <td>{shamsi.gregorianToJalali(item.date).join('-')}</td>
                   <td>{item.desc}</td>
@@ -82,7 +82,12 @@ const FaselDetail = () => {
                   <td>{item.transfer}</td>
                   <td>{item.commitment_transfer}</td>
                   <td className="flex justify-around">
-                    <Link href={""} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
+                    <Link href={`/finance/forms/fasel-detail/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
+                    {
+                      item.befor_pay > 0 && item.commitment == "" ?
+                        <Link href={`/finance/forms/fasel-detail/add/${item.id}`} className="btn btn-sm btn-success"><FaCheck className="bg-inherit" /></Link>
+                        : null
+                    }
                   </td>
                 </tr>
               ))
