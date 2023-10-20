@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaArrowAltCircleRight, FaFileCsv, FaIdCardAlt } from "react-icons/fa";
+import { FaArrowAltCircleRight, FaFileCsv, FaIdCardAlt, FaReceipt } from "react-icons/fa";
 
 const Hero = () => {
   return (
@@ -14,6 +14,9 @@ const Hero = () => {
 
           <Link href='./finance/forms' className='btn btn-outline-dark flex mb-2'>
             <FaIdCardAlt className='mx-1 bg-inherit' />بخش فورم های میم پوهنتون کابل</Link>
+
+            <Link href='./finance/reports' className='btn btn-outline-dark flex mb-2'>
+            <FaReceipt className='mx-1 bg-inherit' />بخش گزارشات</Link>
             
           <Link href='/' className='btn btn-outline-dark flex mb-2'>
             <FaArrowAltCircleRight className='mx-1 bg-inherit' />بازگشت به صفحه اصلی</Link>

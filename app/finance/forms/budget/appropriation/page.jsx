@@ -47,7 +47,7 @@ const Appropriation = () => {
           <thead className="table-dark">
             <tr>
               <th>#</th>
-              <th>کد</th>
+              <th>کود</th>
               <th>نام دری</th>
               <th>نام پشتو</th>
               <th>نام انگلیسی</th>

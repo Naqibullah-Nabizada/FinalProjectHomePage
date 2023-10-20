@@ -41,19 +41,19 @@ const Add = () => {
         <form onSubmit={handleSubmit(submitForm)}>
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
             <div className="w-[32%]">
-              <label className="form-label">کد</label>
+              <label className="form-label">کود</label>
               <input
                 type="text"
                 {...register("code", { required: true, min: 0, pattern: /^[0-9]+$/i, minLength: 1, maxLength: 15, })}
                 className={`form-control form-control-sm mb-3 ${errors.code ? 'is-invalid' : ''}`}
-                placeholder="کد"
+                placeholder="کود"
                 autoFocus
               />
-              {errors.code && errors.code.type === "required" && <span className="invalid-feedback">کد الزامی است.</span>}
-              {errors.code && errors.code.type === "pattern" && <span className="invalid-feedback">کد باید عدد باشد.</span>}
-              {errors.code && errors.code.type === "min" && <span className="invalid-feedback">کد باید یک عدد مثب باشد.</span>}
-              {errors.code && errors.code.type === "minLength" && <span className="invalid-feedback">کد حداقل باید 1 کارکتر باشد.</span>}
-              {errors.code && errors.code.type === "maxLength" && <span className="invalid-feedback">کد حداکثر باید 15 کارکتر باشد..</span>}
+              {errors.code && errors.code.type === "required" && <span className="invalid-feedback">کود الزامی است.</span>}
+              {errors.code && errors.code.type === "pattern" && <span className="invalid-feedback">کود باید عدد باشد.</span>}
+              {errors.code && errors.code.type === "min" && <span className="invalid-feedback">کود باید یک عدد مثب باشد.</span>}
+              {errors.code && errors.code.type === "minLength" && <span className="invalid-feedback">کود حداقل باید 1 کارکتر باشد.</span>}
+              {errors.code && errors.code.type === "maxLength" && <span className="invalid-feedback">کود حداکثر باید 15 کارکتر باشد..</span>}
             </div>
 
             <div className="w-[32%]">

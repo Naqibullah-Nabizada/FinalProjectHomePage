@@ -78,7 +78,7 @@
 //           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
 
 //             <div className="w-[32%]">
-//               <label className="form-label">کد</label>
+//               <label className="form-label">کود</label>
 //               <select
 //                 className={`form-control form-control-sm mb-3 ${errors.parentBabsId ? 'is-invalid' : ''}`}
 //                 {...register("appropriationId", { required: true })}
@@ -89,7 +89,7 @@
 //                   ))
 //                 }
 //               </select>
-//               {errors.appropriation && <span className="invalid-feedback">کد الزامی است.</span>}
+//               {errors.appropriation && <span className="invalid-feedback">کود الزامی است.</span>}
 //             </div>
 
 //             <div className="w-[32%]">
@@ -238,7 +238,7 @@
 //         <form onSubmit={handleSubmit(submitForm)}>
 //           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
 //             <div className="w-[32%]">
-//               <label className="form-label">کد</label>
+//               <label className="form-label">کود</label>
 //               <select
 //                 className={`form-control form-control-sm mb-3 ${errors.parentBabsId ? 'is-invalid' : ''}`}
 //                 {...register("appropriationId", { required: true })}
@@ -247,7 +247,7 @@
 //                   <option value={app.id} key={app.id}>{app.code}</option>
 //                 ))}
 //               </select>
-//               {errors.appropriationId && <span className="invalid-feedback">کد الزامی است.</span>}
+//               {errors.appropriationId && <span className="invalid-feedback">کود الزامی است.</span>}
 //             </div>
 //             <div className="w-[32%]">
 //               <label className="form-label">فصل</label>
@@ -395,7 +395,7 @@ const Update = () => {
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
 
             <div className="w-[32%]">
-              <label className="form-label">کد</label>
+              <label className="form-label">کود</label>
               <select
                 className={`form-control form-control-sm mb-3 ${errors.parentBabsId ? 'is-invalid' : ''}`}
                 {...register("appropriationId", { required: true })}
@@ -404,7 +404,7 @@ const Update = () => {
                   <option value={app.id} key={app.id}>{app.code}</option>
                 ))}
               </select>
-              {errors.appropriationId && <span className="invalid-feedback">کد الزامی است.</span>}
+              {errors.appropriationId && <span className="invalid-feedback">کود الزامی است.</span>}
             </div>
 
             <div className="w-[32%]">

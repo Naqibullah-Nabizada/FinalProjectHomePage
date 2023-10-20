@@ -3,7 +3,6 @@
 import axios from "axios";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useState } from "react";
 import { FaArrowCircleRight, FaPlus } from "react-icons/fa";
 
 //! Shamsi Date
@@ -12,6 +11,8 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import transition from "react-element-popper/animations/transition";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 const Add = () => {
@@ -19,29 +20,37 @@ const Add = () => {
   const router = useRouter();
   const { id } = useParams();
 
-  const [pendant_num, setPendantNum] = useState(null);
-  const [pendant_date, setPendantDate] = useState(null);
-  const [remark, setRemark] = useState(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue, // Add the setValue function from react-hook-form
+  } = useForm({});
+  const [selectedDate, setSelectedDate] = useState(null); // Selected date state
 
-  const submitForm = async (e) => {
-    e.preventDefault();
+  const submitForm = async (data) => {
+    const formData = { ...data, date: selectedDate };
+
     try {
       toast('معلومات جدید با موفقیت اضافه شد',
-        {
-          hideProgressBar: false,
-          autoClose: 5000,
-          type: 'success',
-          position: 'top-right'
-        })
+      {
+        hideProgressBar: false,
+        autoClose: 5000,
+        type: 'success',
+        position: 'top-right'
+      })
       router.push("/finance/income/id-cards");
-
-      await axios.put(`http://localhost:5000/IdCards/${id}`, {
-        pendant_date, pendant_num, remark
-      });
+      await axios.put(`http://localhost:5000/IdCards/${id}`, formData);
     } catch (err) {
       console.log(err)
     }
   }
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    // Update the form's value for the date field
+    setValue("pendant_date", date);
+  };
 
   return (
     <>
@@ -52,29 +61,32 @@ const Add = () => {
       </header>
       <hr />
       <main>
-        <form onSubmit={submitForm}>
+        <form onSubmit={handleSubmit(submitForm)}>
+          
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
 
             <div className="w-[32%]">
               <label className="form-label">نمبر آویز</label>
               <input
-                type="number"
-                name="pendant_num"
-                className="form-control form-control-sm mb-3"
+                type="text"
+                className={`form-control form-control-sm mb-2 ${errors.pendant_num ? 'is-invalid' : ''}`}
+                {...register("pendant_num", { required: true, min: 1, pattern: /^[0-9]+$/i, minLength: 2, maxLength: 15 })}
                 placeholder="نمبر آویز"
-                onChange={(e) => setPendantNum(e.target.value)}
-                required
-                autoFocus
               />
+              {errors.pendant_num && errors.pendant_num.type === "required" && <span className="invalid-feedback">نمبر آویز الزامی است.</span>}
+              {errors.pendant_num && errors.pendant_num.type === "pattern" && <span className="invalid-feedback">نمبر آویز باید عدد باشد.</span>}
+              {errors.pendant_num && errors.pendant_num.type === "min" && <span className="invalid-feedback">نمبر آویز باید یک عدد مثب باشد.</span>}
+              {errors.pendant_num && errors.pendant_num.type === "minLength" && <span className="invalid-feedback">نمبر آویز حداقل باید 2 کارکتر باشد.</span>}
+              {errors.pendant_num && errors.pendant_num.type === "maxLength" && <span className="invalid-feedback">نمبر آویز حداکثر باید 15 کارکتر باشد..</span>}
             </div>
 
             <div className="w-[32%]">
-              <label className="form-label">تاریخ آویز</label>
+              <label className="form-label d-block">تاریخ آویز</label>
               <DatePicker
                 months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
                 hideOnScroll
                 hideWeekDays
-                editable={false}
+                editable={true}
                 placeholder="تاریخ آویز"
                 currentDate={
                   new DateObject({ calendar: persian })
@@ -83,9 +95,10 @@ const Add = () => {
                 calendar={persian}
                 locale={persian_fa}
                 inputClass="custom-input"
-                value={pendant_date}
-                onChange={setPendantDate}
-                name="tariff_date"
+                value={selectedDate} // Use the selectedDate state as the value
+                onChange={handleDateChange} // Call the handleDateChange function
+                name="pendant_date"
+                required
               />
             </div>
 
@@ -93,11 +106,9 @@ const Add = () => {
               <label className="form-label">ملاحضات</label>
               <textarea
                 rows="3"
-                name="remark"
-                className="form-control form-control-sm mb-3"
                 placeholder="ملاحضات"
-                onChange={(e) => setRemark(e.target.value)}
-                required
+                className={`form-control form-control-sm mb-2 ${errors.remark ? 'is-invalid' : ''}`}
+                {...register("remark")}
               ></textarea>
             </div>
 

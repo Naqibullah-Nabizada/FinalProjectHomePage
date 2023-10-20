@@ -45,7 +45,7 @@ const Program = () => {
           <thead className="table-dark">
             <tr>
               <th>#</th>
-              <th>کد</th>
+              <th>کود</th>
               <th>تفصیلات</th>
               <th>اصل بودجه</th>
               <th>بودجه باقی مانده</th>
