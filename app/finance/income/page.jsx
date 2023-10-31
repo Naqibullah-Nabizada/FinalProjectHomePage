@@ -62,7 +62,7 @@ const Income = () => {
               <FaIdCard className='mx-1 bg-inherit' />فورم های ماستری</Link>
 
             <Link href='/finance/income/papers' className='btn btn-outline-dark flex mb-2'>
-              <FaCar className='mx-1 bg-inherit' />فروش ضایعات کاغذ نشرات</Link>
+              <FaCar className='mx-1 bg-inherit' />فروش ضایعات کاغذ آمریت نشرات</Link>
 
             <Link href='/finance/income/animal-clinic' className='btn btn-outline-dark flex mb-2'>
               <FaIdCard className='mx-1 bg-inherit' />کلینک حیوانی پوهنځی وترنری</Link>

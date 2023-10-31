@@ -1,13 +1,13 @@
 "use client";
 
-import Header from "@/components/Header";
 
 import axios from "axios";
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-
+import Link from "next/link";
+import { FaArrowCircleRight } from "react-icons/fa";
 
 const FormsReport = () => {
 
@@ -54,11 +54,11 @@ const FormsReport = () => {
 
   return (
     <>
-      <header className="flex">
-        <Header hrefAddBtn="/finance/reports/income" hrefBackBtn="/finance/reports" section={"report"} pageName="income" />
-      </header>
-      <hr />
-      <main className="w-[100%] mx-auto" id="main">
+      <main className="w-[80%] mx-auto" id="main">
+        <header>
+          <h2 className="my-3 text-center">گزارش عواید پوهنتون کابل</h2>
+        </header>
+        <hr />
         <table className="table table-bordered table-sm table-striped">
           <thead className="table-dark">
             <tr>
@@ -67,9 +67,9 @@ const FormsReport = () => {
               <th>شرح</th>
               <th>تادیه بعدی</th>
               <th>تادیه پیشکی</th>
-              <th>باب</th>
+              {/* <th>باب</th>
               <th>کود فعالیت</th>
-              <th>کود کتگوری</th>
+              <th>کود کتگوری</th> */}
               <th>ماه</th>
               <th>حواله تخصیصات</th>
               <th>حواله تخصیصات تعهد شده</th>
@@ -84,9 +84,9 @@ const FormsReport = () => {
                   <td>{item.desc}</td>
                   <td>{item.befor_pay || 0}</td>
                   <td>{item.after_pay || 0}</td>
+                  {/* <td></td>
                   <td></td>
-                  <td></td>
-                  <td></td>
+                  <td></td> */}
                   <td>{item.income}</td>
                   <td>{item.commitment}</td>
                   <td>{item.commitment_transfer}</td>
@@ -96,9 +96,11 @@ const FormsReport = () => {
           </tbody>
         </table>
       </main>
-      <div className="d-flex justify-around bg-gray-200 p-1">
+      <div className=" w-[100%] d-flex justify-around bg-gray-200 p-1">
+        <Link href="./finance/report" className="btn btn-sm btn-outline-secondary flex">
+          <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
+        </Link>
         <button onClick={print} className="btn btn-sm btn-dark">پرنت</button>
-        {/* <span>مجموع مصارف: {formReport}</span> */}
       </div>
     </>
   )
