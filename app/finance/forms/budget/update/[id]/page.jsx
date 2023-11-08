@@ -34,7 +34,7 @@ const Update = () => {
   const submitForm = async (data) => {
     try {
       await axios.put(`http://localhost:5000/Appropriation/${id}`, data);
-      router.push("/finance/forms/budget/appropriation");
+      router.push("/finance/forms/budget");
       toast('معلومات جدید با موفقیت اضافه شد', {
         hideProgressBar: false,
         autoClose: 5000,
@@ -242,7 +242,7 @@ const Update = () => {
               <FaPlus className="mx-1 bg-inherit" />
             </button>
 
-            <Link href="./finance/forms/budget/appropriation" className="btn btn-outline-secondary flex">
+            <Link href="./finance/forms/budget" className="btn btn-outline-secondary flex">
               <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
             </Link>
           </div>

@@ -70,7 +70,7 @@ const Income = () => {
             <Link href='/finance/income/kabul-bank' className='btn btn-outline-dark flex mb-2'>
               <FaIdCardAlt className='mx-1 bg-inherit' />کرایه نمایندگی کابل بانک</Link>
 
-            <Link href='/finance/income/bike' className='btn btn-outline-dark flex mb-2'>
+            <Link href='/finance/income/bicycle' className='btn btn-outline-dark flex mb-2'>
               <FaBuilding className='mx-1 bg-inherit' />کرایه بایسکل نگهبانی</Link>
 
 

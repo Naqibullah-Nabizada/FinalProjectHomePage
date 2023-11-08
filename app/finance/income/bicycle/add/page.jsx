@@ -3,6 +3,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FaArrowCircleRight, FaPlus } from "react-icons/fa";
 
 //! Shamsi Date
@@ -11,7 +12,6 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import transition from "react-element-popper/animations/transition";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -25,16 +25,14 @@ const Add = () => {
     formState: { errors },
     setValue, // Add the setValue function from react-hook-form
   } = useForm({});
-  
+
   const [selectedDate, setSelectedDate] = useState(null); // Selected date state
 
   const submitForm = async (data) => {
-
     const formData = { ...data, date: selectedDate };
-
     try {
       await axios.post("http://localhost:5000/TwelveSection", formData);
-      router.push("/finance/income/ma-forms");
+      router.push("/finance/income/bicycle");
       toast('معلومات جدید با موفقیت اضافه شد',
         {
           hideProgressBar: false,
@@ -57,7 +55,7 @@ const Add = () => {
     <>
       <header>
         <h3 className="my-4 text-center text-xl">
-          فورم ثبت فیس محصلین برنامه های ماستری
+          کرایه بایسکل نگهبانی
         </h3>
       </header>
       <hr />
@@ -68,7 +66,7 @@ const Add = () => {
 
             <input
               {...register("type")}
-              value={"MAForms"}
+              value={"bicycle"}
               hidden
             />
 
@@ -208,14 +206,13 @@ const Add = () => {
 
           </section>
 
-
           <div className="flex">
             <button type="submit" className="btn btn-outline-success flex mr-10 ml-5">
               ثبت
               <FaPlus className="mx-1 bg-inherit" />
             </button>
 
-            <Link href="./finance/income/ma-forms" className="btn btn-outline-secondary flex">
+            <Link href="./finance/income/bicycle" className="btn btn-outline-secondary flex">
               <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
             </Link>
           </div>

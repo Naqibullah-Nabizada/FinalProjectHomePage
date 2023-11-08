@@ -52,6 +52,10 @@ const FormsReport = () => {
     }
   }
 
+  const print = () => {
+    window.print();
+  }
+
   return (
     <>
       <main className="w-[80%] mx-auto" id="main">
@@ -96,8 +100,8 @@ const FormsReport = () => {
           </tbody>
         </table>
       </main>
-      <div className=" w-[100%] d-flex justify-around bg-gray-200 p-1">
-        <Link href="./finance/report" className="btn btn-sm btn-outline-secondary flex">
+      <div className=" w-[100%] d-flex justify-around bg-gray-200 p-1 mb-5">
+        <Link href="./finance/reports" className="btn btn-sm btn-outline-secondary flex">
           <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
         </Link>
         <button onClick={print} className="btn btn-sm btn-dark">پرنت</button>

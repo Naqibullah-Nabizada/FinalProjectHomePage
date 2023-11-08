@@ -93,6 +93,21 @@ const IncomeReport = () => {
   const [currentYearResearchFarmAmount, setcurrentYearResearchFarmAmount] = useState();
   const [currentYearResearchFarmCost, setcurrentYearResearchFarmCost] = useState();
 
+  const [AnimalClinicAmount, setAnimalClinicAmount] = useState();
+  const [AnimalClinicCost, setAnimalClinicCost] = useState();
+  const [currentYearAnimalClinicAmount, setcurrentYearAnimalClinicAmount] = useState();
+  const [currentYearAnimalClinicCost, setcurrentYearAnimalClinicCost] = useState();
+
+  const [KabulBankAmount, setKabulBankAmount] = useState();
+  const [KabulBankCost, setKabulBankCost] = useState();
+  const [currentYearKabulBankAmount, setcurrentYearKabulBankAmount] = useState();
+  const [currentYearKabulBankCost, setcurrentYearKabulBankCost] = useState();
+
+  const [BicycleAmount, setBicycleAmount] = useState();
+  const [BicycleCost, setBicycleCost] = useState();
+  const [currentYearBicycleAmount, setcurrentYearBicycleAmount] = useState();
+  const [currentYearBicycleCost, setcurrentYearBicycleCost] = useState();
+
   const currentYearIncome = async () => {
     try {
       const { data } = await axios.get('http://localhost:5000/income/report');
@@ -522,7 +537,7 @@ const IncomeReport = () => {
 
   const ResearchFarmReport = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/income/report/research-farms`);
+      const { data } = await axios.get(`http://localhost:5000/income/report/agriculture-farm`);
       setResearchFarmAmount(data);
       setResearchFarmCost(data);
       let totalCost = 0;
@@ -595,6 +610,80 @@ const IncomeReport = () => {
     }
   };
 
+  const AnimalClinicReport = async () => {
+    try {
+      const { data } = await axios.get(`http://localhost:5000/income/report/animal-clinic`);
+      setAnimalClinicAmount(data);
+      setAnimalClinicCost(data);
+      let totalCost = 0;
+      let currentYearTotalCost = 0;
+      let currentYearTotalAmount = data.filter(item => item.year == moment().format('jYYYY')).length;
+      data.forEach((item) => {
+        if (item.amount) {
+          totalCost += parseFloat(item.amount);
+        }
+        if (item.year == moment().format("jYYYY")) {
+          currentYearTotalCost += item.amount;
+        }
+      });
+      setAnimalClinicAmount(data.length);
+      setAnimalClinicCost(totalCost);
+      setcurrentYearAnimalClinicAmount(currentYearTotalAmount);
+      setcurrentYearAnimalClinicCost(currentYearTotalCost);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const KabulBankReport = async () => {
+    try {
+      const { data } = await axios.get(`http://localhost:5000/income/report/kabul-bank`);
+      setKabulBankAmount(data);
+      setKabulBankCost(data);
+      let totalCost = 0;
+      let currentYearTotalCost = 0;
+      let currentYearTotalAmount = data.filter(item => item.year == moment().format('jYYYY')).length;
+      data.forEach((item) => {
+        if (item.amount) {
+          totalCost += parseFloat(item.amount);
+        }
+        if (item.year == moment().format("jYYYY")) {
+          currentYearTotalCost += item.amount;
+        }
+      });
+      setKabulBankAmount(data.length);
+      setKabulBankCost(totalCost);
+      setcurrentYearKabulBankAmount(currentYearTotalAmount);
+      setcurrentYearKabulBankCost(currentYearTotalCost);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const BicycleReport = async () => {
+    try {
+      const { data } = await axios.get(`http://localhost:5000/income/report/bicycle`);
+      setBicycleAmount(data);
+      setBicycleCost(data);
+      let totalCost = 0;
+      let currentYearTotalCost = 0;
+      let currentYearTotalAmount = data.filter(item => item.year == moment().format('jYYYY')).length;
+      data.forEach((item) => {
+        if (item.amount) {
+          totalCost += parseFloat(item.amount);
+        }
+        if (item.year == moment().format("jYYYY")) {
+          currentYearTotalCost += item.amount;
+        }
+      });
+      setBicycleAmount(data.length);
+      setBicycleCost(totalCost);
+      setcurrentYearBicycleAmount(currentYearTotalAmount);
+      setcurrentYearBicycleCost(currentYearTotalCost);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     idCardReport();
@@ -614,7 +703,15 @@ const IncomeReport = () => {
     ResearchFarmReport()
     GuaranteedRecursiveReport()
     FarmProductsReport();
+    AnimalClinicReport();
+    KabulBankReport();
+    BicycleReport();
   }, []);
+
+  const print = () => {
+    window.print();
+  }
+
 
   return (
     <>
@@ -763,18 +860,42 @@ const IncomeReport = () => {
               <td>{FarmProductAmount} عدد</td>
               <td>{FarmProductCost} افغانی</td>
             </tr>
+            <tr>
+              <td>17</td>
+              <td>کلینیک حیوانی پوهنځی وترنری</td>
+              <td>{currentYearAnimalClinicAmount} عدد</td>
+              <td>{currentYearAnimalClinicCost} افغانی</td>
+              <td>{AnimalClinicAmount} عدد</td>
+              <td>{AnimalClinicCost} افغانی</td>
+            </tr>
+            <tr>
+              <td>18</td>
+              <td>کرایه نمایندگی کابل بانک</td>
+              <td>{currentYearKabulBankAmount} عدد</td>
+              <td>{currentYearKabulBankCost} افغانی</td>
+              <td>{KabulBankAmount} عدد</td>
+              <td>{KabulBankCost} افغانی</td>
+            </tr>
+            <tr>
+              <td>19</td>
+              <td>کرایه بایسکل نگهبانی</td>
+              <td>{currentYearBicycleAmount} عدد</td>
+              <td>{currentYearBicycleCost} افغانی</td>
+              <td>{BicycleAmount} عدد</td>
+              <td>{BicycleCost} افغانی</td>
+            </tr>
           </tbody>
         </table>
-        <hr/>
+        <hr />
         <section className="flex justify-around align-items-center bg-gray-300 p-1 my-3">
           <span>عواید سال <ShamsiDate />: {incomeCurrentYearReport} افغانی</span>
-          <span>مجموع عواید: {idCardCost + nocturnalFeesCost + MAFeesCost + EnDeplomaCost + EnTranscriptCost + NactionalTableCost + PaperCost + BreadCost + BakeryCost + MAFormsCost + ResearchFarmCost + GuaranteedCost + GuestHouseCost + FarmProductCost} افغانی</span>
-          <span>تعداد کلی عدد: {idCardAmount + nocturnalFeesAmount + MAFeesAmount + EnDeplomaAmount + EnTranscriptAmount + NactionalTableAmount + PaperAmount + BreadAmount + BakeryAmount + MAFormsAmount + ResearchFarmAmount + GuaranteedAmount + GuestHouseAmount + FarmProductAmount}</span>
+          <span>مجموع عواید: {idCardCost + nocturnalFeesCost + MAFeesCost + EnDeplomaCost + EnTranscriptCost + NactionalTableCost + PaperCost + BreadCost + BakeryCost + MAFormsCost + ResearchFarmCost + GuaranteedCost + GuestHouseCost + FarmProductCost + AnimalClinicCost + KabulBankCost + BicycleCost} افغانی</span>
+          <span>تعداد کلی عدد: {idCardAmount + nocturnalFeesAmount + MAFeesAmount + EnDeplomaAmount + EnTranscriptAmount + NactionalTableAmount + PaperAmount + BreadAmount + BakeryAmount + MAFormsAmount + ResearchFarmAmount + GuaranteedAmount + GuestHouseAmount + FarmProductAmount + AnimalClinicAmount + KabulBankAmount + BicycleAmount}</span>
         </section>
-      </main>
-      <div className="flex justify-around align-items-center bg-gray-200 p-1">
+      </main >
+      <div className="flex justify-around align-items-center bg-gray-200 p-1 mb-5">
 
-        <Link href="./finance/report" className="btn btn-outline-secondary flex">
+        <Link href="./finance/reports" className="btn btn-sm btn-outline-secondary flex">
           <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
         </Link>
 

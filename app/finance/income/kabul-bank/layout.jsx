@@ -1,9 +1,9 @@
 export const metadata = {
-  title: 'تخصیصات',
+  title: 'کرایه نمایندگی کابل بانک',
   description: 'Developed by Naqibullah Nabizada and Shoaib Nigzad',
 }
 
-export default function BakeryLayout({ children }) {
+export default function PapersLayout({ children }) {
   return (
     <main>{children}</main>
   )

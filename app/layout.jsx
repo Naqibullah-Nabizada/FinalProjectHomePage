@@ -4,6 +4,8 @@ import '../styles/bootstrap/bootstrap.css';
 
 import './globals.css';
 
+import { AuthContextProvider } from './finance/admin/context/context.js';
+
 // import { ToastContainer } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 
@@ -19,7 +21,9 @@ export default function RootLayout({ children }) {
     <html lang="fa">
       <body className={inter.className}>
         {/* <ToastContainer /> */}
-        {children}
+        <AuthContextProvider>
+          {children}
+        </AuthContextProvider>
       </body>
     </html>
   )

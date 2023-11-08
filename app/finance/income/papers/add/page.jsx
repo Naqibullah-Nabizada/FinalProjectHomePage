@@ -47,7 +47,7 @@ const Add = () => {
   const handleDateChange = (date) => {
     setSelectedDate(date);
     // Update the form's value for the date field
-    setValue("pendant_date", date);
+    setValue("tariff_date", date);
   };
 
   return (
