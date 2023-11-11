@@ -5,11 +5,15 @@ import axios from "axios";
 import ShamsiDate from "@/components/ShamsiDate";
 import moment from "jalali-moment";
 
+import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaArrowCircleRight } from "react-icons/fa";
+import { AuthContext } from "../../admin/context/context";
 
 const IncomeReport = () => {
+
+  const { token, admin } = useContext(AuthContext);
 
   const [incomeCurrentYearReport, setIncomeCurrentYearReport] = useState();
 
@@ -715,192 +719,211 @@ const IncomeReport = () => {
 
   return (
     <>
-      <main className="w-[80%] mx-auto" id="main">
-        <header>
-          <h3 className="my-3 text-center">راپور قطعیه عواید تحصیل شده سال <ShamsiDate /> ریاست پوهنتون کابل</h3>
-        </header>
-        <hr />
-        <table className="table table-bordered table-sm table-striped">
-          <thead className="table-dark">
-            <tr>
-              <th>#</th>
-              <th>منابع</th>
-              <th>تعداد سال <ShamsiDate /></th>
-              <th>مجموع سال <ShamsiDate /></th>
-              <th>تعداد کل</th>
-              <th>مجموع کل</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>کارت های هویت محصلین پوهنتون کابل</td>
-              <td>{currentYearIdCardAmount} عدد</td>
-              <td>{currentYearIdCardCost} افغانی</td>
-              <td>{idCardAmount} عدد</td>
-              <td>{idCardCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>فیس محصلین برنامه های شبانه پوهنتون کابل</td>
-              <td>{currentYearNocturnalFeesAmount} عدد</td>
-              <td>{currentYearNocturnalFeesCost} افغانی</td>
-              <td>{nocturnalFeesAmount} عدد</td>
-              <td>{nocturnalFeesCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>فیس محصلین برنامه های ماستری پوهنتون کابل</td>
-              <td>{currentYearMAFeesAmount} عدد</td>
-              <td>{currentYearMAFeesCost} افغانی</td>
-              <td>{MAFeesAmount} عدد</td>
-              <td>{MAFeesCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>دیپلوم زبان انگلیسی پوهنتون کابل</td>
-              <td>{currentYearEnDeplomaAmount} عدد</td>
-              <td>{currentYearEnDeplomaCost} افغانی</td>
-              <td>{EnDeplomaAmount} عدد</td>
-              <td>{EnDeplomaCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>ترانسکریپت زبان انگلیسی پوهنتون کابل</td>
-              <td>{currentYearEnTranscriptAmount} عدد</td>
-              <td>{currentYearEnTranscriptCost} افغانی</td>
-              <td>{EnTranscriptAmount} عدد</td>
-              <td>{EnTranscriptCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td>جدول نمرات ملی پوهنتون کابل</td>
-              <td>{currentYearNactionalTableAmount} عدد</td>
-              <td>{currentYearNactionalTableCost} افغانی</td>
-              <td>{NactionalTableAmount} عدد</td>
-              <td>{NactionalTableCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td>کرایه اپارتمان های استادان</td>
-              <td>{currentYearBuildingAmount} عدد</td>
-              <td>{currentYearBuildingCost} افغانی</td>
-              <td>{BuildingAmount} عدد</td>
-              <td>{BuildingCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>8</td>
-              <td>کارت های وسایط نقلیه</td>
-              <td>{currentYearVehicleAmount} عدد</td>
-              <td>{currentYearVehicleCost} افغانی</td>
-              <td>{VehicleAmount} عدد</td>
-              <td>{VehicleCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>9</td>
-              <td>فارم تحقیقاتی پوهنځی زراعت</td>
-              <td>{currentYearResearchFarmAmount} عدد</td>
-              <td>{currentYearResearchFarmCost} افغانی</td>
-              <td>{ResearchFarmAmount} عدد</td>
-              <td>{ResearchFarmCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td>کرایه مهمانخانه آمریت خدمات</td>
-              <td>{currentYearGuestHouseAmount} عدد</td>
-              <td>{currentYearGuestHouseCost} افغانی</td>
-              <td>{GuestHouseAmount} عدد</td>
-              <td>{GuestHouseCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>11</td>
-              <td>تضمین و بازگشتی</td>
-              <td>{currentYearGuaranteedAmount} عدد</td>
-              <td>{currentYearGuaranteedCost} افغانی</td>
-              <td>{GuaranteedAmount} عدد</td>
-              <td>{GuaranteedCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>12</td>
-              <td>فروش ضایعات کاغذ آمریت نشرات</td>
-              <td>{currentYearPaperAmount} عدد</td>
-              <td>{currentYearPaperCost} افغانی</td>
-              <td>{PaperAmount} عدد</td>
-              <td>{PaperCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>13</td>
-              <td>فورم های ماستری</td>
-              <td>{currentYearMAFormsAmount} عدد</td>
-              <td>{currentYearMAFormsCost} افغانی</td>
-              <td>{MAFormsAmount} عدد</td>
-              <td>{MAFormsCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>14</td>
-              <td>فروش نان قاق لیلیه</td>
-              <td>{currentYearBreadAmount} عدد</td>
-              <td>{currentYearBreadCost} افغانی</td>
-              <td>{BreadAmount} عدد</td>
-              <td>{BreadCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>15</td>
-              <td>کرایه خبازی</td>
-              <td>{currentYearBakeryAmount} عدد</td>
-              <td>{currentYearBakeryCost} افغانی</td>
-              <td>{BakeryAmount} عدد</td>
-              <td>{BakeryCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>16</td>
-              <td>محصولات تجزیه فارمسوتیکی</td>
-              <td>{currentYearFarmProductAmount} عدد</td>
-              <td>{currentYearFarmProductCost} افغانی</td>
-              <td>{FarmProductAmount} عدد</td>
-              <td>{FarmProductCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>17</td>
-              <td>کلینیک حیوانی پوهنځی وترنری</td>
-              <td>{currentYearAnimalClinicAmount} عدد</td>
-              <td>{currentYearAnimalClinicCost} افغانی</td>
-              <td>{AnimalClinicAmount} عدد</td>
-              <td>{AnimalClinicCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>18</td>
-              <td>کرایه نمایندگی کابل بانک</td>
-              <td>{currentYearKabulBankAmount} عدد</td>
-              <td>{currentYearKabulBankCost} افغانی</td>
-              <td>{KabulBankAmount} عدد</td>
-              <td>{KabulBankCost} افغانی</td>
-            </tr>
-            <tr>
-              <td>19</td>
-              <td>کرایه بایسکل نگهبانی</td>
-              <td>{currentYearBicycleAmount} عدد</td>
-              <td>{currentYearBicycleCost} افغانی</td>
-              <td>{BicycleAmount} عدد</td>
-              <td>{BicycleCost} افغانی</td>
-            </tr>
-          </tbody>
-        </table>
-        <hr />
-        <section className="flex justify-around align-items-center bg-gray-300 p-1 my-3">
-          <span>عواید سال <ShamsiDate />: {incomeCurrentYearReport} افغانی</span>
-          <span>مجموع عواید: {idCardCost + nocturnalFeesCost + MAFeesCost + EnDeplomaCost + EnTranscriptCost + NactionalTableCost + PaperCost + BreadCost + BakeryCost + MAFormsCost + ResearchFarmCost + GuaranteedCost + GuestHouseCost + FarmProductCost + AnimalClinicCost + KabulBankCost + BicycleCost} افغانی</span>
-          <span>تعداد کلی عدد: {idCardAmount + nocturnalFeesAmount + MAFeesAmount + EnDeplomaAmount + EnTranscriptAmount + NactionalTableAmount + PaperAmount + BreadAmount + BakeryAmount + MAFormsAmount + ResearchFarmAmount + GuaranteedAmount + GuestHouseAmount + FarmProductAmount + AnimalClinicAmount + KabulBankAmount + BicycleAmount}</span>
-        </section>
-      </main >
-      <div className="flex justify-around align-items-center bg-gray-200 p-1 mb-5">
 
-        <Link href="./finance/reports" className="btn btn-sm btn-outline-secondary flex">
-          <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
-        </Link>
+      {
+        token !== null && admin == 1 ? (
+          <section>
+            <main className="w-[80%] mx-auto" id="main">
+              <header>
+                <h3 className="my-3 text-center">راپور قطعیه عواید تحصیل شده سال <ShamsiDate /> ریاست پوهنتون کابل</h3>
+              </header>
+              <hr />
+              <table className="table table-bordered table-sm table-striped">
+                <thead className="table-dark">
+                  <tr>
+                    <th>#</th>
+                    <th>منابع</th>
+                    <th>تعداد سال <ShamsiDate /></th>
+                    <th>مجموع سال <ShamsiDate /></th>
+                    <th>تعداد کل</th>
+                    <th>مجموع کل</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>کارت های هویت محصلین پوهنتون کابل</td>
+                    <td>{currentYearIdCardAmount} عدد</td>
+                    <td>{currentYearIdCardCost} افغانی</td>
+                    <td>{idCardAmount} عدد</td>
+                    <td>{idCardCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>فیس محصلین برنامه های شبانه پوهنتون کابل</td>
+                    <td>{currentYearNocturnalFeesAmount} عدد</td>
+                    <td>{currentYearNocturnalFeesCost} افغانی</td>
+                    <td>{nocturnalFeesAmount} عدد</td>
+                    <td>{nocturnalFeesCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>فیس محصلین برنامه های ماستری پوهنتون کابل</td>
+                    <td>{currentYearMAFeesAmount} عدد</td>
+                    <td>{currentYearMAFeesCost} افغانی</td>
+                    <td>{MAFeesAmount} عدد</td>
+                    <td>{MAFeesCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>دیپلوم زبان انگلیسی پوهنتون کابل</td>
+                    <td>{currentYearEnDeplomaAmount} عدد</td>
+                    <td>{currentYearEnDeplomaCost} افغانی</td>
+                    <td>{EnDeplomaAmount} عدد</td>
+                    <td>{EnDeplomaCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>ترانسکریپت زبان انگلیسی پوهنتون کابل</td>
+                    <td>{currentYearEnTranscriptAmount} عدد</td>
+                    <td>{currentYearEnTranscriptCost} افغانی</td>
+                    <td>{EnTranscriptAmount} عدد</td>
+                    <td>{EnTranscriptCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>جدول نمرات ملی پوهنتون کابل</td>
+                    <td>{currentYearNactionalTableAmount} عدد</td>
+                    <td>{currentYearNactionalTableCost} افغانی</td>
+                    <td>{NactionalTableAmount} عدد</td>
+                    <td>{NactionalTableCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>کرایه اپارتمان های استادان</td>
+                    <td>{currentYearBuildingAmount} عدد</td>
+                    <td>{currentYearBuildingCost} افغانی</td>
+                    <td>{BuildingAmount} عدد</td>
+                    <td>{BuildingCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>8</td>
+                    <td>کارت های وسایط نقلیه</td>
+                    <td>{currentYearVehicleAmount} عدد</td>
+                    <td>{currentYearVehicleCost} افغانی</td>
+                    <td>{VehicleAmount} عدد</td>
+                    <td>{VehicleCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>9</td>
+                    <td>فارم تحقیقاتی پوهنځی زراعت</td>
+                    <td>{currentYearResearchFarmAmount} عدد</td>
+                    <td>{currentYearResearchFarmCost} افغانی</td>
+                    <td>{ResearchFarmAmount} عدد</td>
+                    <td>{ResearchFarmCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>10</td>
+                    <td>کرایه مهمانخانه آمریت خدمات</td>
+                    <td>{currentYearGuestHouseAmount} عدد</td>
+                    <td>{currentYearGuestHouseCost} افغانی</td>
+                    <td>{GuestHouseAmount} عدد</td>
+                    <td>{GuestHouseCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>11</td>
+                    <td>تضمین و بازگشتی</td>
+                    <td>{currentYearGuaranteedAmount} عدد</td>
+                    <td>{currentYearGuaranteedCost} افغانی</td>
+                    <td>{GuaranteedAmount} عدد</td>
+                    <td>{GuaranteedCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>12</td>
+                    <td>فروش ضایعات کاغذ آمریت نشرات</td>
+                    <td>{currentYearPaperAmount} عدد</td>
+                    <td>{currentYearPaperCost} افغانی</td>
+                    <td>{PaperAmount} عدد</td>
+                    <td>{PaperCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>13</td>
+                    <td>فورم های ماستری</td>
+                    <td>{currentYearMAFormsAmount} عدد</td>
+                    <td>{currentYearMAFormsCost} افغانی</td>
+                    <td>{MAFormsAmount} عدد</td>
+                    <td>{MAFormsCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>14</td>
+                    <td>فروش نان قاق لیلیه</td>
+                    <td>{currentYearBreadAmount} عدد</td>
+                    <td>{currentYearBreadCost} افغانی</td>
+                    <td>{BreadAmount} عدد</td>
+                    <td>{BreadCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>15</td>
+                    <td>کرایه خبازی</td>
+                    <td>{currentYearBakeryAmount} عدد</td>
+                    <td>{currentYearBakeryCost} افغانی</td>
+                    <td>{BakeryAmount} عدد</td>
+                    <td>{BakeryCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>16</td>
+                    <td>محصولات تجزیه فارمسوتیکی</td>
+                    <td>{currentYearFarmProductAmount} عدد</td>
+                    <td>{currentYearFarmProductCost} افغانی</td>
+                    <td>{FarmProductAmount} عدد</td>
+                    <td>{FarmProductCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>17</td>
+                    <td>کلینیک حیوانی پوهنځی وترنری</td>
+                    <td>{currentYearAnimalClinicAmount} عدد</td>
+                    <td>{currentYearAnimalClinicCost} افغانی</td>
+                    <td>{AnimalClinicAmount} عدد</td>
+                    <td>{AnimalClinicCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>18</td>
+                    <td>کرایه نمایندگی کابل بانک</td>
+                    <td>{currentYearKabulBankAmount} عدد</td>
+                    <td>{currentYearKabulBankCost} افغانی</td>
+                    <td>{KabulBankAmount} عدد</td>
+                    <td>{KabulBankCost} افغانی</td>
+                  </tr>
+                  <tr>
+                    <td>19</td>
+                    <td>کرایه بایسکل نگهبانی</td>
+                    <td>{currentYearBicycleAmount} عدد</td>
+                    <td>{currentYearBicycleCost} افغانی</td>
+                    <td>{BicycleAmount} عدد</td>
+                    <td>{BicycleCost} افغانی</td>
+                  </tr>
+                </tbody>
+              </table>
+              <hr />
+              <section className="flex justify-around align-items-center bg-gray-300 p-1 my-3">
+                <span>عواید سال <ShamsiDate />: {incomeCurrentYearReport} افغانی</span>
+                <span>مجموع عواید: {idCardCost + nocturnalFeesCost + MAFeesCost + EnDeplomaCost + EnTranscriptCost + NactionalTableCost + PaperCost + BreadCost + BakeryCost + MAFormsCost + ResearchFarmCost + GuaranteedCost + GuestHouseCost + FarmProductCost + AnimalClinicCost + KabulBankCost + BicycleCost} افغانی</span>
+                <span>تعداد کلی عدد: {idCardAmount + nocturnalFeesAmount + MAFeesAmount + EnDeplomaAmount + EnTranscriptAmount + NactionalTableAmount + PaperAmount + BreadAmount + BakeryAmount + MAFormsAmount + ResearchFarmAmount + GuaranteedAmount + GuestHouseAmount + FarmProductAmount + AnimalClinicAmount + KabulBankAmount + BicycleAmount}</span>
+              </section>
+            </main >
+            <div className="flex justify-around align-items-center bg-gray-200 p-1 mb-5">
 
-        <button onClick={print} className="btn btn-sm btn-dark">پرنت</button>
-      </div>
+              <Link href="./finance/reports" className="btn btn-sm btn-outline-secondary flex">
+                <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
+              </Link>
+
+              <button onClick={print} className="btn btn-sm btn-dark">پرنت</button>
+            </div>
+          </section>
+        ) : (
+          <>
+            <section className="container col-8 flex justify-center align-items-center">
+              <div>
+                <p className="alert alert-info text-center">برای وارد شدن به پنل مدیریت ابتدا وارد حساب کاربری خود شوید!</p>
+                <Link href="finance/admin/auth" className="block mx-auto btn btn-outline-primary col-6">ورود به پنل مدیریت</Link>
+              </div>
+              <div>
+                <Image src={"/images/finance/register.svg"} alt='register' width={500} height={500} />
+              </div>
+            </section>
+          </>
+        )
+      }
 
     </>
   )

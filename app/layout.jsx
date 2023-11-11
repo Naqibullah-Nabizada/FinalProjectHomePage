@@ -1,14 +1,20 @@
+"use client"
+
+import axios from 'axios';
 import { Inter } from 'next/font/google';
 
 import '../styles/bootstrap/bootstrap.css';
 
 import './globals.css';
 
-import { AuthContextProvider } from './finance/admin/context/context.js';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
-// import { ToastContainer } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { AuthContextProvider } from './finance/admin/context/context';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+axios.defaults.withCredentials = true;
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -20,8 +26,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fa">
       <body className={inter.className}>
-        {/* <ToastContainer /> */}
         <AuthContextProvider>
+        <ToastContainer /> 
           {children}
         </AuthContextProvider>
       </body>

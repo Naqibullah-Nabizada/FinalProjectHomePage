@@ -1,9 +1,10 @@
 "use client"
 
 import axios from "axios";
-import jwt_decode from "jwt-decode";
+import jwtDecode from "jwt-decode";
 import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
+import { confirmAlert } from "react-confirm-alert";
 
 import { toast } from "react-toastify";
 
@@ -16,11 +17,12 @@ export const AuthContextProvider = ({ children }) => {
   const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [userId, setUserId] = useState("");
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(null);
   const [admin, setAdmin] = useState(null);
   const [expire, setExpire] = useState("");
   const [resgisterError, setRegisterError] = useState("");
   const [users, setUsers] = useState([]);
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
     getAllUsers()
@@ -28,13 +30,14 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     refreshToken();
-  }, []);
+  }, [])
+
 
   const refreshToken = async () => {
     try {
       const response = await axios.get(`http://localhost:5000/token`);
       setToken(response.data.accessToken);
-      const decoded = jwt_decode(response.data.accessToken);
+      const decoded = jwtDecode(response.data.accessToken);
       setName(decoded.name);
       setUserId(decoded.userId);
       setAdmin(decoded.isAdmin);
@@ -49,12 +52,11 @@ export const AuthContextProvider = ({ children }) => {
   axiosJWT.interceptors.request.use(
     async (config) => {
       const currentDate = new Date();
-      console.log("Token")
       if (expire * 1000 < currentDate.getTime()) {
         const response = await axios.get(`http://localhost:5000/token`);
         config.headers.Authorization = `Bearer ${response.data.accessToken}`;
         setToken(response.data.accessToken);
-        const decoded = jwt_decode(response.data.accessToken);
+        const decoded = jwtDecode(response.data.accessToken);
         setName(decoded.name);
         setUserId(decoded.userId);
         setAdmin(decoded.isAdmin);
@@ -83,7 +85,7 @@ export const AuthContextProvider = ({ children }) => {
           closeOnClick: true,
           pauseOnHover: true,
         });
-        router.push("/finance")
+        router.push("/finance/admin/users")
       }
     } catch (error) {
       console.log(error);
@@ -92,7 +94,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = async (inputs) => {
     try {
-      const res = await axios.post(`http://localhost:5000/api/users/login`,inputs);
+      const res = await axios.post(`http://localhost:5000/api/users/login`, inputs);
       if (res.data.error) {
         setError(res.data.error);
       } else {
@@ -102,11 +104,11 @@ export const AuthContextProvider = ({ children }) => {
           closeOnClick: true,
           pauseOnHover: true,
         });
-        router.push("/finance");
         setName(res.data.name);
         setUserId(res.data.userId);
         setToken(res.data.accessToken);
         setAdmin(res.data.isAdmin);
+        router.push("/finance");
       }
     } catch (error) {
       console.log(error);
@@ -127,7 +129,21 @@ export const AuthContextProvider = ({ children }) => {
   };
 
 
-  const updataUser = async (value) => {
+  const getSingleUser = async (id) => {
+    try {
+      const res = await axiosJWT.get(`http://localhost:5000/api/user/${id}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  const updateUser = async (value) => {
     try {
       const res = await axiosJWT.put(`http://localhost:5000/api/users/${value.id}`, value, {
         headers: {
@@ -140,9 +156,10 @@ export const AuthContextProvider = ({ children }) => {
         closeOnClick: true,
         pauseOnHover: true,
       });
-      // navigate("/view-users");
+      router.push("/finance/admin/users")
     } catch (error) {
       console.log(error);
+      console.log("errror")
     }
   }
 
@@ -159,16 +176,56 @@ export const AuthContextProvider = ({ children }) => {
         closeOnClick: true,
         pauseOnHover: true,
       });
-      getAllUsers()
+      getAllUsers();
     } catch (error) {
       console.log(error);
     }
   }
 
 
+  const confirm = (userId) => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div
+            dir="rtl"
+            style={{
+              backgroundColor: "gray",
+              border: `1px solid purple`,
+              borderRadius: "1em",
+              textAlign: 'center'
+            }}
+            className="p-4"
+          >
+            <h1 style={{ color: "white" }}>🔔پاک کردن کاربر🔔</h1>
+            <p style={{ color: "white", padding: "1rem" }}>
+              مطمئنی که میخواهی کاربر را پاک کنی ؟😕
+            </p>
+            <button
+              onClick={() => {
+                deleteUser(userId);
+                onClose();
+              }}
+              className="btn btn-success mx-2"
+            >
+              مطمئن هستم✅
+            </button>
+            <button
+              onClick={onClose}
+              className="btn btn-warning"
+            >
+              انصراف❌
+            </button>
+          </div>
+        );
+      },
+    });
+  };
+
+
   const Logout = async () => {
     try {
-      const res = await axiosJWT.delete(`http://localhost:5000/api/users/logout`, {
+      const res = await axiosJWT.delete("http://localhost:5000/api/users/logout", {
         headers: {
           authorization: `Bearer ${token}`
         }
@@ -192,16 +249,19 @@ export const AuthContextProvider = ({ children }) => {
         login,
         error,
         getAllUsers,
+        getSingleUser,
         axiosJWT,
         token,
         register,
         resgisterError,
         users,
-        updataUser,
+        user,
+        updateUser,
         deleteUser,
         Logout,
         userId,
-        admin
+        admin,
+        confirm
       }}
     >
       {children}
