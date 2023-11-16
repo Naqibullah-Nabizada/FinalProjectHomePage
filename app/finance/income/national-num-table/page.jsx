@@ -39,12 +39,13 @@ const NationalNumTable = () => {
 
   return (
     <>
-      <header className="flex">
+      <header className="flex" id="header">
         <Header hrefAddBtn="/finance/income/national-num-table/add" hrefBackBtn="/finance/income" section={"income"} pageName="national-num-table" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto" id="main">
         <table className="table table-bordered table-sm table-striped">
+        <caption className="caption-top text-center text-dark">عواید جدول نمرات ملی پوهنتون کابل</caption>
           <thead className="table-dark">
             <tr>
               <th>شماره</th>
@@ -62,7 +63,7 @@ const NationalNumTable = () => {
               <th>نمبر آویز</th>
               <th>تاریخ آویز</th>
               <th>ملاحضات</th>
-              <th className="flex justify-center">ویرایش</th>
+              <th className="flex justify-center" id="edit_label">ویرایش</th>
             </tr>
           </thead>
           <tbody>
@@ -84,7 +85,7 @@ const NationalNumTable = () => {
                   <td>{item.pendant_num}</td>
                   <td>{item.pendant_date != null ? shamsi.gregorianToJalali(item.pendant_date).join('-') : null}</td>
                   <td>{item.remark}</td>
-                  <td className="flex justify-around">
+                  <td className="flex justify-around" id="edit_btn">
                     <Link href={`/finance/income/national-num-table/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
                     {item.pendant_num == null || item.pendant_num == ''?
                       <Link href={`/finance/income/national-num-table/add/${item.id}`} className="btn btn-sm btn-success"><FaCheck className="bg-inherit" /></Link>

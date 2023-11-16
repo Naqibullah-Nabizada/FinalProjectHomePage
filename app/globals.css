@@ -63,15 +63,26 @@
 @media print {
   body * {
     visibility: hidden;
+    font-size: small;
   }
 
   #main,
   #main * {
     visibility: visible;
   }
+
+  #edit_label,
+  #edit_btn * {
+    /* visibility: hidden; */
+    display: none;
+  }
+
+  #header *{
+    display: none;
+  }
 }
 
 
-#fasel-detail-table{
+#fasel-detail-table {
   font-size: small !important;
 }

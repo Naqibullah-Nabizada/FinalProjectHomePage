@@ -36,7 +36,7 @@ const Fasel = () => {
 
   return (
     <>
-      <header className="flex">
+      <header className="flex" id="header">
         <Header hrefAddBtn="/finance/forms/fasel/add" hrefBackBtn="/finance/forms" section="forms" pageName="fasel" />
       </header>
       <hr />
@@ -49,7 +49,7 @@ const Fasel = () => {
               <th>فصل</th>
               <th>توضیحات</th>
               <th>مقدار تخصیص</th>
-              <th className="flex justify-center">ویرایش</th>
+              <th className="flex justify-center" id="edit_label">ویرایش</th>
             </tr>
           </thead>
           <tbody>
@@ -65,7 +65,7 @@ const Fasel = () => {
                   </td>
                   <td>{item.desc}</td>
                   <td>{item.amount}</td>
-                  <td className="flex justify-around">
+                  <td className="flex justify-around" id="edit_btn">
                     <Link href={`/finance/forms/fasel/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
                   </td>
                 </tr>

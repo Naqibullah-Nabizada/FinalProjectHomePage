@@ -1,11 +1,11 @@
-import ListProducts from "@/components/supplies/products/listProducts";
 import Header from "@/components/Header";
+import ListProducts from "@/components/supplies/products/listProducts";
 import TableHead from "@/components/supplies/table/th/tableHead";
 
 function DepotList() {
   return (
     <div>
-      <header className="flex">
+      <header className="flex" id="header">
         <Header hrefAddBtn="/supplies/depot" hrefBackBtn={"/supplies/"}pageName="nocturnal-fees"/>
       </header>
       <main className="w-[99%] mx-auto">

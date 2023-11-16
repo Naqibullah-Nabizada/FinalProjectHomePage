@@ -36,7 +36,7 @@ const ParentBob = () => {
 
   return (
     <>
-      <header className="flex">
+      <header className="flex" id="header">
         <Header hrefAddBtn="/finance/forms/bab/add" hrefBackBtn="/finance/forms" section={"forms"} pageName="bab" />
       </header>
       <hr />
@@ -50,7 +50,7 @@ const ParentBob = () => {
               <th>تخصیص از</th>
               <th>کود تخصیص</th>
               <th>مقدار تخصیص</th>
-              <th className="flex justify-center">ویرایش</th>
+              <th className="flex justify-center" id="edit_label">ویرایش</th>
             </tr>
           </thead>
           <tbody>
@@ -65,7 +65,7 @@ const ParentBob = () => {
                   }</td>
                   <td>{item.kind_of_budget}</td>
                   <td>{item.amount}</td>
-                  <td className="flex justify-around">
+                  <td className="flex justify-around" id="edit_btn">
                     <Link href={""} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
                   </td>
                 </tr>

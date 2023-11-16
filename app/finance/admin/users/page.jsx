@@ -22,7 +22,7 @@ const Users = () => {
       <hr />
       {
         token !== null && admin == 1 ? (
-          <section className="flex justify-content-center align-items-center">
+          <section className="flex justify-content-around align-items-center mt-3">
             <section className="col-5 mr-[4rem] border rounded shadow p-3">
 
               <h1 className="text-center h5 p-3">لسیت کاربران سایت</h1>
@@ -80,7 +80,7 @@ const Users = () => {
             </section>
 
             <section>
-              <Image src={"/images/finance/login.svg"} width={520} height={520} alt="Users" />
+              <Image src={"/images/finance/user1.svg"} width={600} height={600} alt="Users" />
             </section>
           </section>
 

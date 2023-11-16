@@ -36,7 +36,7 @@ const Program = () => {
 
   return (
     <>
-      <header className="flex">
+      <header className="flex" id="header">
         <Header hrefAddBtn="/finance/forms/budget/program/add" hrefBackBtn="/finance/forms/budget" section={"forms"} pageName="budget/program" />
       </header>
       <hr />
@@ -49,7 +49,7 @@ const Program = () => {
               <th>تفصیلات</th>
               <th>اصل بودجه</th>
               <th>بودجه باقی مانده</th>
-              <th className="flex justify-center">ویرایش</th>
+              <th className="flex justify-center" id="edit_label">ویرایش</th>
             </tr>
           </thead>
           <tbody>
@@ -61,7 +61,7 @@ const Program = () => {
                   <td>{item.desc}</td>
                   <td>{item.main_amount}</td>
                   <td>{item.amount}</td>
-                  <td className="flex justify-around">
+                  <td className="flex justify-around" id="edit_btn">
                     <Link href={""} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
                   </td>
                 </tr>

@@ -38,7 +38,7 @@ const FaselDetail = () => {
 
   return (
     <>
-      <header className="flex">
+      <header className="flex" id="header">
         <Header hrefAddBtn="/finance/forms/fasel-detail/add" hrefBackBtn="/finance/forms" section={"forms"} pageName="fasel-detail" />
       </header>
       <hr />
@@ -60,7 +60,7 @@ const FaselDetail = () => {
               <th>عاید</th>
               <th>حواله تخصیصات</th>
               <th>حواله تخصیصات تعهد شده</th>
-              <th className="flex justify-center">ویرایش</th>
+              <th className="flex justify-center" id="edit_label">ویرایش</th>
             </tr>
           </thead>
           <tbody>
@@ -81,7 +81,7 @@ const FaselDetail = () => {
                   <td>{item.income}</td>
                   <td>{item.transfer}</td>
                   <td>{item.commitment_transfer}</td>
-                  <td className="flex justify-around">
+                  <td className="flex justify-around" id="edit_btn">
                     <Link href={`/finance/forms/fasel-detail/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
                     {
                       item.befor_pay > 0 && item.commitment == "" ?

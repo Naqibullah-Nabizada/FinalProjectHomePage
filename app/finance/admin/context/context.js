@@ -197,9 +197,9 @@ export const AuthContextProvider = ({ children }) => {
             }}
             className="p-4"
           >
-            <h1 style={{ color: "white" }}>🔔پاک کردن کاربر🔔</h1>
+            <h1 style={{ color: "white" }}>🔔حذف کاربر🔔</h1>
             <p style={{ color: "white", padding: "1rem" }}>
-              مطمئنی که میخواهی کاربر را پاک کنی ؟😕
+              مطمئنی که میخواهی کاربر را حذف کنی ؟😕
             </p>
             <button
               onClick={() => {

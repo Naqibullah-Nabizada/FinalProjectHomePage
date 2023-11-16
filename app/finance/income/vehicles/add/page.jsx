@@ -176,7 +176,6 @@ const Add = () => {
                 value={selectedDate} // Use the selectedDate state as the value
                 onChange={handleDateChange} // Call the handleDateChange function
                 name="tariff_date"
-                required
               />
             </div>
 

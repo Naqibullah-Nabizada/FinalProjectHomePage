@@ -35,9 +35,9 @@ const Login = () => {
 
       <Navbar title="معاونیت مالی و اداری" />
       <hr />
-      <div className="col-12 flex justify-content-center align-items-center border rounded shadow p-3">
+      <div className="col-12 flex justify-center items-center">
 
-        <div className="col-4 p-3">
+        <div className="col-4 p-3 border rounded shadow-lg mx-[5rem]">
           <h2 className="text-center h5 my-2">ورود به پنل مدیریت</h2>
           <hr />
           <form className="my-3" onSubmit={formik.handleSubmit}>
@@ -88,7 +88,7 @@ const Login = () => {
         </div>
 
         <div>
-          <Image src={"/images/finance/login.svg"} width={500} height={500} alt="Login Page" />
+          <Image src={"/images/finance/password.gif"} width={500} height={500} alt="Login Page" />
         </div>
 
       </div>
