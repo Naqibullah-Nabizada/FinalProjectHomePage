@@ -48,7 +48,6 @@ const Add = () => {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    // Update the form's value for the date field
     setValue("tariff_date", date);
   };
 
@@ -64,7 +63,7 @@ const Add = () => {
       <main>
         <form onSubmit={handleSubmit(submitForm)}>
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
-            
+
             <div className="w-[32%]">
               <label className="form-label">نام تحویل دهنده</label>
               <input
@@ -182,8 +181,8 @@ const Add = () => {
                 calendar={persian}
                 locale={persian_fa}
                 inputClass="custom-input"
-                value={selectedDate} // Use the selectedDate state as the value
-                onChange={handleDateChange} // Call the handleDateChange function
+                value={selectedDate}
+                onChange={handleDateChange}
                 name="tariff_date"
               />
             </div>
