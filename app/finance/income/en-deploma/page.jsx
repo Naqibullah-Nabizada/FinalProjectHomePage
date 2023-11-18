@@ -9,12 +9,15 @@ import axios from "axios";
 import Link from "next/link";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { FaCheck, FaEdit } from "react-icons/fa";
+import { AuthContext } from "../../admin/context/context";
 
 
 const EnDeploma = () => {
+
+  const { admin } = useContext(AuthContext);
 
   const [EnDeploma, SetEnDeploma] = useState([]);
 
@@ -40,12 +43,12 @@ const EnDeploma = () => {
   return (
     <>
       <header className="flex" id="header">
-        <Header hrefAddBtn="/finance/income/en-deploma/add" hrefBackBtn="/finance/income" section={"income"} pageName="en-deploma" />
+        <Header hrefAddBtn={admin == 0 ? ("/finance/income/en-deploma/add") : ""} hrefBackBtn="/finance/income" section={"income"} pageName="en-deploma" />
       </header>
       <hr />
       <main className="w-[99%] mx-auto" id="main">
         <table className="table table-bordered table-sm table-striped">
-        <caption className="caption-top text-center text-dark">عواید دیپلوم زبان انگلیسی پوهنتون کابل</caption>
+          <caption className="caption-top text-center text-dark">عواید دیپلوم زبان انگلیسی پوهنتون کابل</caption>
           <thead className="table-dark">
             <tr>
               <th>شماره</th>
@@ -63,7 +66,11 @@ const EnDeploma = () => {
               <th>نمبر آویز</th>
               <th>تاریخ آویز</th>
               <th>ملاحضات</th>
-              <th className="flex justify-center" id="edit_label">ویرایش</th>
+              {
+                admin == 0 ? (
+                  <th className="flex justify-center" id="edit_label">ویرایش</th>
+                ) : null
+              }
             </tr>
           </thead>
           <tbody>
@@ -85,14 +92,18 @@ const EnDeploma = () => {
                   <td>{item.pendant_num ?? null}</td>
                   <td>{item.pendant_date != null ? shamsi.gregorianToJalali(item.pendant_date).join('-') : null}</td>
                   <td>{item.remark}</td>
-                  <td className="flex justify-around" id="edit_btn">
-                    <Link href={`/finance/income/en-deploma/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
-                    {
-                      item.pendant_num == null || item.pendant_num == '' ?
-                        <Link href={`/finance/income/en-deploma/add/${item.id}`} className="btn btn-sm btn-success"><FaCheck className="bg-inherit" /></Link>
-                        : null
-                    }
-                  </td>
+                  {
+                    admin == 0 ? (
+                      <td className="flex justify-around" id="edit_btn">
+                        <Link href={`/finance/income/en-deploma/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
+                        {
+                          item.pendant_num == null || item.pendant_num == '' ?
+                            <Link href={`/finance/income/en-deploma/add/${item.id}`} className="btn btn-sm btn-success"><FaCheck className="bg-inherit" /></Link>
+                            : null
+                        }
+                      </td>
+                    ) : null
+                  }
                 </tr>
               ))
             }

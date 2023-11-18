@@ -721,7 +721,7 @@ const IncomeReport = () => {
     <>
 
       {
-        token !== null && admin == 1 ? (
+        token !== null && admin == 0 || admin == 2 ? (
           <section>
             <main className="w-[80%] mx-auto" id="main">
               <header>

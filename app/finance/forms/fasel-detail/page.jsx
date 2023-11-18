@@ -6,14 +6,17 @@ import axios from "axios";
 import Link from "next/link";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { FaCheck, FaEdit } from "react-icons/fa";
 
 //! Shamsi Date Converter 
 import * as shamsi from "shamsi-date-converter";
+import { AuthContext } from "../../admin/context/context";
 
 const FaselDetail = () => {
+
+  const { admin } = useContext(AuthContext);
 
   const [faselDetails, setFaselDetail] = useState([]);
 
@@ -30,16 +33,10 @@ const FaselDetail = () => {
     setFaselDetail(data);
   }
 
-  // const { totalAmount } = Fasel.reduce((accumulator, item) => {
-  //   return {
-  //     totalAmount: accumulator.totalAmount + (item.amount)
-  //   };
-  // }, { totalAmount: 0 });
-
   return (
     <>
       <header className="flex" id="header">
-        <Header hrefAddBtn="/finance/forms/fasel-detail/add" hrefBackBtn="/finance/forms" section={"forms"} pageName="fasel-detail" />
+        <Header hrefAddBtn={admin == 1 ? ("/finance/forms/fasel-detail/add") : ""} hrefBackBtn="/finance/forms" section={"forms"} pageName="fasel-detail" />
       </header>
       <hr />
       <main className="w-[100%] table-responsive mx-auto" id="main">
@@ -60,7 +57,11 @@ const FaselDetail = () => {
               <th>عاید</th>
               <th>حواله تخصیصات</th>
               <th>حواله تخصیصات تعهد شده</th>
-              <th className="flex justify-center" id="edit_label">ویرایش</th>
+              {
+                admin == 1 ? (
+                  <th className="flex justify-center" id="edit_label">ویرایش</th>
+                ) : null
+              }
             </tr>
           </thead>
           <tbody>
@@ -81,14 +82,18 @@ const FaselDetail = () => {
                   <td>{item.income}</td>
                   <td>{item.transfer}</td>
                   <td>{item.commitment_transfer}</td>
-                  <td className="flex justify-around" id="edit_btn">
-                    <Link href={`/finance/forms/fasel-detail/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
-                    {
-                      item.befor_pay > 0 && item.commitment == "" ?
-                        <Link href={`/finance/forms/fasel-detail/add/${item.id}`} className="btn btn-sm btn-success"><FaCheck className="bg-inherit" /></Link>
-                        : null
-                    }
-                  </td>
+                  {
+                    admin == 1 ? (
+                      <td className="flex justify-around" id="edit_btn">
+                        <Link href={`/finance/forms/fasel-detail/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
+                        {
+                          item.befor_pay > 0 && item.commitment == "" ?
+                            <Link href={`/finance/forms/fasel-detail/add/${item.id}`} className="btn btn-sm btn-success"><FaCheck className="bg-inherit" /></Link>
+                            : null
+                        }
+                      </td>
+                    ) : null
+                  }
                 </tr>
               ))
             }

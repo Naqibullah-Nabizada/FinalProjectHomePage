@@ -6,12 +6,15 @@ import axios from "axios";
 import Link from "next/link";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { FaEdit } from "react-icons/fa";
+import { AuthContext } from "../../admin/context/context";
 
 
 const Fasel = () => {
+
+  const { admin } = useContext(AuthContext);
 
   const [fasels, setFasel] = useState([]);
 
@@ -28,16 +31,10 @@ const Fasel = () => {
     setFasel(data);
   }
 
-  // const { totalBudget } = childBabs.reduce((accumulator, item) => {
-  //   return {
-  //     totalBudget: accumulator.totalBudget + (item.amount)
-  //   };
-  // }, { totalBudget: 0 });
-
   return (
     <>
       <header className="flex" id="header">
-        <Header hrefAddBtn="/finance/forms/fasel/add" hrefBackBtn="/finance/forms" section="forms" pageName="fasel" />
+        <Header hrefAddBtn={admin == 1 ? ("/finance/forms/fasel/add") : ""} hrefBackBtn="/finance/forms" section="forms" pageName="fasel" />
       </header>
       <hr />
       <main className="w-[60%] mx-auto" id="main">
@@ -49,7 +46,11 @@ const Fasel = () => {
               <th>فصل</th>
               <th>توضیحات</th>
               <th>مقدار تخصیص</th>
-              <th className="flex justify-center" id="edit_label">ویرایش</th>
+              {
+                admin == 1 ? (
+                  <th className="flex justify-center" id="edit_label">ویرایش</th>
+                ) : null
+              }
             </tr>
           </thead>
           <tbody>
@@ -65,9 +66,13 @@ const Fasel = () => {
                   </td>
                   <td>{item.desc}</td>
                   <td>{item.amount}</td>
-                  <td className="flex justify-around" id="edit_btn">
-                    <Link href={`/finance/forms/fasel/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
-                  </td>
+                  {
+                    admin == 1 ? (
+                      <td className="flex justify-around" id="edit_btn">
+                        <Link href={`/finance/forms/fasel/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
+                      </td>
+                    ) : null
+                  }
                 </tr>
               ))
             }

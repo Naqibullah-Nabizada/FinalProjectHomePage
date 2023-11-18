@@ -64,7 +64,7 @@ const FormsReport = () => {
   return (
     <>
       {
-        token !== null && admin == 1 ? (
+        token !== null && admin == 1 || admin == 2 ? (
           <section>
             <main className="w-[80%] mx-auto" id="main">
               <header>
@@ -79,7 +79,7 @@ const FormsReport = () => {
                     <th>شرح</th>
                     <th>تادیه بعدی</th>
                     <th>تادیه پیشکی</th>
-                    <th>ماه</th>
+                    {/* <th>ماه</th> */}
                     <th>حواله تخصیصات</th>
                     <th>حواله تخصیصات تعهد شده</th>
                   </tr>
@@ -93,7 +93,7 @@ const FormsReport = () => {
                         <td>{item.desc}</td>
                         <td>{item.befor_pay || 0}</td>
                         <td>{item.after_pay || 0}</td>
-                        <td>{item.income}</td>
+                        {/* <td>{item.income}</td> */}
                         <td>{item.commitment}</td>
                         <td>{item.commitment_transfer}</td>
                       </tr>

@@ -6,11 +6,14 @@ import axios from "axios";
 import Link from "next/link";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { FaEdit } from "react-icons/fa";
+import { AuthContext } from "../../admin/context/context";
 
 const Appropriation = () => {
+
+  const { admin } = useContext(AuthContext);
 
   const [appropriations, setAppropriation] = useState([]);
 
@@ -39,7 +42,7 @@ const Appropriation = () => {
   return (
     <>
       <header className="flex" id="header">
-        <Header hrefAddBtn="/finance/forms/budget/add" hrefBackBtn="/finance/forms" section={"forms"} pageName="budget" />
+        <Header hrefAddBtn={admin == 1 ? ("/finance/forms/budget/add") : ""} hrefBackBtn="/finance/forms" section={"forms"} pageName="budget" />
       </header>
       <hr />
       <main className="w-[80%] mx-auto" id="main">
@@ -55,7 +58,11 @@ const Appropriation = () => {
               <th>نام انگلیسی</th>
               <th>اصل بودجه</th>
               <th>بودجه باقی مانده</th>
-              <th className="flex justify-center" id="edit_label">ویرایش</th>
+              {
+                admin == 1 ? (
+                  <th className="flex justify-center" id="edit_label">ویرایش</th>
+                ) : null
+              }
             </tr>
           </thead>
           <tbody>
@@ -69,9 +76,13 @@ const Appropriation = () => {
                   <td>{item.eng_name}</td>
                   <td>{item.main_amount}</td>
                   <td>{item.amount}</td>
-                  <td className="flex justify-around" id="edit_btn">
-                    <Link href={`/finance/forms/budget/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
-                  </td>
+                  {
+                    admin == 1 ? (
+                      <td className="flex justify-around" id="edit_btn">
+                        <Link href={`/finance/forms/budget/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
+                      </td>
+                    ) : null
+                  }
                 </tr>
               ))
             }

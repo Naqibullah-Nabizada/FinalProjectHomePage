@@ -16,17 +16,28 @@ const Hero = () => {
 
         <div className='w-[60%] mt-36'>
 
-          <Link href='./finance/income' className='btn btn-outline-dark flex align-items-center mb-2'>
-            <FaFileCsv className='mx-1 bg-inherit' />بخش عواید پوهنتون کابل</Link>
-
-          <Link href='./finance/forms' className='btn btn-outline-dark flex align-items-center mb-2'>
-            <FaIdCardAlt className='mx-1 bg-inherit' />بخش فورم های میم پوهنتون کابل</Link>
+          {
+            admin == 0 ? (
+              <Link href='./finance/income' className='btn btn-outline-dark flex align-items-center mb-2'>
+                <FaFileCsv className='mx-1 bg-inherit' />بخش عواید پوهنتون کابل</Link>
+            ) : null
+          }
 
           {
             admin == 1 ? (
+              <Link href='./finance/forms' className='btn btn-outline-dark flex align-items-center mb-2'>
+                <FaIdCardAlt className='mx-1 bg-inherit' />بخش فورم های میم پوهنتون کابل</Link>
+            ) : null
+          }
+
+          {
+            admin == 2 ? (
               <>
-                <Link href='./finance/reports' className='btn btn-outline-dark align-items-center flex mb-2'>
-                  <FaReceipt className='mx-1 bg-inherit' />بخش گزارشات</Link>
+                <Link href='./finance/income' className='btn btn-outline-dark flex align-items-center mb-2'>
+                  <FaFileCsv className='mx-1 bg-inherit' />بخش عواید پوهنتون کابل</Link>
+
+                <Link href='./finance/forms' className='btn btn-outline-dark flex align-items-center mb-2'>
+                  <FaIdCardAlt className='mx-1 bg-inherit' />بخش فورم های میم پوهنتون کابل</Link>
 
                 <Link href='./finance/admin/users' className='btn btn-outline-dark align-items-center flex mb-2'>
                   <FaUser className='mx-1 bg-inherit' />بخش کاربران</Link>
@@ -34,8 +45,8 @@ const Hero = () => {
             ) : null
           }
 
-          {/* <Link href='/' className='btn btn-outline-dark flex mb-2'>
-            <FaArrowAltCircleRight className='mx-1 bg-inherit' />بازگشت به صفحه اصلی</Link> */}
+          <Link href='./finance/reports' className='btn btn-outline-dark align-items-center flex mb-2'>
+            <FaReceipt className='mx-1 bg-inherit' />بخش گزارشات</Link>
 
           <a href="/" onClick={Logout} className="btn btn-sm btn-outline-danger flex col-3 align-items-center"><FaArrowAltCircleRight className='mx-1 bg-inherit' />خروج</a>
 

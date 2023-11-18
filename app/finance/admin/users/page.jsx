@@ -21,7 +21,7 @@ const Users = () => {
       <Navbar title="مدیریت مالی و حسابی" />
       <hr />
       {
-        token !== null && admin == 1 ? (
+        token !== null && admin == 2 ? (
           <section className="flex justify-content-around align-items-center mt-3">
             <section className="col-5 mr-[4rem] border rounded shadow p-3">
 
@@ -46,7 +46,14 @@ const Users = () => {
                         <td>{user.email}</td>
                         <td>
                           {
-                            user.isAdmin == 0 ? 'کاربر' : 'ادمین'
+                            user.isAdmin == 0 ? 'ادمین عواید' : null
+                          }
+                          {
+                            user.isAdmin == 1 ? 'ادمین فورم میم' : null
+                          }
+
+                          {
+                            user.isAdmin == 2 ? 'مدیر سایت' : null
                           }
                         </td>
                         <td className="flex justify-between">
@@ -54,7 +61,7 @@ const Users = () => {
                             <FaEdit className="bg-transparent" />
                           </Link>
                           {
-                            user.isAdmin == 0 ? (
+                            user.isAdmin == 0 || user.isAdmin == 1 ? (
                               <button
                                 onClick={() => confirm(user.id)}
                                 className="btn btn-sm btn-danger">

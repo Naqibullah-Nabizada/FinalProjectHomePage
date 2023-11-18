@@ -5,8 +5,13 @@ const Button = ({ hrefAddBtn, hrefBackBtn, text }) => {
   return (
     <>
       <div className="flex mx-5 my-4">
-        <Link href={hrefBackBtn} className="btn btn-outline-secondary flex w-[50%]"><FaArrowAltCircleRight className="bg-transparent mx-2" />بازگشت</Link>
-        <Link href={hrefAddBtn} className="btn btn-outline-primary flex w-[70%] mx-4"><FaPlus className="bg-transparent mx-2" />{text}</Link>
+        <Link href={hrefBackBtn} className="btn btn-outline-secondary flex align-items-center"><FaArrowAltCircleRight className="bg-transparent mx-2" />بازگشت</Link>
+
+        {
+          hrefAddBtn != "" ? (
+            <Link href={hrefAddBtn} className="btn btn-outline-primary flex align-items-center mx-4"><FaPlus className="bg-transparent mx-2" />{text}</Link>
+          ) : null
+        }
       </div>
     </>
   )

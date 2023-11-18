@@ -1,11 +1,12 @@
 "use client";
 
+import { AuthContext } from "@/app/finance/admin/context/context";
 import Header from "@/components/Header";
 
 import axios from "axios";
 
 import { useParams, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 
 //! Shamsi Date Converter 
@@ -14,6 +15,8 @@ import * as shamsi from "shamsi-date-converter";
 const Fasel = () => {
 
   const { id } = useParams();
+
+  const { admin } = useContext(AuthContext);
 
   const [faselDetails, setFaselDetail] = useState([]);
 
@@ -30,16 +33,10 @@ const Fasel = () => {
     setFaselDetail(data);
   }
 
-  // const { totalAmount } = Fasel.reduce((accumulator, item) => {
-  //   return {
-  //     totalAmount: accumulator.totalAmount + (item.amount)
-  //   };
-  // }, { totalAmount: 0 });
-
   return (
     <>
       <header className="flex" id="header">
-        <Header hrefAddBtn="/finance/forms/fasel-detail/add" hrefBackBtn={`/finance/forms/fasel`} pageName="forms" />
+        <Header hrefAddBtn={admin == 1 ? ("/finance/forms/fasel-detail/add") : ""} hrefBackBtn={`/finance/forms/fasel`} pageName="forms" />
       </header>
       <hr />
       <main className="w-[100%] table-responsive mx-auto" id="main">
@@ -81,9 +78,9 @@ const Fasel = () => {
                   <td>{item.income}</td>
                   <td>{item.transfer}</td>
                   <td>{item.commitment_transfer}</td>
-                  <td className="flex justify-around" id="edit_btn">
-                    {/* <Link href={`/finance/forms/fasel-detail/${item.id}/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link> */}
-                  </td>
+                  {/* <td className="flex justify-around" id="edit_btn">
+                    <Link href={`/finance/forms/fasel-detail/${item.id}/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
+                  </td> */}
                 </tr>
               ))
             }

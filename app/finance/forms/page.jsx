@@ -24,19 +24,16 @@ const Forms = () => {
 
                 <div className='w-[60%]'>
 
-                  <Link href='/finance/forms/budget' className='btn btn-outline-dark flex mb-2'>
+                  <Link href='/finance/forms/budget' className='btn btn-outline-dark flex align-items-center mb-2'>
                     <FaBuilding className='mx-1 bg-inherit' />بودجه</Link>
 
-                  {/* <Link href='/finance/forms/bab' className='btn btn-outline-dark flex mb-2'>
-                  <FaBuilding className='mx-1 bg-inherit' />باب ها</Link> */}
-
-                  <Link href='/finance/forms/fasel' className='btn btn-outline-dark flex mb-2'>
+                  <Link href='/finance/forms/fasel' className='btn btn-outline-dark flex align-items-center mb-2'>
                     <FaIdCard className='mx-1 bg-inherit' />فصل ها</Link>
 
-                  <Link href='/finance/forms/fasel-detail' className='btn btn-outline-dark flex mb-2'>
+                  <Link href='/finance/forms/fasel-detail' className='btn btn-outline-dark flex align-items-center mb-2'>
                     <FaIdCardAlt className='mx-1 bg-inherit' />جزئیات تمام فصل ها</Link>
 
-                  <Link href='/finance' className='btn btn-outline-dark flex mb-2'>
+                  <Link href='/finance' className='btn btn-outline-dark flex align-items-center mb-2'>
                     <FaArrowAltCircleRight className='mx-1 bg-inherit' />بازگشت به صفحه اصلی</Link>
                 </div>
 

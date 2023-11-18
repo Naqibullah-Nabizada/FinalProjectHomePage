@@ -47,7 +47,7 @@ const AddUser = () => {
   return (
     <>
       {
-        token !== null && admin == 1 ? (
+        token !== null && admin == 2 ? (
           <section className="flex justify-content-center align-items-center">
 
             <div className="col-4 mx-[6rem] border rounded shadow p-3">
@@ -130,8 +130,9 @@ const AddUser = () => {
                     onBlur={formik.handleBlur("isAdmin")}
                   >
                     <option>انتخاب کنید</option>
-                    <option value="0">کاربر</option>
-                    <option value="1">مدیر</option>
+                    <option value="0">ادمین عواید</option>
+                    <option value="1">ادمین فورم میم</option>
+                    <option value="2">مدیر سایت</option>
                   </select>
                   <p className="text-danger mt-2">
                     {formik.touched.isAdmin && formik.errors.isAdmin}
