@@ -57,7 +57,7 @@ const UpdateUser = () => {
   return (
     <>
       {
-        token !== null && admin == 1 ? (
+        token !== null && admin == 2 ? (
           <section className="flex justify-content-center align-items-center">
 
             <div className="col-4 mx-[6rem] border rounded shadow p-3">
