@@ -81,6 +81,7 @@ const Add = () => {
               <select
                 className={`form-control form-control-sm mb-3 ${errors.parentBabsId ? 'is-invalid' : ''}`}
                 {...register("year", { required: true })}
+                autoFocus
               >
                 {
                   years.map((year) => (
@@ -112,7 +113,6 @@ const Add = () => {
                 type="text"
                 className={`form-control form-control-sm mb-3 ${errors.code ? 'is-invalid' : ''}`}
                 placeholder="فصل"
-                autoFocus
                 {...register("code", { required: true, min: 0, pattern: /^[0-9]+$/i, minLength: 1, maxLength: 15, })}
               />
               {errors.code && errors.code.type === "required" && <span className="invalid-feedback">فصل الزامی است.</span>}
@@ -135,11 +135,11 @@ const Add = () => {
             </div>
 
             <div className="w-[32%]">
-              <label className="form-label">مقدار بودجه</label>
+              <label className="form-label">مقدار تخصیص</label>
               <input
                 type="text"
                 className={`form-control form-control-sm mb-3 ${errors.amount ? 'is-invalid' : ''}`}
-                placeholder="مقدار بودجه"
+                placeholder="مقدار تخصیص"
                 {...register("amount", { required: true, min: 0, minLength: 1, pattern: /^(?:\d+(?:\.\d*)?|\.\d*)$/ })}
               />
               {errors.amount && errors.amount.type === "required" && <span className="invalid-feedback">مقدار بودجه الزامی است.</span>}

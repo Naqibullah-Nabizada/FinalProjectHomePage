@@ -32,6 +32,15 @@ const Fasel = () => {
     setFasel(data);
   }
 
+  const { totalMainBudget, totalBudget } = fasels.reduce((accumulator, item) => {
+    return {
+      totalMainBudget: accumulator.totalMainBudget + item.main_amount,
+      totalBudget: accumulator.totalBudget + item.amount,
+    };
+  }, { totalMainBudget: 0, totalBudget: 0 });
+
+  const totalSpendBudget = totalMainBudget - totalBudget;
+
   return (
     <>
       <header className="flex" id="header">
@@ -86,10 +95,14 @@ const Fasel = () => {
             }
           </tbody>
         </table>
+        <div className="d-flex justify-around bg-gray-200 p-1">
+          <span>مجموع اصل بودجه: {totalMainBudget}</span>
+          <span>مجموع بودجه باقی مانده: {totalBudget}</span>
+          <span>مجموع بودجه مصرف شده: {totalSpendBudget}</span>
+        </div>
       </main>
-      <div className="d-flex justify-around bg-gray-200 p-1">
+      <div className="text-center my-3">
         <button onClick={print} className="btn btn-sm btn-dark">پرنت</button>
-        {/* <span>مجموع بودجه تخصیص داده شده: {totalBudget}</span> */}
       </div>
     </>
   )

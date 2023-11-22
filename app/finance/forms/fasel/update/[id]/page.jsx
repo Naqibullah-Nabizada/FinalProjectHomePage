@@ -9,9 +9,11 @@ import { FaArrowCircleRight, FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 const Update = () => {
+
   const { id } = useParams();
   const router = useRouter();
 
+  const [error, setError] = useState(null);
   const [appropriations, setAppropriation] = useState([]);
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
 
@@ -48,13 +50,17 @@ const Update = () => {
   // Handle form submission
   const submitForm = async (data) => {
     try {
-      await axios.put(`http://localhost:5000/Fasel/${id}`, data);
-      router.push("/finance/forms/fasel");
-      toast.success('معلومات جدید با موفقیت اضافه شد', {
-        hideProgressBar: false,
-        autoClose: 5000,
-        position: 'top-right'
-      });
+      const res = await axios.put(`http://localhost:5000/Fasel/${id}`, data);
+      if (res.data.error) {
+        setError(res.data.error)
+      } else {
+        router.push("/finance/forms/fasel");
+        toast.success('معلومات جدید با موفقیت اضافه شد', {
+          hideProgressBar: false,
+          autoClose: 5000,
+          position: 'top-right'
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -69,10 +75,15 @@ const Update = () => {
       </header>
       <hr />
       <main>
+        {
+          error !== null ? (
+            <div className="text-center alert alert-danger mt-3">{error}</div>
+          ) : null
+        }
         <form onSubmit={handleSubmit(submitForm)}>
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
 
-          <div className="w-[32%]">
+            <div className="w-[32%]">
               <label className="form-label">سال</label>
               <input
                 type="text"

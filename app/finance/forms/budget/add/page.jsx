@@ -3,6 +3,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaArrowCircleRight, FaPlus } from "react-icons/fa";
 
@@ -57,6 +58,7 @@ const Add = () => {
                 className={`form-control form-control-sm mb-2 ${errors.year ? 'is-invalid' : ''}`}
                 {...register("year", { required: true, min: 1, pattern: /^(139[0-9]|14[0-4][0-9]|1450)*$/, minLength: 4, maxLength: 4 })}
                 placeholder="سال"
+                autoFocus
               />
               {errors.year && errors.year.type === "required" && <span className="invalid-feedback">سال الزامی است.</span>}
               {errors.year && errors.year.type === "pattern" && <span className="invalid-feedback">فرمت سال معتبر نیست.</span>}
@@ -72,7 +74,6 @@ const Add = () => {
                 {...register("code", { required: true, min: 0, pattern: /^[0-9]+$/i, minLength: 1, maxLength: 15, })}
                 className={`form-control form-control-sm mb-3 ${errors.code ? 'is-invalid' : ''}`}
                 placeholder="کود"
-                autoFocus
               />
               {errors.code && errors.code.type === "required" && <span className="invalid-feedback">کود الزامی است.</span>}
               {errors.code && errors.code.type === "pattern" && <span className="invalid-feedback">کود باید عدد باشد.</span>}

@@ -17,6 +17,8 @@ const Update = () => {
 
   const { id } = useParams();
   const router = useRouter();
+
+  const [error, setError] = useState(null);
   const [fasels, setFasel] = useState([]);
 
   const {
@@ -62,16 +64,19 @@ const Update = () => {
 
   const submitForm = async (data) => {
     try {
-      // Add the selected date to the form data
       const formData = { ...data, date: selectedDate };
-      await axios.put(`http://localhost:5000/FaselDetail/${id}`, formData);
-      router.push("/finance/forms/fasel-detail");
-      toast("معلومات جدید با موفقیت اضافه شد", {
-        hideProgressBar: false,
-        autoClose: 5000,
-        type: "success",
-        position: "top-right",
-      });
+      const res = await axios.put(`http://localhost:5000/FaselDetail/${id}`, formData);
+      if (res.data.error) {
+        setError(res.data.error)
+      } else {
+        router.push("/finance/forms/fasel-detail");
+        toast("معلومات جدید با موفقیت اضافه شد", {
+          hideProgressBar: false,
+          autoClose: 5000,
+          type: "success",
+          position: "top-right",
+        });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -93,6 +98,11 @@ const Update = () => {
       </header>
       <hr />
       <main>
+        {
+          error !== null ? (
+            <div className="text-center alert alert-danger mt-3">{error}</div>
+          ) : null
+        }
         <form onSubmit={handleSubmit(submitForm)}>
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
 
