@@ -15,14 +15,20 @@ import transition from "react-element-popper/animations/transition";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 
 const Add = () => {
+
   const router = useRouter();
+
+  const [error, setError] = useState(null);
+
   const [fasels, setFasel] = useState([]);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue, // Add the setValue function from react-hook-form
   } = useForm({});
+
   const [selectedDate, setSelectedDate] = useState(null); // Selected date state
 
   useEffect(() => {
@@ -36,16 +42,22 @@ const Add = () => {
 
   const submitForm = async (data) => {
     try {
-      // Add the selected date to the form data
+
       const formData = { ...data, date: selectedDate };
-      await axios.post("http://localhost:5000/FaselDetail", formData);
-      router.push("/finance/forms/fasel-detail");
-      toast("معلومات جدید با موفقیت اضافه شد", {
-        hideProgressBar: false,
-        autoClose: 5000,
-        type: "success",
-        position: "top-right",
-      });
+
+      const res = await axios.post("http://localhost:5000/FaselDetail", formData);
+
+      if (res.data.error) {
+        setError(res.data.error)
+      } else {
+        router.push("/finance/forms/fasel-detail");
+        toast("معلومات جدید با موفقیت اضافه شد", {
+          hideProgressBar: false,
+          autoClose: 5000,
+          type: "success",
+          position: "top-right",
+        });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -53,19 +65,21 @@ const Add = () => {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    // Update the form's value for the date field
     setValue("date", date);
   };
 
   return (
     <>
       <header>
-        <h3 className="my-4 text-center text-xl">
-          فورم ثبت فصل ها
-        </h3>
+        <h3 className="my-4 text-center text-xl">فورم ثبت جزئیات فصل ها</h3>
       </header>
       <hr />
       <main>
+        {
+          error !== null ? (
+            <div className="alert alert-danger text-center mt-1">{error}</div>
+          ): null
+        }
         <form onSubmit={handleSubmit(submitForm)}>
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
 

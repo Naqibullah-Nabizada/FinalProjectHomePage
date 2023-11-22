@@ -15,7 +15,8 @@ const Add = () => {
 
   const router = useRouter();
 
-  // const [parentBabs, setParentBabs] = useState([]);
+  const [error, setError] = useState(null);
+  const [years, setYears] = useState([]);
   const [appropriations, setAppropriation] = useState([]);
 
   const {
@@ -26,6 +27,7 @@ const Add = () => {
 
   useEffect(() => {
     fetchData();
+    fetchApproYears();
   }, [])
 
   const fetchData = async () => {
@@ -33,17 +35,27 @@ const Add = () => {
     setAppropriation(data);
   }
 
+  const fetchApproYears = async () => {
+    const { data } = await axios.get("http://localhost:5000/Appropriations/years");
+    setYears(data);
+  }
+
+
   const submitForm = async (data) => {
     try {
-      await axios.post("http://localhost:5000/Fasel", data);
-      router.push("/finance/forms/fasel");
-      toast('معلومات جدید با موفقیت اضافه شد',
-        {
-          hideProgressBar: false,
-          autoClose: 5000,
-          type: 'success',
-          position: 'top-right'
-        });
+      const res = await axios.post("http://localhost:5000/Fasel", data);
+      if (res.data.error) {
+        setError(res.data.error);
+      } else {
+        router.push("/finance/forms/fasel");
+        toast('معلومات جدید با موفقیت اضافه شد',
+          {
+            hideProgressBar: false,
+            autoClose: 5000,
+            type: 'success',
+            position: 'top-right'
+          });
+      }
     } catch (err) {
       console.log(err)
     }
@@ -52,14 +64,32 @@ const Add = () => {
   return (
     <>
       <header>
-        <h3 className="my-4 text-center text-xl">
-          فورم ثبت فصل ها
-        </h3>
+        <h3 className="my-4 text-center text-xl">فورم ثبت فصل ها</h3>
       </header>
       <hr />
       <main>
+        {
+          error !== null ? (
+            <div className="text-center alert alert-danger mt-3">{error}</div>
+          ) : null
+        }
         <form onSubmit={handleSubmit(submitForm)}>
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
+
+            <div className="w-[32%]">
+              <label className="form-label">سال</label>
+              <select
+                className={`form-control form-control-sm mb-3 ${errors.parentBabsId ? 'is-invalid' : ''}`}
+                {...register("year", { required: true })}
+              >
+                {
+                  years.map((year) => (
+                    <option value={year.year} key={year.id}>{year.year}</option>
+                  ))
+                }
+              </select>
+              {errors.appropriation && <span className="invalid-feedback">سال الزامی است.</span>}
+            </div>
 
             <div className="w-[32%]">
               <label className="form-label">کود</label>

@@ -86,3 +86,12 @@
 #fasel-detail-table {
   font-size: small !important;
 }
+
+/* Header */
+
+#header{
+  font-size: 1.5rem;
+  border-bottom: 3px solid #000;
+  border-radius: 10%;
+  padding-bottom: 5px;
+}

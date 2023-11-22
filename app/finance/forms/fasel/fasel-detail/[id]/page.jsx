@@ -39,53 +39,53 @@ const Fasel = () => {
         <Header hrefAddBtn={admin == 1 ? ("/finance/forms/fasel-detail/add") : ""} hrefBackBtn={`/finance/forms/fasel`} pageName="forms" />
       </header>
       <hr />
-      <main className="w-[100%] table-responsive mx-auto" id="main">
-        <table className="table table-bordered table-sm table-striped" id="fasel-detail-table">
-          <thead className="table-dark">
-            <tr>
-              <th>#</th>
-              <th>فصل</th>
-              <th>تاریخ</th>
-              <th>توضیحات</th>
-              <th>مراجعه</th>
-              <th>نمبر خصوصی</th>
-              <th>مراجعه تصفیه</th>
-              <th>تادیه بعدی</th>
-              <th>تادیه پیشکی</th>
-              <th>پیشکی محسوب شده</th>
-              <th>تعهد تصفیه شده</th>
-              <th>عاید</th>
-              <th>حواله تخصیصات</th>
-              <th>حواله تخصیصات تعهد شده</th>
-              {/* <th className="flex justify-center">ویرایش</th> */}
-            </tr>
-          </thead>
-          <tbody>
-            {
-              faselDetails.map((item) => (
-                <tr key={item.id} style={item.befor_pay !== 0 && item.commitment === '' ? { background: "#F2BBA7" } : null}>
-                  <td>{item.id}</td>
-                  <td>{item.fasel.code}</td>
-                  <td>{shamsi.gregorianToJalali(item.date).join('-')}</td>
-                  <td>{item.desc}</td>
-                  <td>{item.reference}</td>
-                  <td>{item.private_num}</td>
-                  <td>{item.refinement}</td>
-                  <td>{item.after_pay}</td>
-                  <td>{item.befor_pay}</td>
-                  <td>{item.previous_considered}</td>
-                  <td>{item.commitment}</td>
-                  <td>{item.income}</td>
-                  <td>{item.transfer}</td>
-                  <td>{item.commitment_transfer}</td>
-                  {/* <td className="flex justify-around" id="edit_btn">
+      <main className="w-[100%] mx-auto" id="main">
+        <div className="table-responsive">
+          <table className="table table-bordered table-sm table-striped" id="fasel-detail-table">
+            <thead className="table-dark">
+              <tr>
+                <th className="text-center text-nowrap">فصل</th>
+                <th className="text-center text-nowrap">تاریخ</th>
+                <th className="text-center text-nowrap">توضیحات</th>
+                <th className="text-center text-nowrap">مراجعه</th>
+                <th className="text-center text-nowrap">نمبر خصوصی</th>
+                <th className="text-center text-nowrap">مراجعه تصفیه</th>
+                <th className="text-center text-nowrap">تادیه بعدی</th>
+                <th className="text-center text-nowrap">تادیه پیشکی</th>
+                <th className="text-center text-nowrap">پیشکی محسوب شده</th>
+                <th className="text-center text-nowrap">تعهد تصفیه شده</th>
+                <th className="text-center text-nowrap">عاید</th>
+                <th className="text-center text-nowrap">حواله تخصیصات</th>
+                <th className="text-center text-nowrap">حواله تخصیصات تعهد شده</th>
+                {/* <th className="flex justify-center">ویرایش</th> */}
+              </tr>
+            </thead>
+            <tbody>
+              {
+                faselDetails.map((item) => (
+                  <tr key={item.id} style={item.befor_pay !== 0 && item.commitment === '' ? { background: "#F2BBA7" } : null}>
+                    <td className="text-center text-nowrap">{item.fasel.code}</td>
+                    <td className="text-center text-nowrap">{shamsi.gregorianToJalali(item.date).join('-')}</td>
+                    <td className="text-center text-nowrap">{item.desc}</td>
+                    <td className="text-center text-nowrap">{item.reference}</td>
+                    <td className="text-center text-nowrap">{item.private_num}</td>
+                    <td className="text-center text-nowrap">{item.refinement}</td>
+                    <td className="text-center text-nowrap">{item.after_pay}</td>
+                    <td className="text-center text-nowrap">{item.befor_pay}</td>
+                    <td className="text-center text-nowrap">{item.previous_considered}</td>
+                    <td className="text-center text-nowrap">{item.commitment}</td>
+                    <td className="text-center text-nowrap">{item.income}</td>
+                    <td className="text-center text-nowrap">{item.transfer}</td>
+                    <td className="text-center text-nowrap">{item.commitment_transfer}</td>
+                    {/* <td className="flex justify-around" id="edit_btn">
                     <Link href={`/finance/forms/fasel-detail/${item.id}/update/${item.id}`} className="btn btn-sm btn-warning"><FaEdit className="bg-inherit" /></Link>
                   </td> */}
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
       </main>
       <div className="d-flex justify-around bg-gray-200 p-1">
         <button onClick={print} className="btn btn-sm btn-dark">پرنت</button>

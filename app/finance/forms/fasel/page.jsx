@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/components/Header";
+import ShamsiDate from "@/components/ShamsiDate";
 
 import axios from "axios";
 import Link from "next/link";
@@ -37,15 +38,19 @@ const Fasel = () => {
         <Header hrefAddBtn={admin == 1 ? ("/finance/forms/fasel/add") : ""} hrefBackBtn="/finance/forms" section="forms" pageName="fasel" />
       </header>
       <hr />
-      <main className="w-[60%] mx-auto" id="main">
+      <main className="w-[80%] mx-auto" id="main">
         <table className="table table-responsive table-bordered table-sm table-striped">
+          <caption className="caption-top text-center text-dark">تخصیصات بودجه عادی پوهنتون کابل سال <ShamsiDate /></caption>
           <thead className="table-dark">
             <tr>
               <th>#</th>
+              <th>سال</th>
               <th>باب</th>
               <th>فصل</th>
               <th>توضیحات</th>
-              <th>مقدار تخصیص</th>
+              <th>اصل بودجه</th>
+              <th>بودجه باقی مانده</th>
+              <th>بودجه مصرف شده</th>
               {
                 admin == 1 ? (
                   <th className="flex justify-center" id="edit_label">ویرایش</th>
@@ -58,6 +63,7 @@ const Fasel = () => {
               fasels.map((item, index) => (
                 <tr key={item.id}>
                   <td>{index + 1}</td>
+                  <td>{item.year}</td>
                   <td>{item.appropriation.code}</td>
                   <td>
                     <Link href={`/finance/forms/fasel/fasel-detail/${item.id}`}>
@@ -65,7 +71,9 @@ const Fasel = () => {
                     </Link>
                   </td>
                   <td>{item.desc}</td>
+                  <td>{item.main_amount}</td>
                   <td>{item.amount}</td>
+                  <td>{parseFloat(item.main_amount) - parseFloat(item.amount)}</td>
                   {
                     admin == 1 ? (
                       <td className="flex justify-around" id="edit_btn">

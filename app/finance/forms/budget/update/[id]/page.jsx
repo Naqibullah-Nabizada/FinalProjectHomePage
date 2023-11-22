@@ -21,6 +21,7 @@ const Update = () => {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(`http://localhost:5000/Appropriation/${id}`);
+      setValue("year", data[0].year);
       setValue("code", data[0].code);
       setValue("dari_name", data[0].dari_name);
       setValue("pashto_name", data[0].pashto_name);
@@ -59,45 +60,35 @@ const Update = () => {
       <main>
         <form onSubmit={handleSubmit(submitForm)}>
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
+
             <div className="w-[32%]">
-              <label className="form-label">کود</label>
+              <label className="form-label">سال</label>
               <input
                 type="text"
-                {...register("code", {
-                  required: true,
-                  min: 0,
-                  pattern: /^[0-9]+$/i,
-                  minLength: 1,
-                  maxLength: 15,
-                })}
-                className={`form-control form-control-sm mb-3 ${errors.code ? "is-invalid" : ""
-                  }`}
-                placeholder="کود"
+                className={`form-control form-control-sm mb-2 ${errors.year ? 'is-invalid' : ''}`}
+                {...register("year", { required: true, min: 1, pattern: /^(139[0-9]|14[0-4][0-9]|1450)*$/, minLength: 4, maxLength: 4 })}
+                placeholder="سال"
                 autoFocus
               />
-              {errors.code && errors.code.type === "required" && (
-                <span className="invalid-feedback">کود الزامی است.</span>
-              )}
-              {errors.code && errors.code.type === "pattern" && (
-                <span className="invalid-feedback">
-                  کود باید عدد باشد.
-                </span>
-              )}
-              {errors.code && errors.code.type === "min" && (
-                <span className="invalid-feedback">
-                  کود باید یک عدد مثب باشد.
-                </span>
-              )}
-              {errors.code && errors.code.type === "minLength" && (
-                <span className="invalid-feedback">
-                  کود حداقل باید 1 کارکتر باشد.
-                </span>
-              )}
-              {errors.code && errors.code.type === "maxLength" && (
-                <span className="invalid-feedback">
-                  کود حداکثر باید 15 کارکتر باشد..
-                </span>
-              )}
+              {errors.year && errors.year.type === "required" && <span className="invalid-feedback">سال الزامی است.</span>}
+              {errors.year && errors.year.type === "pattern" && <span className="invalid-feedback">فرمت سال معتبر نیست.</span>}
+              {errors.year && errors.year.type === "min" && <span className="invalid-feedback">فرمت سال معتبر نیست.</span>}
+              {errors.year && errors.year.type === "minLength" && <span className="invalid-feedback">فرمت سال معتبر نیست.</span>}
+              {errors.year && errors.year.type === "maxLength" && <span className="invalid-feedback">فرمت سال معتبر نیست..</span>}
+            </div>
+
+            <div className="w-[32%]">
+              <label className="form-label">کود</label>
+              <input type="text"
+                {...register("code", { required: true, min: 0, pattern: /^[0-9]+$/i, minLength: 1, maxLength: 15, })}
+                className={`form-control form-control-sm mb-3 ${errors.code ? "is-invalid" : ""}`}
+                placeholder="کود"
+              />
+              {errors.code && errors.code.type === "required" && (<span className="invalid-feedback">کود الزامی است.</span>)}
+              {errors.code && errors.code.type === "pattern" && (<span className="invalid-feedback">کود باید عدد باشد.</span>)}
+              {errors.code && errors.code.type === "min" && (<span className="invalid-feedback">کود باید یک عدد مثب باشد.</span>)}
+              {errors.code && errors.code.type === "minLength" && (<span className="invalid-feedback">کود حداقل باید 1 کارکتر باشد.</span>)}
+              {errors.code && errors.code.type === "maxLength" && (<span className="invalid-feedback">کود حداکثر باید 15 کارکتر باشد..</span>)}
             </div>
 
             <div className="w-[32%]">

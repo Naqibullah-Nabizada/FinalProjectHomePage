@@ -11,19 +11,27 @@ import { toast } from "react-toastify";
 const Add = () => {
 
   const router = useRouter();
+
+  const [error, setError] = useState();
+
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const submitForm = async (data) => {
     try {
-      await axios.post("http://localhost:5000/Appropriation", data);
-      router.push("/finance/forms/budget");
-      toast('معلومات جدید با موفقیت اضافه شد',
-        {
-          hideProgressBar: false,
-          autoClose: 5000,
-          type: 'success',
-          position: 'top-right'
-        });
+      const res = await axios.post("http://localhost:5000/Appropriation", data);
+      if (res.data.error) {
+        setError(res.data.error)
+      } else {
+        router.push("/finance/forms/budget");
+        toast('معلومات جدید با موفقیت اضافه شد',
+          {
+            hideProgressBar: false,
+            autoClose: 5000,
+            type: 'success',
+            position: 'top-right'
+          });
+      }
+
     } catch (err) {
       console.log(err)
     }
@@ -38,8 +46,25 @@ const Add = () => {
       </header>
       <hr />
       <main>
+        <div>{error}</div>
         <form onSubmit={handleSubmit(submitForm)}>
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
+
+            <div className="w-[32%]">
+              <label className="form-label">سال</label>
+              <input
+                type="text"
+                className={`form-control form-control-sm mb-2 ${errors.year ? 'is-invalid' : ''}`}
+                {...register("year", { required: true, min: 1, pattern: /^(139[0-9]|14[0-4][0-9]|1450)*$/, minLength: 4, maxLength: 4 })}
+                placeholder="سال"
+              />
+              {errors.year && errors.year.type === "required" && <span className="invalid-feedback">سال الزامی است.</span>}
+              {errors.year && errors.year.type === "pattern" && <span className="invalid-feedback">فرمت سال معتبر نیست.</span>}
+              {errors.year && errors.year.type === "min" && <span className="invalid-feedback">فرمت سال معتبر نیست.</span>}
+              {errors.year && errors.year.type === "minLength" && <span className="invalid-feedback">فرمت سال معتبر نیست.</span>}
+              {errors.year && errors.year.type === "maxLength" && <span className="invalid-feedback">فرمت سال معتبر نیست..</span>}
+            </div>
+
             <div className="w-[32%]">
               <label className="form-label">کود</label>
               <input
@@ -74,7 +99,7 @@ const Add = () => {
               <label className="form-label">نام به پشتو</label>
               <input
                 type="text"
-                {...register("pashto_name", { required: true, minLength: 3, maxLength:30, pattern: /^[آ-ی-آ-ي][آ-ی-آ-ي\s]*$/ })}
+                {...register("pashto_name", { required: true, minLength: 3, maxLength: 30, pattern: /^[آ-ی-آ-ي][آ-ی-آ-ي\s]*$/ })}
                 className={`form-control form-control-sm mb-3 ${errors.pashto_name ? 'is-invalid' : ''}`}
                 placeholder="نام به پشتو"
               />

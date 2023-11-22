@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
-import { FaArrowAltCircleRight, FaBuilding, FaIdCard, FaIdCardAlt } from "react-icons/fa";
+import { FaArrowAltCircleRight, FaIdCard, FaIdCardAlt, FaWallet } from "react-icons/fa";
 import { AuthContext } from "../admin/context/context";
 
 const Forms = () => {
@@ -25,7 +25,7 @@ const Forms = () => {
                 <div className='w-[60%]'>
 
                   <Link href='/finance/forms/budget' className='btn btn-outline-dark flex align-items-center mb-2'>
-                    <FaBuilding className='mx-1 bg-inherit' />بودجه</Link>
+                    <FaWallet className='mx-1 bg-inherit' />بودجه</Link>
 
                   <Link href='/finance/forms/fasel' className='btn btn-outline-dark flex align-items-center mb-2'>
                     <FaIdCard className='mx-1 bg-inherit' />فصل ها</Link>

@@ -45,19 +45,21 @@ const Appropriation = () => {
         <Header hrefAddBtn={admin == 1 ? ("/finance/forms/budget/add") : ""} hrefBackBtn="/finance/forms" section={"forms"} pageName="budget" />
       </header>
       <hr />
-      <main className="w-[80%] mx-auto" id="main">
+      <main className="w-[85%] mx-auto" id="main">
         <h3 className="text-center my-2">لیست بودجه و مصارف پوهنتون کابل</h3>
         <hr />
         <table className="table table-bordered table-sm table-striped">
           <thead className="table-dark">
             <tr>
               <th>#</th>
+              <th>سال</th>
               <th>کود</th>
               <th>نام دری</th>
               <th>نام پشتو</th>
               <th>نام انگلیسی</th>
               <th>اصل بودجه</th>
               <th>بودجه باقی مانده</th>
+              <th>بودجه مصرف شده</th>
               {
                 admin == 1 ? (
                   <th className="flex justify-center" id="edit_label">ویرایش</th>
@@ -70,12 +72,14 @@ const Appropriation = () => {
               appropriations.map((item, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
+                  <td>{item.year}</td>
                   <td>{item.code}</td>
                   <td>{item.dari_name}</td>
                   <td>{item.pashto_name}</td>
                   <td>{item.eng_name}</td>
                   <td>{item.main_amount}</td>
                   <td>{item.amount}</td>
+                  <td>{parseFloat(item.main_amount) - parseFloat(item.amount)}</td>
                   {
                     admin == 1 ? (
                       <td className="flex justify-around" id="edit_btn">

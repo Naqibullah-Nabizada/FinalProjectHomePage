@@ -4,7 +4,7 @@ import { AuthContext } from "@/app/finance/admin/context/context";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
-import { FaArrowAltCircleRight, FaFileCsv, FaIdCardAlt, FaReceipt, FaUser } from "react-icons/fa";
+import { FaArrowAltCircleRight, FaIdCardAlt, FaMoneyBill, FaMoneyCheckAlt, FaReceipt, FaUser } from "react-icons/fa";
 
 const Hero = () => {
 
@@ -19,7 +19,7 @@ const Hero = () => {
           {
             admin == 0 ? (
               <Link href='./finance/income' className='btn btn-outline-dark flex align-items-center mb-2'>
-                <FaFileCsv className='mx-1 bg-inherit' />بخش عواید پوهنتون کابل</Link>
+                <FaMoneyBill className='mx-1 bg-inherit' />بخش عواید پوهنتون کابل</Link>
             ) : null
           }
 
@@ -34,7 +34,7 @@ const Hero = () => {
             admin == 2 ? (
               <>
                 <Link href='./finance/income' className='btn btn-outline-dark flex align-items-center mb-2'>
-                  <FaFileCsv className='mx-1 bg-inherit' />بخش عواید پوهنتون کابل</Link>
+                  <FaMoneyCheckAlt className='mx-1 bg-inherit' />بخش عواید پوهنتون کابل</Link>
 
                 <Link href='./finance/forms' className='btn btn-outline-dark flex align-items-center mb-2'>
                   <FaIdCardAlt className='mx-1 bg-inherit' />بخش فورم های میم پوهنتون کابل</Link>

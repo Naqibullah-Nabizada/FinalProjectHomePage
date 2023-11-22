@@ -13,6 +13,14 @@ import { AuthContext } from "../../admin/context/context";
 
 const IncomeReport = () => {
 
+  const date = new Date();
+  const option = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  }
+
   const { token, admin } = useContext(AuthContext);
 
   const [incomeCurrentYearReport, setIncomeCurrentYearReport] = useState();
@@ -751,8 +759,9 @@ const IncomeReport = () => {
         token !== null && admin == 0 || admin == 2 ? (
           <section>
             <main className="w-[80%] mx-auto" id="main">
-              <header>
-                <h3 className="my-3 text-center">راپور قطعیه عواید تحصیل شده سال <ShamsiDate /> ریاست پوهنتون کابل</h3>
+              <header className="flex justify-between my-2">
+                <span className="text-center">راپور قطعیه عواید تحصیل شده سال <ShamsiDate /> ریاست پوهنتون کابل</span>
+                <span>{date.toLocaleDateString("fa-AF", option)}</span>
               </header>
               <hr />
               <table className="table table-bordered table-sm table-striped">
