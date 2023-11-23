@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { FaArrowCircleRight } from "react-icons/fa";
 
+import moment from "jalali-moment";
 import Image from "next/image";
 import { useContext } from "react";
 import { AuthContext } from "../../admin/context/context";
@@ -63,6 +64,7 @@ const FormsReport = () => {
                 <thead className="table-dark">
                   <tr>
                     <th>#</th>
+                    <th>سال</th>
                     <th>فصل</th>
                     <th>تادیه بعدی</th>
                     <th>تادیه پیشکی</th>
@@ -74,6 +76,7 @@ const FormsReport = () => {
                     formYearlyReport.map((item, index) => (
                       <tr key={index}>
                         <td>{index + 1}</td>
+                        <td>{moment(item.date).locale("fa").format("jYYYY")}</td>
                         <td>{item.fasel.code || null}</td>
                         <td>{item.befor_pay || 0} افغانی</td>
                         <td>{item.after_pay || 0} افغانی</td>

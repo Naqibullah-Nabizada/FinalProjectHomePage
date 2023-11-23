@@ -25,7 +25,7 @@ const Users = () => {
           <section className="flex justify-content-around align-items-center mt-3">
             <section className="col-5 mr-[4rem] border rounded shadow p-3">
 
-              <h1 className="text-center h5 p-3">لسیت کاربران سایت</h1>
+              <h1 className="text-center h5 p-3">لیست کاربران سایت</h1>
 
               <table className="table table-sm table-active table-bordered table-hover table-striped">
                 <thead className="table-dark">
@@ -87,7 +87,7 @@ const Users = () => {
             </section>
 
             <section>
-              <Image src={"/images/finance/user1.svg"} width={600} height={600} alt="Users" />
+              <Image src={"/images/finance/undraw_feeling_proud_qne1.svg"} width={520} height={520} alt="Users" />
             </section>
           </section>
 

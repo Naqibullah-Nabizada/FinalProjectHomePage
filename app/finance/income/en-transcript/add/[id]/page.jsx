@@ -19,6 +19,7 @@ const Add = () => {
 
   const router = useRouter();
   const { id } = useParams();
+  const [error, setError] = useState(null);
 
   const {
     register,
@@ -31,15 +32,19 @@ const Add = () => {
   const submitForm = async (data) => {
     const formData = { ...data, date: selectedDate };
     try {
-      router.push("/finance/income/en-transcript");
-      await axios.put(`http://localhost:5000/NMDTN/${id}`, formData);
-      toast('معلومات جدید با موفقیت اضافه شد',
-        {
-          hideProgressBar: false,
-          autoClose: 5000,
-          type: 'success',
-          position: 'top-right'
-        });
+      const res = await axios.put(`http://localhost:5000/NMDTN/${id}`, formData);
+      if (res.data.error) {
+        setError(res.data.error)
+      } else {
+        router.push("/finance/income/en-transcript");
+        toast('معلومات جدید با موفقیت اضافه شد',
+          {
+            hideProgressBar: false,
+            autoClose: 5000,
+            type: 'success',
+            position: 'top-right'
+          });
+      }
     } catch (err) {
       console.log(err)
     }
@@ -60,6 +65,11 @@ const Add = () => {
       </header>
       <hr />
       <main>
+        {
+          error !== null ? (
+            <div className="alert alert-danger text-center mt-2">{error}</div>
+          ) : null
+        }
         <form onSubmit={handleSubmit(submitForm)}>
 
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">

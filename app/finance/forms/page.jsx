@@ -40,7 +40,7 @@ const Forms = () => {
               </div>
 
               <div className='w-[60%] mx-auto'>
-                <Image src='/images/finance/1675576783.jpg' alt='background' className='img-thumbnail' width={700} height={100} />
+                <Image src='/images/finance/undraw_success_factors_re_ce93.svg' alt='background' className='img-thumbnail' width={700} height={100} />
               </div>
 
             </section>

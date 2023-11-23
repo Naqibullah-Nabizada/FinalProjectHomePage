@@ -20,27 +20,35 @@ const Add = () => {
   const router = useRouter();
   const { id } = useParams();
 
+  const [error, setError] = useState(null);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue, // Add the setValue function from react-hook-form
   } = useForm({});
+
   const [selectedDate, setSelectedDate] = useState(null); // Selected date state
 
   const submitForm = async (data) => {
+
     const formData = { ...data, date: selectedDate };
 
     try {
-      toast('معلومات جدید با موفقیت اضافه شد',
-      {
-        hideProgressBar: false,
-        autoClose: 5000,
-        type: 'success',
-        position: 'top-right'
-      })
-      router.push("/finance/income/id-cards");
-      await axios.put(`http://localhost:5000/IdCards/${id}`, formData);
+      const res = await axios.put(`http://localhost:5000/IdCards/${id}`, formData);
+      if (res.data.error) {
+        setError(res.data.error)
+      } else {
+        router.push("/finance/income/id-cards");
+        toast('معلومات جدید با موفقیت اضافه شد',
+          {
+            hideProgressBar: false,
+            autoClose: 5000,
+            type: 'success',
+            position: 'top-right'
+          })
+      }
     } catch (err) {
       console.log(err)
     }
@@ -48,7 +56,6 @@ const Add = () => {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    // Update the form's value for the date field
     setValue("pendant_date", date);
   };
 
@@ -61,8 +68,13 @@ const Add = () => {
       </header>
       <hr />
       <main>
+        {
+          error !== null ? (
+            <div className="alert alert-danger text-center mt-2">{error}</div>
+          ) : null
+        }
         <form onSubmit={handleSubmit(submitForm)}>
-          
+
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
 
             <div className="w-[32%]">

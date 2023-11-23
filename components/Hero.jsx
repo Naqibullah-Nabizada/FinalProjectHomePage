@@ -11,10 +11,10 @@ const Hero = () => {
   const { Logout, admin } = useContext(AuthContext)
 
   return (
-    <section className='w-[95%] mx-auto flex my-4'>
+    <section className='w-[95%] flex justify-center align-items-center  mx-auto flex my-4'>
       <div className='w-[40%]'>
 
-        <div className='w-[60%] mt-36'>
+        <div className='w-[60%] mr-[5rem]'>
 
           {
             admin == 0 ? (
@@ -53,7 +53,7 @@ const Hero = () => {
         </div>
       </div>
       <div className='w-[60%] mx-auto'>
-        <Image src='/images/finance/1675576783.jpg' alt='background' className='img-thumbnail' width={700} height={100} />
+        <Image src='/images/finance/undraw_finance_re_gnv2.svg' alt='background' className='img-thumbnail' width={700} height={700} />
       </div>
     </section>
   )

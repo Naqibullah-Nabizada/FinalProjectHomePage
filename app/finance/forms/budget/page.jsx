@@ -77,9 +77,9 @@ const Appropriation = () => {
                   <td>{item.dari_name}</td>
                   <td>{item.pashto_name}</td>
                   <td>{item.eng_name}</td>
-                  <td>{item.main_amount}</td>
-                  <td>{item.amount}</td>
-                  <td>{parseFloat(item.main_amount) - parseFloat(item.amount)}</td>
+                  <td>{item.main_amount} افغانی</td>
+                  <td>{item.amount} افغانی</td>
+                  <td>{parseFloat(item.main_amount) - parseFloat(item.amount)} افغانی</td>
                   {
                     admin == 1 ? (
                       <td className="flex justify-around" id="edit_btn">
@@ -93,9 +93,9 @@ const Appropriation = () => {
           </tbody>
         </table>
         <div className="d-flex justify-around bg-gray-200 p-1">
-          <span>مجموع اصل بودجه: {totalMainBudget}</span>
-          <span>مجموع بودجه باقی مانده: {totalBudget}</span>
-          <span>مجموع بودجه مصرف شده: {totalSpendBudget}</span>
+          <span>مجموع اصل بودجه: {totalMainBudget} افغانی</span>
+          <span>مجموع بودجه باقی مانده: {totalBudget} افغانی</span>
+          <span>مجموع بودجه مصرف شده: {totalSpendBudget} افغانی</span>
         </div>
       </main>
       <div className="text-center my-3">

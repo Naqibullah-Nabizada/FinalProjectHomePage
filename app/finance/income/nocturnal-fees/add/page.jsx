@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 const Add = () => {
 
   const router = useRouter();
+  const [error, setError] = useState(null);
 
   const {
     register,
@@ -32,15 +33,19 @@ const Add = () => {
     const formData = { ...data, date: selectedDate };
 
     try {
-      await axios.post("http://localhost:5000/NMDTN", formData);
-      router.push("/finance/income/nocturnal-fees");
-      toast('معلومات جدید با موفقیت اضافه شد',
-        {
-          hideProgressBar: false,
-          autoClose: 5000,
-          type: 'success',
-          position: 'top-right'
-        });
+      const res = await axios.post("http://localhost:5000/NMDTN", formData);
+      if (res.data.error) {
+        setError(res.data.error)
+      } else {
+        router.push("/finance/income/nocturnal-fees");
+        toast('معلومات جدید با موفقیت اضافه شد',
+          {
+            hideProgressBar: false,
+            autoClose: 5000,
+            type: 'success',
+            position: 'top-right'
+          });
+      }
     } catch (err) {
       console.log(err)
     }
@@ -61,14 +66,19 @@ const Add = () => {
       </header>
       <hr />
       <main>
+        {
+          error !== null ? (
+            <div className="alert alert-danger text-center mt-2">{error}</div>
+          ) : null
+        }
         <form onSubmit={handleSubmit(submitForm)}>
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
 
-              <input
-                value={"nocturnalFees"}
-                {...register("type")}
-                hidden
-              />
+            <input
+              value={"nocturnalFees"}
+              {...register("type")}
+              hidden
+            />
 
             <div className="w-[32%]">
               <label className="form-label">نام تحویل دهنده</label>
