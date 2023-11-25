@@ -104,12 +104,12 @@ const FormKaryabi = () => {
             />
 
             <div className="w-[32%]">
-              <label className="form-label">ملاحضات</label>
+              <label className="form-label">ملاحظات</label>
               <textarea
                 rows="3"
                 name="remark"
                 className="form-control form-control-sm mb-3"
-                placeholder="ملاحضات"
+                placeholder="ملاحظات"
                 // onChange={setMAFormInfo}
                 required
               ></textarea>

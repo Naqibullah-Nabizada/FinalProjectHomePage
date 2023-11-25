@@ -47,7 +47,7 @@ const Fasel = () => {
         <Header hrefAddBtn={admin == 1 ? ("/finance/forms/fasel/add") : ""} hrefBackBtn="/finance/forms" section="forms" pageName="fasel" />
       </header>
       <hr />
-      <main className="w-[80%] mx-auto" id="main">
+      <main className="w-[95%] mx-auto" id="main">
         <table className="table table-responsive table-bordered table-sm table-striped">
           <caption className="caption-top text-center text-dark">تخصیصات بودجه عادی پوهنتون کابل سال <ShamsiDate /></caption>
           <thead className="table-dark">

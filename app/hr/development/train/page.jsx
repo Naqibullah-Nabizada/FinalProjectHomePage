@@ -68,7 +68,7 @@ const Train = () => {
                 rows="4"
                 name="remark"
                 className="form-control form-control-sm mb-3"
-                placeholder="ملاحضات"
+                placeholder="ملاحظات"
               ></textarea>
             </div>
           </section>

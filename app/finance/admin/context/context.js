@@ -230,7 +230,7 @@ export const AuthContextProvider = ({ children }) => {
           authorization: `Bearer ${token}`
         }
       })
-      router.push("/")
+      router.push("/");
       toast.success(res.data, {
         position: "bottom-center",
         autoClose: 3000,

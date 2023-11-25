@@ -49,7 +49,7 @@ const FaselDetail = () => {
                 <th className="text-center text-nowrap">توضیحات</th>
                 <th className="text-center text-nowrap">مراجعه</th>
                 <th className="text-center text-nowrap">نمبر خصوصی</th>
-                {/* <th>مراجعه تصفیه</th> */}
+                <th className="text-center text-nowrap">مراجعه تصفیه</th>
                 <th className="text-center text-nowrap">تادیه بعدی</th>
                 <th className="text-center text-nowrap">تادیه پیشکی</th>
                 <th className="text-center text-nowrap">پیشکی محسوب شده</th>
@@ -73,7 +73,7 @@ const FaselDetail = () => {
                     <td className="text-center text-nowrap">{item.desc}</td>
                     <td className="text-center text-nowrap">{item.reference}</td>
                     <td className="text-center text-nowrap">{item.private_num}</td>
-                    {/* <td>{item.refinement}</td> */}
+                    <td className="text-center text-nowrap">{item.refinement}</td>
                     <td className="text-center text-nowrap">{item.after_pay}</td>
                     <td className="text-center text-nowrap">{item.befor_pay}</td>
                     <td className="text-center text-nowrap">{item.previous_considered}</td>

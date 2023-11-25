@@ -80,6 +80,11 @@
   #header *{
     display: none;
   }
+
+  #navbar *{
+    display: block;
+    visibility: visible;
+  }
 }
 
 

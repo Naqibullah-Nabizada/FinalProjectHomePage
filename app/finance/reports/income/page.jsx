@@ -5,6 +5,7 @@ import axios from "axios";
 import ShamsiDate from "@/components/ShamsiDate";
 import moment from "jalali-moment";
 
+import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
@@ -754,7 +755,10 @@ const IncomeReport = () => {
 
   return (
     <>
-
+      <div id="navbar">
+        <Navbar title={"معاونیت مالی و اداری"} />
+        <hr />
+      </div>
       {
         token !== null && admin == 0 || admin == 2 ? (
           <section>

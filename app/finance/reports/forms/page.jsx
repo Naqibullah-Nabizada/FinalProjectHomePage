@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { FaArrowCircleRight } from "react-icons/fa";
 
+import Navbar from "@/components/Navbar";
 import moment from "jalali-moment";
 import Image from "next/image";
 import { useContext } from "react";
@@ -51,6 +52,11 @@ const FormsReport = () => {
 
   return (
     <>
+      <div className="flex justify-center">
+        {/* <Header hrefAddBtn={admin == 1 ? ("/finance/reports") : ""} hrefBackBtn="/finance/reports" section={"reports"} pageName="forms" /> */}
+        <Navbar title={"معاونیت مالی و اداری"} />
+      </div>
+      <hr />
       {
         token !== null && admin == 1 || admin == 2 ? (
           <section>
@@ -65,6 +71,7 @@ const FormsReport = () => {
                   <tr>
                     <th>#</th>
                     <th>سال</th>
+                    <th>توضیحات</th>
                     <th>فصل</th>
                     <th>تادیه بعدی</th>
                     <th>تادیه پیشکی</th>
@@ -77,9 +84,10 @@ const FormsReport = () => {
                       <tr key={index}>
                         <td>{index + 1}</td>
                         <td>{moment(item.date).locale("fa").format("jYYYY")}</td>
+                        <td>{item.fasel.desc}</td>
                         <td>{item.fasel.code || null}</td>
-                        <td>{item.befor_pay || 0} افغانی</td>
                         <td>{item.after_pay || 0} افغانی</td>
+                        <td>{item.befor_pay || 0} افغانی</td>
                         <td>{parseFloat(item.befor_pay) + parseFloat(item.after_pay)} افغانی</td>
                       </tr>
                     ))

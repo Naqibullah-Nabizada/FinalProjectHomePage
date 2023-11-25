@@ -63,7 +63,7 @@ const AnimalClinic = () => {
               <th>تاریخ تعرفه</th>
               <th>نمبر آویز</th>
               <th>تاریخ آویز</th>
-              <th>ملاحضات</th>
+              <th>ملاحظات</th>
 
               {
                 admin == 0 ? (

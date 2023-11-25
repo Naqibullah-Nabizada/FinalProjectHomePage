@@ -19,7 +19,7 @@ const Report = () => {
       {
         token !== null ?
           (
-            <section className='w-[95%] mx-auto flex my-4'>
+            <section className='w-[95%] mx-auto flex my-5'>
               <div className='w-[40%] flex justify-center items-center'>
 
                 <div className='w-[60%] mx-5'>
@@ -57,7 +57,7 @@ const Report = () => {
 
               </div>
               <div className='w-[60%] mx-auto'>
-                <Image src='/images/finance/undraw_growth_analytics_re_pyxf.svg' alt='background' className='img-thumbnail' width={700} height={100} />
+                <Image src='/images/finance/undraw_growth_analytics_re_pyxf.svg' alt='background' className='img-thumbnail shadow-lg' width={700} height={700} />
               </div>
             </section>
           ) : (

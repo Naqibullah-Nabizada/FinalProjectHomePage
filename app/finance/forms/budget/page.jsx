@@ -45,7 +45,7 @@ const Appropriation = () => {
         <Header hrefAddBtn={admin == 1 ? ("/finance/forms/budget/add") : ""} hrefBackBtn="/finance/forms" section={"forms"} pageName="budget" />
       </header>
       <hr />
-      <main className="w-[85%] mx-auto" id="main">
+      <main className="w-[95%] mx-auto" id="main">
         <h3 className="text-center my-2">لیست بودجه و مصارف پوهنتون کابل</h3>
         <hr />
         <table className="table table-bordered table-sm table-striped">

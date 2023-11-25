@@ -115,10 +115,10 @@ const Add = () => {
             </div>
 
             <div className="w-[32%]">
-              <label className="form-label">ملاحضات</label>
+              <label className="form-label">ملاحظات</label>
               <textarea
                 rows="3"
-                placeholder="ملاحضات"
+                placeholder="ملاحظات"
                 className={`form-control form-control-sm mb-2 ${errors.remark ? 'is-invalid' : ''}`}
                 {...register("remark")}
               ></textarea>

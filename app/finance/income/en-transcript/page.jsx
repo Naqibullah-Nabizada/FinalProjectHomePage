@@ -65,7 +65,7 @@ const EnTranscript = () => {
               <th>تاریخ تعرفه</th>
               <th>نمبر آویز</th>
               <th>تاریخ آویز</th>
-              <th>ملاحضات</th>
+              <th>ملاحظات</th>
               {
                 admin == 0 ? (
                   <th className="flex justify-center" id="edit_label">ویرایش</th>
