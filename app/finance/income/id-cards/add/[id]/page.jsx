@@ -36,11 +36,11 @@ const Add = () => {
     const formData = { ...data, date: selectedDate };
 
     try {
+      router.push("/finance/income/id-cards");
       const res = await axios.put(`http://localhost:5000/IdCards/${id}`, formData);
       if (res.data.error) {
         setError(res.data.error)
       } else {
-        router.push("/finance/income/id-cards");
         toast('معلومات جدید با موفقیت اضافه شد',
           {
             hideProgressBar: false,

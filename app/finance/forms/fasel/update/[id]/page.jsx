@@ -15,12 +15,27 @@ const Update = () => {
 
   const [error, setError] = useState(null);
   const [appropriations, setAppropriation] = useState([]);
+  const [fasel, setFasel] = useState([]);
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+
+  const { mainBudget, budget } = fasel.reduce(
+    (accumulator, item) => {
+      return {
+        mainBudget: item.main_amount,
+        budget: item.amount,
+      };
+    },
+    { mainBudget: 0, budget: 0 }
+  );
+
 
   // Fetch data for the selected item
   const fetchData = async () => {
     try {
       const { data } = await axios.get(`http://localhost:5000/single-Fasel/${id}`);
+
+      setFasel(data);
+
       setValue("appropriationId", data[0].appropriationId);
       setValue("year", data[0].year);
       setValue("code", data[0].code);
@@ -40,6 +55,7 @@ const Update = () => {
       console.log(error);
     }
   };
+
 
   // Fetch data on component mount
   useEffect(() => {
@@ -141,12 +157,24 @@ const Update = () => {
 
             <div className="w-[32%]">
               <label className="form-label">مبلغ</label>
-              <input
-                type="text"
-                className={`form-control form-control-sm mb-3 ${errors.amount ? 'is-invalid' : ''}`}
-                placeholder="مبلغ"
-                {...register("amount", { required: true, min: 0, pattern: /^[0-9]+$/i })}
-              />
+              {
+                budget === mainBudget ? (
+                  <input
+                    type="text"
+                    className={`form-control form-control-sm mb-3 ${errors.amount ? 'is-invalid' : ''}`}
+                    placeholder="مبلغ"
+                    {...register("amount", { required: true, min: 0, pattern: /^[0-9]+$/i })}
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    className={`form-control form-control-sm mb-3 ${errors.amount ? 'is-invalid' : ''}`}
+                    placeholder="مبلغ"
+                    disabled
+                    {...register("amount", { required: true, min: 0, pattern: /^[0-9]+$/i })}
+                  />
+                )
+              }
               {errors.amount && errors.amount.type === "required" && <span className="invalid-feedback">مبلغ الزامی است.</span>}
               {errors.amount && errors.amount.type === "pattern" && <span className="invalid-feedback">مبلغ باید عدد باشد.</span>}
               {errors.amount && errors.amount.type === "min" && <span className="invalid-feedback">مبلغ باید عدد مثب باشد.</span>}

@@ -26,15 +26,25 @@ const Report = () => {
 
                   {
                     token !== null && admin == 0 ? (
-                      <Link href='/finance/reports/income' className='btn btn-outline-dark flex align-items-center mb-2'>
-                        <FaIdCard className='mx-1 bg-inherit' />گزارش بخش عواید</Link>
+                      <>
+                        <Link href='/finance/reports/income' className='btn btn-outline-dark flex align-items-center mb-2'>
+                          <FaIdCard className='mx-1 bg-inherit' />گزارش بخش عواید</Link>
+
+                        <Link href='/finance/reports/income/searchByDate' className='btn btn-outline-dark flex align-items-center mb-2'>
+                          <FaIdCard className='mx-1 bg-inherit' />گزارش بخش عواید نظر به تاریخ</Link>
+                      </>
                     ) : null
                   }
 
                   {
                     token !== null && admin == 1 ? (
-                      <Link href='/finance/reports/forms' className='btn btn-outline-dark flex align-items-center mb-2'>
-                        <FaIdCard className='mx-1 bg-inherit' />گزارش بخش فورم های میم</Link>
+                      <>
+                        <Link href='/finance/reports/forms' className='btn btn-outline-dark flex align-items-center mb-2'>
+                          <FaIdCard className='mx-1 bg-inherit' />گزارش بخش فورم های میم</Link>
+
+                        <Link href='/finance/reports/forms/searchByDate' className='btn btn-outline-dark flex align-items-center mb-2'>
+                          <FaIdCard className='mx-1 bg-inherit' />گزارش فورم های میم نظر به تاریخ</Link>
+                      </>
                     ) : null
                   }
 
@@ -44,8 +54,15 @@ const Report = () => {
                         <Link href='/finance/reports/income' className='btn btn-outline-dark flex align-items-center mb-2'>
                           <FaIdCard className='mx-1 bg-inherit' />گزارش بخش عواید</Link>
 
+
+                        <Link href='/finance/reports/income/searchByDate' className='btn btn-outline-dark flex align-items-center mb-2'>
+                          <FaIdCard className='mx-1 bg-inherit' />گزارش بخش عواید نظر به تاریخ</Link>
+
                         <Link href='/finance/reports/forms' className='btn btn-outline-dark flex align-items-center mb-2'>
                           <FaIdCard className='mx-1 bg-inherit' />گزارش بخش فورم های میم</Link>
+
+                        <Link href='/finance/reports/forms/searchByDate' className='btn btn-outline-dark flex align-items-center mb-2'>
+                          <FaIdCard className='mx-1 bg-inherit' />گزارش فورم های میم نظر به تاریخ</Link>
                       </>
                     ) : null
                   }

@@ -76,6 +76,7 @@ const Add = () => {
             <input
               {...register("type")}
               value={"paper"}
+              // value={"ضایعات کاغذ آمریت نشرات"}
               hidden
             />
 
@@ -197,7 +198,7 @@ const Add = () => {
                 months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
                 hideOnScroll
                 hideWeekDays
-                editable={true}
+                editable={false}
                 placeholder="تاریخ تعرفه"
                 currentDate={
                   new DateObject({ calendar: persian })

@@ -77,6 +77,7 @@ const Add = () => {
             <input
               {...register("type")}
               value={"buildings"}
+              // value={"کرایه اپارتمان های استادان"}
               hidden
             />
 
@@ -173,7 +174,7 @@ const Add = () => {
                 months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
                 hideOnScroll
                 hideWeekDays
-                editable={true}
+                editable={false}
                 placeholder="تاریخ تعرفه"
                 currentDate={
                   new DateObject({ calendar: persian })

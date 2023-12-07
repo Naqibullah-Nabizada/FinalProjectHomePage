@@ -1,5 +1,6 @@
 "use client";
 
+import Navbar from "@/components/Navbar";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -40,8 +41,10 @@ const Add = () => {
 
   return (
     <>
+      <Navbar title="مدیریت مالی و حسابی" />
+      <hr />
       <header>
-        <h3 className="my-4 text-center text-xl">
+        <h3 className="my-2 text-center text-xl">
           فورم ثبت تخصیصات
         </h3>
       </header>

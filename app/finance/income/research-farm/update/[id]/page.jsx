@@ -84,7 +84,7 @@ const Update = () => {
     <>
       <header>
         <h3 className="my-4 text-center text-xl">
-          فورم ویرایش فارم تحقیقاتی پوهنزی زراعت
+          فورم ویرایش فارم تحقیقاتی پوهنځی زراعت
         </h3>
       </header>
       <hr />

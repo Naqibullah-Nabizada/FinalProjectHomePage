@@ -32,11 +32,11 @@ const Add = () => {
   const submitForm = async (data) => {
     const formData = { ...data, date: selectedDate };
     try {
+      router.push("/finance/income/national-num-table");
       const res = await axios.put(`http://localhost:5000/NMDTN/${id}`, formData);
       if (res.data.error) {
         setError(res.data.error)
       } else {
-        router.push("/finance/income/national-num-table");
         toast('معلومات جدید با موفقیت اضافه شد',
           {
             hideProgressBar: false,

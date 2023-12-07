@@ -71,7 +71,7 @@ const Appropriation = () => {
             {
               appropriations.map((item, index) => (
                 <tr key={index}>
-                  <td>{index + 1}</td>
+                  <td>{item.id}</td>
                   <td>{item.year}</td>
                   <td>{item.code}</td>
                   <td>{item.dari_name}</td>

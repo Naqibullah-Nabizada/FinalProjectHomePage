@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from 'react';
+
 import axios from "axios";
 
 import ShamsiDate from "@/components/ShamsiDate";
@@ -8,7 +10,7 @@ import moment from "jalali-moment";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { FaArrowCircleRight } from "react-icons/fa";
 import { AuthContext } from "../../admin/context/context";
 
@@ -28,7 +30,7 @@ const IncomeReport = () => {
   const [incomeCurrentYearReportAmount, setIncomeCurrentYearReportAmount] = useState();
 
   const [idCardAmount, setIdCardAmount] = useState();
-  const [idCardCost, setIdCardCost] = useState();
+  const [idCardCost, setIdCardCost] = useState(0);
   const [currentYearIdCardAmount, setcurrentYearIdCardAmount] = useState();
   const [currentYearIdCardCost, setcurrentYearIdCardCost] = useState();
 
@@ -48,7 +50,7 @@ const IncomeReport = () => {
   const [currentYearEnDeplomaCost, setcurrentYearEnDeplomaCost] = useState();
 
   const [EnTranscriptAmount, setEnTranscriptAmount] = useState();
-  const [EnTranscriptCost, setEnTranscriptCost] = useState();
+  const [EnTranscriptCost, setEnTranscriptCost] = useState(0);
   const [currentYearEnTranscriptAmount, setcurrentYearEnTranscriptAmount] = useState();
   const [currentYearEnTranscriptCost, setcurrentYearEnTranscriptCost] = useState();
 
@@ -752,7 +754,6 @@ const IncomeReport = () => {
     window.print();
   }
 
-
   return (
     <>
       <div id="navbar">
@@ -941,6 +942,7 @@ const IncomeReport = () => {
                 <span>مجموع عواید: {idCardCost + nocturnalFeesCost + MAFeesCost + EnDeplomaCost + EnTranscriptCost + NactionalTableCost + PaperCost + BreadCost + BakeryCost + MAFormsCost + ResearchFarmCost + GuaranteedCost + GuestHouseCost + FarmProductCost + AnimalClinicCost + KabulBankCost + BicycleCost} افغانی</span>
                 <span>تعداد کلی: {idCardAmount + nocturnalFeesAmount + MAFeesAmount + EnDeplomaAmount + EnTranscriptAmount + NactionalTableAmount + PaperAmount + BreadAmount + BakeryAmount + MAFormsAmount + ResearchFarmAmount + GuaranteedAmount + GuestHouseAmount + FarmProductAmount + AnimalClinicAmount + KabulBankAmount + BicycleAmount}</span>
               </section>
+              
             </main >
             <div className="flex justify-around align-items-center bg-gray-200 p-1 mb-5">
 

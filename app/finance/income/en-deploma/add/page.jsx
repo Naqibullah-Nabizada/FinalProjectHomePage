@@ -76,6 +76,7 @@ const Add = () => {
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
 
             <input
+              // value={"دیپلوم زبان انگلیسی"}
               value={"EnDeploma"}
               {...register("type")}
               hidden
@@ -216,7 +217,7 @@ const Add = () => {
                 months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
                 hideOnScroll
                 hideWeekDays
-                editable={true}
+                editable={false}
                 placeholder="تاریخ تعرفه"
                 currentDate={
                   new DateObject({ calendar: persian })

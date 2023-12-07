@@ -26,8 +26,8 @@ const Add = () => {
     try {
       // Add the selected date to the form data
       const formData = { ...data, date: selectedDate };
-      await axios.put(`http://localhost:5000/FaselDetails/${id}`, formData);
       router.push("/finance/forms");
+      await axios.put(`http://localhost:5000/FaselDetails/${id}`, formData);
       toast("معلومات جدید با موفقیت اضافه شد", {
         hideProgressBar: false,
         autoClose: 5000,
@@ -73,7 +73,7 @@ const Add = () => {
               {errors.after_pay && <span className="invalid-feedback">فیلد تادیه بعدی الزامی است.</span>}
             </div>
 
-            <div className="w-[32%]">
+            {/* <div className="w-[32%]">
               <label className="form-label">تادیه پیشکی</label>
               <input
                 type="number"
@@ -82,7 +82,7 @@ const Add = () => {
                 placeholder="تادیه پیشکی"
               />
               {errors.befor_pay && <span className="invalid-feedback">فیلد تادیه پیشکی الزامی است.</span>}
-            </div>
+            </div> */}
 
             <div className="w-[32%]">
               <label className="form-label">پیشکی محسوب شده</label>

@@ -33,12 +33,12 @@ const Add = () => {
     const formData = { ...data, date: selectedDate };
 
     try {
+      router.push("/finance/income/research-farm");
       const res = await axios.put(`http://localhost:5000/TwelveSection/${id}`, formData);
 
       if (res.data.error) {
         setError(res.data.error)
       } else {
-        router.push("/finance/income/research-farm");
         toast('معلومات جدید با موفقیت اضافه شد',
           {
             hideProgressBar: false,
@@ -62,7 +62,7 @@ const Add = () => {
     <>
       <header>
         <h3 className="my-4 text-center text-xl">
-          فورم ثبت فارم تحقیقاتی پوهنزی زراعت
+          فورم ثبت فارم تحقیقاتی پوهنځی زراعت
         </h3>
       </header>
       <hr />

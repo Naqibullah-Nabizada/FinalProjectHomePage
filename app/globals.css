@@ -35,7 +35,37 @@
     box-shadow .15s ease-in-out
 }
 
+.startDate,
+.endDate {
+  min-height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.35rem 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.2rem;
+  display: block;
+  width: 10rem;
+  font-weight: 800;
+  line-height: 1.5;
+  color: #212529;
+  background-color: rgb(240, 240, 240) !important;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out
+}
+
 .custom-input:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.startDate:focus,
+.endDate:focus {
   color: #212529;
   background-color: #fff;
   border-color: #86b7fe;
@@ -77,11 +107,11 @@
     display: none;
   }
 
-  #header *{
+  #header * {
     display: none;
   }
 
-  #navbar *{
+  #navbar * {
     display: block;
     visibility: visible;
   }
@@ -94,7 +124,7 @@
 
 /* Header */
 
-#header{
+#header {
   font-size: 1.5rem;
   border-bottom: 3px solid #000;
   border-radius: 10%;

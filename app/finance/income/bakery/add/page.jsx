@@ -60,7 +60,7 @@ const Add = () => {
     <>
       <header>
         <h3 className="my-4 text-center text-xl">
-          فورم ثبت کرایه کرایه خبازی
+          فورم ثبت کرایه خبازی
         </h3>
       </header>
       <hr />
@@ -77,6 +77,7 @@ const Add = () => {
             <input
               {...register("type")}
               value={"bakery"}
+              // value={"کرایه خبازی"}
               hidden
             />
 
@@ -198,7 +199,7 @@ const Add = () => {
                 months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
                 hideOnScroll
                 hideWeekDays
-                editable={true}
+                editable={false}
                 placeholder="تاریخ تعرفه"
                 currentDate={
                   new DateObject({ calendar: persian })

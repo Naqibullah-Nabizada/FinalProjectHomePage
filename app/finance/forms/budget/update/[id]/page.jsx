@@ -3,7 +3,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaArrowCircleRight, FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -11,6 +11,19 @@ import { toast } from "react-toastify";
 const Update = () => {
   const router = useRouter();
   const { id } = useParams();
+
+  const [appropriations, setAppropriation] = useState([]);
+
+  const { mainBudget, budget } = appropriations.reduce(
+    (accumulator, item) => {
+      return {
+        mainBudget: item.main_amount,
+        budget: item.amount,
+      };
+    },
+    { mainBudget: 0, budget: 0 }
+  );
+
   const {
     register,
     handleSubmit,
@@ -20,7 +33,11 @@ const Update = () => {
 
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/Appropriation/${id}`);
+      const { data } = await axios.get(
+        `http://localhost:5000/Appropriation/${id}`
+      );
+      setAppropriation(data);
+
       setValue("year", data[0].year);
       setValue("code", data[0].code);
       setValue("dari_name", data[0].dari_name);
@@ -36,11 +53,11 @@ const Update = () => {
     try {
       await axios.put(`http://localhost:5000/Appropriation/${id}`, data);
       router.push("/finance/forms/budget");
-      toast('معلومات جدید با موفقیت اضافه شد', {
+      toast("معلومات جدید با موفقیت اضافه شد", {
         hideProgressBar: false,
         autoClose: 5000,
-        type: 'success',
-        position: 'top-right'
+        type: "success",
+        position: "top-right",
       });
     } catch (err) {
       console.log(err);
@@ -60,35 +77,75 @@ const Update = () => {
       <main>
         <form onSubmit={handleSubmit(submitForm)}>
           <section className="w-[95%] flex justify-between flex-wrap mx-auto my-3">
-
             <div className="w-[32%]">
               <label className="form-label">سال</label>
               <input
                 type="text"
-                className={`form-control form-control-sm mb-2 ${errors.year ? 'is-invalid' : ''}`}
-                {...register("year", { required: true, min: 1, pattern: /^(139[0-9]|14[0-4][0-9]|1450)*$/, minLength: 4, maxLength: 4 })}
+                className={`form-control form-control-sm mb-2 ${errors.year ? "is-invalid" : ""
+                  }`}
+                {...register("year", {
+                  required: true,
+                  min: 1,
+                  pattern: /^(139[0-9]|14[0-4][0-9]|1450)*$/,
+                  minLength: 4,
+                  maxLength: 4,
+                })}
                 placeholder="سال"
                 autoFocus
               />
-              {errors.year && errors.year.type === "required" && <span className="invalid-feedback">سال الزامی است.</span>}
-              {errors.year && errors.year.type === "pattern" && <span className="invalid-feedback">فرمت سال معتبر نیست.</span>}
-              {errors.year && errors.year.type === "min" && <span className="invalid-feedback">فرمت سال معتبر نیست.</span>}
-              {errors.year && errors.year.type === "minLength" && <span className="invalid-feedback">فرمت سال معتبر نیست.</span>}
-              {errors.year && errors.year.type === "maxLength" && <span className="invalid-feedback">فرمت سال معتبر نیست..</span>}
+              {errors.year && errors.year.type === "required" && (
+                <span className="invalid-feedback">سال الزامی است.</span>
+              )}
+              {errors.year && errors.year.type === "pattern" && (
+                <span className="invalid-feedback">فرمت سال معتبر نیست.</span>
+              )}
+              {errors.year && errors.year.type === "min" && (
+                <span className="invalid-feedback">فرمت سال معتبر نیست.</span>
+              )}
+              {errors.year && errors.year.type === "minLength" && (
+                <span className="invalid-feedback">فرمت سال معتبر نیست.</span>
+              )}
+              {errors.year && errors.year.type === "maxLength" && (
+                <span className="invalid-feedback">فرمت سال معتبر نیست..</span>
+              )}
             </div>
 
             <div className="w-[32%]">
               <label className="form-label">کود</label>
-              <input type="text"
-                {...register("code", { required: true, min: 0, pattern: /^[0-9]+$/i, minLength: 1, maxLength: 15, })}
-                className={`form-control form-control-sm mb-3 ${errors.code ? "is-invalid" : ""}`}
+              <input
+                type="text"
+                {...register("code", {
+                  required: true,
+                  min: 0,
+                  pattern: /^[0-9]+$/i,
+                  minLength: 1,
+                  maxLength: 15,
+                })}
+                className={`form-control form-control-sm mb-3 ${errors.code ? "is-invalid" : ""
+                  }`}
                 placeholder="کود"
               />
-              {errors.code && errors.code.type === "required" && (<span className="invalid-feedback">کود الزامی است.</span>)}
-              {errors.code && errors.code.type === "pattern" && (<span className="invalid-feedback">کود باید عدد باشد.</span>)}
-              {errors.code && errors.code.type === "min" && (<span className="invalid-feedback">کود باید یک عدد مثب باشد.</span>)}
-              {errors.code && errors.code.type === "minLength" && (<span className="invalid-feedback">کود حداقل باید 1 کارکتر باشد.</span>)}
-              {errors.code && errors.code.type === "maxLength" && (<span className="invalid-feedback">کود حداکثر باید 15 کارکتر باشد..</span>)}
+              {errors.code && errors.code.type === "required" && (
+                <span className="invalid-feedback">کود الزامی است.</span>
+              )}
+              {errors.code && errors.code.type === "pattern" && (
+                <span className="invalid-feedback">کود باید عدد باشد.</span>
+              )}
+              {errors.code && errors.code.type === "min" && (
+                <span className="invalid-feedback">
+                  کود باید یک عدد مثب باشد.
+                </span>
+              )}
+              {errors.code && errors.code.type === "minLength" && (
+                <span className="invalid-feedback">
+                  کود حداقل باید 1 کارکتر باشد.
+                </span>
+              )}
+              {errors.code && errors.code.type === "maxLength" && (
+                <span className="invalid-feedback">
+                  کود حداکثر باید 15 کارکتر باشد..
+                </span>
+              )}
             </div>
 
             <div className="w-[32%]">
@@ -149,16 +206,18 @@ const Update = () => {
                   نام باید به حروف پشتو باشد.
                 </span>
               )}
-              {errors.pashto_name && errors.pashto_name.type === "minLength" && (
-                <span className="invalid-feedback">
-                  نام به پشتو باید حداقل 3 کاراکتر باشد.
-                </span>
-              )}
-              {errors.pashto_name && errors.pashto_name.type === "maxLength" && (
-                <span className="invalid-feedback">
-                  نام به پشتو باید حداکثر 30 کاراکتر باشد.
-                </span>
-              )}
+              {errors.pashto_name &&
+                errors.pashto_name.type === "minLength" && (
+                  <span className="invalid-feedback">
+                    نام به پشتو باید حداقل 3 کاراکتر باشد.
+                  </span>
+                )}
+              {errors.pashto_name &&
+                errors.pashto_name.type === "maxLength" && (
+                  <span className="invalid-feedback">
+                    نام به پشتو باید حداکثر 30 کاراکتر باشد.
+                  </span>
+                )}
             </div>
 
             <div className="w-[32%]">
@@ -199,32 +258,42 @@ const Update = () => {
 
             <div className="w-[32%]">
               <label className="form-label">مقدار</label>
-              <input
-                type="text"
-                {...register("amount", {
-                  required: true,
-                  min: 0,
-                  pattern: /^[0-9]+$/i,
-                })}
-                className={`form-control form-control-sm mb-3 ${errors.amount ? "is-invalid" : ""
-                  }`}
-                placeholder="مقدار"
-              />
+              {
+                budget === mainBudget ? (
+                  <input
+                    type="text"
+                    {...register("amount", {
+                      required: true,
+                      min: 0,
+                      pattern: /^[0-9]+$/i,
+                    })}
+                    className={`form-control form-control-sm mb-3 ${errors.amount ? "is-invalid" : ""}`}
+                    placeholder="مقدار"
+                  />
+                ) : (
+                  <input
+                  type="text"
+                  {...register("amount", {
+                    required: true,
+                    min: 0,
+                    pattern: /^[0-9]+$/i,
+                  })}
+                  className={`form-control form-control-sm mb-3 ${errors.amount ? "is-invalid" : ""}`}
+                  disabled
+                  placeholder="مقدار"
+                />
+                )
+              }
               {errors.amount && errors.amount.type === "required" && (
                 <span className="invalid-feedback">مقدار الزامی است.</span>
               )}
               {errors.amount && errors.amount.type === "pattern" && (
-                <span className="invalid-feedback">
-                  مقدار باید عدد باشد.
-                </span>
+                <span className="invalid-feedback">مقدار باید عدد باشد.</span>
               )}
               {errors.amount && errors.amount.type === "min" && (
-                <span className="invalid-feedback">
-                  مقدار باید ی
-                </span>
+                <span className="invalid-feedback">مقدار باید ی</span>
               )}
             </div>
-
           </section>
 
           <div className="flex">
@@ -233,12 +302,15 @@ const Update = () => {
               <FaPlus className="mx-1 bg-inherit" />
             </button>
 
-            <Link href="./finance/forms/budget" className="btn btn-outline-secondary flex">
+            <Link
+              href="./finance/forms/budget"
+              className="btn btn-outline-secondary flex"
+            >
               <FaArrowCircleRight className="mx-1 bg-inherit" /> بازگشت
             </Link>
           </div>
         </form>
-      </main >
+      </main>
     </>
   );
 };

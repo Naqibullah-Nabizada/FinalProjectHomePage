@@ -2,28 +2,26 @@
 
 import axios from "axios";
 
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
+//! Shamsi Date
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import transition from "react-element-popper/animations/transition";
+import DatePicker, { DateObject } from "react-multi-date-picker";
+
 import Image from "next/image";
+import { MdLockReset } from "react-icons/md";
 
-import Header from "@/components/Header";
-
+import { AuthContext } from "@/app/finance/admin/context/context";
 import moment from "jalali-moment";
 import Link from "next/link";
 import { useContext } from "react";
-import { FaArrowCircleRight } from "react-icons/fa";
-import { AuthContext } from "../../admin/context/context";
+import { FaArrowCircleRight, FaSearch } from "react-icons/fa";
 
 const FormsReport = () => {
 
   const { token, admin } = useContext(AuthContext);
-
-  const [formYearlyReport, setformYearlyReport] = useState([]);
-
-  const search = useSearchParams();
-  const searchQuery = search ? search.get("search") : null;
-  const encodedSearchQuery = encodeURI(searchQuery || "");
 
   const date = new Date();
   const option = {
@@ -33,38 +31,102 @@ const FormsReport = () => {
     day: "numeric"
   }
 
-  useEffect(() => {
-    fetchYearlyReprot();
-  }, [searchQuery]);
+  const print = () => {
+    window.print();
+  }
 
-  const fetchYearlyReprot = async () => {
+
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+  const handleStartDateChange = (value) => {
+    setStartDate(value);
+  };
+
+  const handleEndDateChange = (value) => {
+    setEndDate(value);
+  };
+
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearch = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/forms/yearly-report/${encodedSearchQuery}`);
-      setformYearlyReport(data);
+      const response = await axios.get(`http://localhost:5000/api/search?startDate=${startDate}&endDate=${endDate}`);
+      setSearchResults(response.data);
     } catch (error) {
-      console.log(error)
+      console.error(error);
     }
   }
 
-  const { totalAfterPay, totalBeforPay } = formYearlyReport.reduce((accumulator, item) => {
+  const { totalAfterPay, totalBeforPay } = searchResults.reduce((accumulator, item) => {
     return {
       totalAfterPay: parseFloat(accumulator.totalAfterPay) + parseFloat(item.after_pay),
       totalBeforPay: parseFloat(accumulator.totalBeforPay) + parseFloat(item.befor_pay),
     };
   }, { totalAfterPay: 0, totalBeforPay: 0 });
 
-  const totalOfBoth = totalAfterPay - totalBeforPay;
+  const totalOfBoth = totalAfterPay + totalBeforPay;
 
-  const print = () => {
-    window.print();
+  useEffect(() => {
+    handleSearch();
+  }, [startDate, endDate]);
+
+  const Reset = () => {
+    setStartDate("")
+    setEndDate("");
   }
 
   return (
     <>
-      <div className="flex justify-center">
-        <Header hrefAddBtn={admin == 1 ? ("/finance/reports") : ""} hrefBackBtn="/finance/reports" section={"reports"} pageName="forms" />
+
+      <div className="flex justify-center w-[100%] mx-auto mt-2">
+
+        <div className="mx-[1rem]">
+          <DatePicker
+            months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
+            hideOnScroll
+            hideWeekDays
+            editable={false}
+            placeholder="تاریخ شروع"
+            currentDate={
+              new DateObject({ calendar: persian })
+            }
+            animations={[transition()]}
+            calendar={persian}
+            locale={persian_fa}
+            inputClass="startDate"
+            value={startDate}
+            onChange={handleStartDateChange}
+            name="startDate"
+          />
+        </div>
+
+        <div>
+          <DatePicker
+            months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
+            hideOnScroll
+            hideWeekDays
+            editable={false}
+            placeholder="تاریخ ختم"
+            currentDate={
+              new DateObject({ calendar: persian })
+            }
+            animations={[transition()]}
+            calendar={persian}
+            locale={persian_fa}
+            inputClass="endDate"
+            value={endDate}
+            onChange={handleEndDateChange}
+            name="endDate"
+          />
+        </div>
+
+        <button className="btn btn-sm btn-outline-success mx-2" onClick={handleSearch}>
+          <FaSearch />
+        </button>
+        <button type="reset" className="border rounded p-2 bg-secondary text-white" onClick={() => Reset()}><MdLockReset /></button>
+
       </div>
-      <hr />
 
       {
         token !== null && admin == 1 || admin == 2 ? (
@@ -89,7 +151,7 @@ const FormsReport = () => {
                 </thead>
                 <tbody>
                   {
-                    formYearlyReport.map((item, index) => (
+                    searchResults.map((item, index) => (
                       <tr key={index}>
                         <td>{item.id}</td>
                         <td>{moment(item.date).locale("fa").format("jYYYY")}</td>

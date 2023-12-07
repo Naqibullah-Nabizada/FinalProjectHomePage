@@ -41,6 +41,9 @@ const Hero = () => {
 
                 <Link href='./finance/admin/users' className='btn btn-outline-dark align-items-center flex mb-2'>
                   <FaUser className='mx-1 bg-inherit' />بخش کاربران</Link>
+
+                {/* <Link href='./finance/logs' className='btn btn-outline-dark align-items-center flex mb-2'>
+                  <FaAdjust className='mx-1 bg-inherit' />بخش لاگ ها</Link> */}
               </>
             ) : null
           }

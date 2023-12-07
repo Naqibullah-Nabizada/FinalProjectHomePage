@@ -65,11 +65,11 @@ const Update = () => {
   const submitForm = async (data) => {
     try {
       const formData = { ...data, date: selectedDate };
+      router.push("/finance/forms/fasel-detail");
       const res = await axios.put(`http://localhost:5000/FaselDetail/${id}`, formData);
       if (res.data.error) {
         setError(res.data.error)
       } else {
-        router.push("/finance/forms/fasel-detail");
         toast("معلومات جدید با موفقیت اضافه شد", {
           hideProgressBar: false,
           autoClose: 5000,
@@ -128,7 +128,7 @@ const Update = () => {
                 months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
                 hideOnScroll
                 hideWeekDays
-                editable={true}
+                editable={false}
                 placeholder="تاریخ"
                 currentDate={
                   new DateObject({ calendar: persian })

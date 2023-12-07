@@ -78,7 +78,8 @@ const Add = () => {
 
             <input
               {...register("type")}
-              value={"MAForms"}
+              value={"maforms"}
+              // value={"فورم های ماستری"}
               hidden
             />
 
@@ -200,7 +201,7 @@ const Add = () => {
                 months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
                 hideOnScroll
                 hideWeekDays
-                editable={true}
+                editable={false}
                 placeholder="تاریخ تعرفه"
                 currentDate={
                   new DateObject({ calendar: persian })

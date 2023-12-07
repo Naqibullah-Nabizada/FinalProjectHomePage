@@ -60,7 +60,7 @@ const Add = () => {
     <>
       <header>
         <h3 className="my-4 text-center text-xl">
-          فورم ثبت فارم تحقیقاتی پوهنزی زراعت
+          فورم ثبت فارم تحقیقاتی پوهنځی زراعت
         </h3>
       </header>
       <hr />
@@ -76,7 +76,8 @@ const Add = () => {
 
             <input
               {...register("type")}
-              value={"agriculterFarm"}
+              value={"agricultureFarm"}
+              // value={"فارم تحقیقاتی پوهنځی زراعت"}
               hidden
             />
 
@@ -198,7 +199,7 @@ const Add = () => {
                 months={["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"]}
                 hideOnScroll
                 hideWeekDays
-                editable={true}
+                editable={false}
                 placeholder="تاریخ تعرفه"
                 currentDate={
                   new DateObject({ calendar: persian })
